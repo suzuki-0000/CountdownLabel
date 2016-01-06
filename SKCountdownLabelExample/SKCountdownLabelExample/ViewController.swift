@@ -7,19 +7,18 @@
 //
 
 import UIKit
+import SKCountdownLabel
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var countdownLabel1: SKCountdownLabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        countdownLabel1.setCountDownTime(30)
+        countdownLabel1.start()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 

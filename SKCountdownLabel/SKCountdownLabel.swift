@@ -14,8 +14,10 @@ import UIKit
     func countingTo(time: NSTimeInterval)
 }
 
+
 public class SKCountdownLabel: UILabel{
-    typealias EndedCompletion = (NSTimeInterval) -> ()?
+    
+    public typealias EndedCompletion = (NSTimeInterval) -> ()?
     
     let defaultTimeFormat = "HH:mm:ss"
     let hourFormatReplace = "!!!*"
@@ -24,18 +26,24 @@ public class SKCountdownLabel: UILabel{
     
     weak var delegate: SKCountdownLabelDelegate?
     
+    public lazy var dateFormatter: NSDateFormatter = { [unowned self] in
+        let df = NSDateFormatter()
+        df.locale = NSLocale(localeIdentifier: "ja_JP")
+        df.timeZone = NSTimeZone(name: "GMT")
+        df.dateFormat = self.timeFormat
+        return df
+    }()
+    
     public var timer: NSTimer!
-    public var dateFormatter: NSDateFormatter!
     public var timeFormat: String!
-    public var timeLabel: UILabel!
-    public var textRange: NSRange!
+    public var textRange: NSRange = NSRange()
     public var attributedDictionaryForTextInRange: NSDictionary!
     
     public var counting: Bool = false
     public var resetTimerAfterFinish: Bool = false
     public var shouldCountBeyondHHLimit: Bool = false
     
-    private var timeUserValue: NSTimeInterval!
+    private var timeUserValue: NSTimeInterval = 0
     private var startCountDate: NSDate!
     private var pausedTime: NSDate!
     private var date1970: NSDate!
@@ -69,7 +77,7 @@ public class SKCountdownLabel: UILabel{
     }
     
     // MARK: - Setter Methods
-    func setCountDownTime(time: NSTimeInterval) {
+    public func setCountDownTime(time: NSTimeInterval) {
         timeUserValue = time < 0 ? 0 : time
         timeToCountOff = date1970.dateByAddingTimeInterval(timeUserValue)
         
@@ -117,25 +125,6 @@ public class SKCountdownLabel: UILabel{
         return timeFormat
     }
     
-    func findDateFormatter() -> NSDateFormatter {
-        if let dateFormatter = dateFormatter {
-            return dateFormatter
-        }
-        dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
-        dateFormatter.timeZone = NSTimeZone(name: "GMT")
-        dateFormatter.dateFormat = timeFormat
-        
-        return dateFormatter
-    }
-    
-    func findTimeLabel() -> UILabel {
-        if timeLabel != nil {
-            timeLabel = self
-        }
-        return timeLabel
-    }
-    
     func findTimeCounted() -> NSTimeInterval {
         if startCountDate == nil {
             return 0
@@ -155,8 +144,89 @@ public class SKCountdownLabel: UILabel{
         return timeUserValue - findTimeCounted()
     }
     
-    // MARK: - Timer Control
+    func updateLabel() {
+        let timeDiff = NSDate().timeIntervalSinceDate(startCountDate)
+        var timeToShow = NSDate()
+        var timerEnded = false
+        
+        if counting {
+            
+            let timeLeft = timeUserValue - timeDiff
+            delegate?.countingTo(timeLeft)
+            
+            if timeDiff >= timeUserValue {
+                pause()
+                timeToShow = date1970.dateByAddingTimeInterval(0)
+                startCountDate = nil
+                timerEnded = true
+            } else {
+                timeToShow = timeToCountOff.dateByAddingTimeInterval(timeDiff * -1)
+            }
+        } else {
+            timeToShow = timeToCountOff
+        }
+        
+        //TODO RESPONd TO Selector
+        
+        if shouldCountBeyondHHLimit {
+            
+            let originalTimeFormat = timeFormat
+            var beyondFormat = timeFormat.stringByReplacingOccurrencesOfString("HH", withString: hourFormatReplace)
+            beyondFormat = beyondFormat.stringByReplacingOccurrencesOfString("H", withString: hourFormatReplace)
+            
+            dateFormatter.dateFormat = beyondFormat
+            
+            let hours = findTimeRemaining() / 3600
+            let formattedDate = dateFormatter.stringFromDate(timeToShow)
+            let beyondedDate = formattedDate.stringByReplacingOccurrencesOfString(hourFormatReplace, withString: NSString(format: "%02d", hours) as String)
+            
+            text = beyondedDate
+            dateFormatter.dateFormat = originalTimeFormat
+            
+        } else {
+            
+            if textRange.length > 0 {
+                if attributedDictionaryForTextInRange != nil {
+                    
+                    let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(timeToShow), attributes: attributedDictionaryForTextInRange as? [String : AnyObject])
+                    
+                    let attributedString = NSMutableAttributedString(string: text!)
+                    attributedString.replaceCharactersInRange(textRange, withAttributedString: attrTextInRange)
+                    
+                    attributedText = attributedString
+                } else {
+                    
+                    let labelText = (text! as NSString).stringByReplacingCharactersInRange(textRange, withString: dateFormatter.stringFromDate(timeToShow))
+                    
+                    text = labelText
+                }
+                
+                
+            } else  {
+                debugPrint(timeToShow)
+                debugPrint(text)
+                
+                text = dateFormatter.stringFromDate(timeToShow)
+            }
+        }
+        
+        
+        if timerEnded {
+            
+            delegate?.finishedCountDownTimerWithTime(timeUserValue)
+            
+            endedBlock?(timeUserValue)
+            
+            if resetTimerAfterFinish {
+                reset()
+            }
+        }
+    }
+}
+
+// MARK: - Timer Control
     
+public extension SKCountdownLabel {
     func start(){
         
         if timer != nil {
@@ -167,7 +237,7 @@ public class SKCountdownLabel: UILabel{
         if timeFormat.rangeOfString("SS")?.underestimateCount() > 0 {
             timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalHighUse, target: self, selector: "updateLabel:", userInfo: nil, repeats: true)
         } else {
-            timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalNormal, target: self, selector: "updateLabel:", userInfo: nil, repeats: true)
+            timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalNormal, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
         }
         
         //TODO : what
@@ -219,85 +289,12 @@ private extension SKCountdownLabel {
     
     func setup(){
         date1970 = NSDate(timeIntervalSince1970: 0)
+        timeFormat = defaultTimeFormat
+        startCountDate = NSDate()
     }
     
     
-    func updateLabel() {
-        let timeDiff = NSDate().timeIntervalSinceDate(startCountDate)
-        var timeToShow = NSDate()
-        var timerEnded = false
-        
-        if counting {
-            
-            let timeLeft = timeUserValue - timeDiff
-            delegate?.countingTo(timeLeft)
-            
-            if timeDiff >= timeUserValue {
-                pause()
-                timeToShow = date1970.dateByAddingTimeInterval(0)
-                startCountDate = nil
-                timerEnded = true
-            } else {
-                timeToShow = timeToCountOff.dateByAddingTimeInterval(timeDiff * -1)
-            }
-        } else {
-            timeToShow = timeToCountOff
-        }
-        
-        //TODO RESPONd TO Selector
-        
-        if shouldCountBeyondHHLimit {
-            
-            let originalTimeFormat = timeFormat
-            var beyondFormat = timeFormat.stringByReplacingOccurrencesOfString("HH", withString: hourFormatReplace)
-            beyondFormat = beyondFormat.stringByReplacingOccurrencesOfString("H", withString: hourFormatReplace)
-            
-            dateFormatter.dateFormat = beyondFormat
-            
-            let hours = findTimeRemaining() / 3600
-            let formattedDate = dateFormatter.stringFromDate(timeToShow)
-            let beyondedDate = formattedDate.stringByReplacingOccurrencesOfString(hourFormatReplace, withString: NSString(format: "%02d", hours) as String)
-            
-            timeLabel.text = beyondedDate
-            dateFormatter.dateFormat = originalTimeFormat
-            
-        } else {
-            
-            if textRange.length > 0 {
-                if attributedDictionaryForTextInRange != nil {
-                    
-                    let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(timeToShow), attributes: attributedDictionaryForTextInRange as? [String : AnyObject])
-                    
-                    let attributedString = NSMutableAttributedString(string: text!)
-                    attributedString.replaceCharactersInRange(textRange, withAttributedString: attrTextInRange)
-                    
-                    timeLabel.attributedText = attributedString
-                } else {
-                    
-                    let labelText = (text! as NSString).stringByReplacingCharactersInRange(textRange, withString: dateFormatter.stringFromDate(timeToShow))
-                    
-                    timeLabel.text = labelText
-                }
-                
-                
-            } else  {
-                
-                timeLabel.text = dateFormatter.stringFromDate(timeToShow)
-            }
-        }
-        
-        
-        if timerEnded {
-            
-            delegate?.finishedCountDownTimerWithTime(timeUserValue)
-            
-            endedBlock?(timeUserValue)
-            
-            if resetTimerAfterFinish {
-                reset()
-            }
-        }
-    }
+    
 }
 
 

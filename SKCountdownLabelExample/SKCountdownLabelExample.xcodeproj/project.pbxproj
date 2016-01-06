@@ -12,6 +12,7 @@
 		892106ED1C3CF4300007CDEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892106EB1C3CF4300007CDEC /* Main.storyboard */; };
 		892106EF1C3CF4300007CDEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 892106EE1C3CF4300007CDEC /* Assets.xcassets */; };
 		892106F21C3CF4300007CDEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 892106F01C3CF4300007CDEC /* LaunchScreen.storyboard */; };
+		892107031C3CFABF0007CDEC /* SKCountdownLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892106FE1C3CF43F0007CDEC /* SKCountdownLabel.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				892107031C3CFABF0007CDEC /* SKCountdownLabel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +324,7 @@
 				892106F81C3CF4300007CDEC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
