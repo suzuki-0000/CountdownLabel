@@ -53,6 +53,12 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1N-IQ-les" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
+                                <rect key="frame" x="266" y="322" width="68" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0C7-3L-igy">
                                 <rect key="frame" x="174" y="238" width="82" height="30"/>
                                 <state key="normal" title="getCounted"/>
@@ -67,40 +73,113 @@
                                     <action selector="getTimerRemain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LeF-Xd-BDD"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adb-gy-x66">
+                                <rect key="frame" x="344" y="325" width="35" height="30"/>
+                                <state key="normal" title="reset"/>
+                                <connections>
+                                    <action selector="controlReset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lil-8P-aeY"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4. Countdown with control" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K8h-9f-0Rt" userLabel="Countdown Label2 Desc">
+                                <rect key="frame" x="201" y="291" width="199" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5. Countdown with completion " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gN3-n6-z8X" userLabel="Countdown Label2 Desc">
+                                <rect key="frame" x="183" y="378" width="234" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="6. Change style dynamically" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gph-0S-Rcj" userLabel="Countdown Label2 Desc">
+                                <rect key="frame" x="206" y="465" width="211" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jdC-e5-Zsd">
+                                <rect key="frame" x="214" y="325" width="42" height="30"/>
+                                <state key="normal" title="pause"/>
+                                <connections>
+                                    <action selector="controlStartStop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f6O-1p-bIW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYF-gU-bQu">
+                                <rect key="frame" x="164" y="325" width="40" height="30"/>
+                                <state key="normal" title="-2sec"/>
+                                <connections>
+                                    <action selector="minus:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FGs-Qt-5jd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfS-nR-UfG">
+                                <rect key="frame" x="389" y="325" width="43" height="30"/>
+                                <state key="normal" title="+2sec"/>
+                                <connections>
+                                    <action selector="plus:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iN6-p0-He0"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lsE-4w-rQx" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
+                                <rect key="frame" x="266" y="409" width="68" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLx-M6-7pP" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
+                                <rect key="frame" x="266" y="496" width="68" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="a1N-IQ-les" firstAttribute="centerY" secondItem="jdC-e5-Zsd" secondAttribute="centerY" id="1KE-80-ExC"/>
+                            <constraint firstItem="eLx-M6-7pP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2QZ-fx-CDp"/>
+                            <constraint firstItem="nfS-nR-UfG" firstAttribute="leading" secondItem="adb-gy-x66" secondAttribute="trailing" constant="10" id="5OE-LF-1k1"/>
+                            <constraint firstItem="a1N-IQ-les" firstAttribute="top" secondItem="K8h-9f-0Rt" secondAttribute="bottom" constant="10" id="8rJ-Qf-N5T"/>
+                            <constraint firstItem="a1N-IQ-les" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="F9e-Tl-OB1"/>
+                            <constraint firstItem="jdC-e5-Zsd" firstAttribute="leading" secondItem="RYF-gU-bQu" secondAttribute="trailing" constant="10" id="FKN-7K-kkw"/>
+                            <constraint firstItem="nfS-nR-UfG" firstAttribute="centerY" secondItem="RYF-gU-bQu" secondAttribute="centerY" id="Fi0-i8-PRL"/>
                             <constraint firstItem="sZp-sM-QAY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="M87-yI-OHJ"/>
+                            <constraint firstItem="K8h-9f-0Rt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OsQ-xQ-YAi"/>
                             <constraint firstItem="0An-xZ-wX8" firstAttribute="top" secondItem="9kl-mb-3ZE" secondAttribute="bottom" constant="20" id="Q7r-0i-lpI"/>
                             <constraint firstItem="JqL-2I-38O" firstAttribute="leading" secondItem="GAq-Se-X7V" secondAttribute="trailing" constant="10" id="RGS-5o-OaA"/>
+                            <constraint firstItem="lsE-4w-rQx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RxY-5p-Fzp"/>
                             <constraint firstItem="0An-xZ-wX8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TUW-3A-bnE"/>
                             <constraint firstItem="GAq-Se-X7V" firstAttribute="leading" secondItem="0C7-3L-igy" secondAttribute="trailing" constant="10" id="TWL-Ic-xsp"/>
                             <constraint firstItem="JqL-2I-38O" firstAttribute="centerY" secondItem="GAq-Se-X7V" secondAttribute="centerY" id="U5a-W2-NFg"/>
                             <constraint firstItem="9kl-mb-3ZE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VQk-kG-12n"/>
+                            <constraint firstItem="Gph-0S-Rcj" firstAttribute="top" secondItem="lsE-4w-rQx" secondAttribute="bottom" constant="20" id="VuS-dh-gxT"/>
                             <constraint firstItem="GAq-Se-X7V" firstAttribute="top" secondItem="vWK-Wa-ZIv" secondAttribute="bottom" constant="10" id="Wb9-Pz-Ssm"/>
                             <constraint firstItem="vWK-Wa-ZIv" firstAttribute="top" secondItem="mYs-hL-INf" secondAttribute="bottom" constant="20" id="XzM-Yu-uRD"/>
+                            <constraint firstItem="a1N-IQ-les" firstAttribute="leading" secondItem="jdC-e5-Zsd" secondAttribute="trailing" constant="10" id="Yjb-L7-Dhv"/>
+                            <constraint firstItem="Gph-0S-Rcj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aZJ-Fr-k7m"/>
                             <constraint firstItem="mYs-hL-INf" firstAttribute="top" secondItem="0An-xZ-wX8" secondAttribute="bottom" constant="10" id="cZy-iS-iQp"/>
+                            <constraint firstItem="eLx-M6-7pP" firstAttribute="top" secondItem="Gph-0S-Rcj" secondAttribute="bottom" constant="10" id="cgG-ya-KCc"/>
                             <constraint firstItem="GAq-Se-X7V" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ffT-0l-aPj"/>
+                            <constraint firstItem="adb-gy-x66" firstAttribute="centerY" secondItem="jdC-e5-Zsd" secondAttribute="centerY" id="gEZ-3P-qFd"/>
                             <constraint firstItem="0C7-3L-igy" firstAttribute="centerY" secondItem="GAq-Se-X7V" secondAttribute="centerY" id="iB1-pk-Po1"/>
                             <constraint firstItem="vWK-Wa-ZIv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ia1-fX-2iz"/>
                             <constraint firstItem="mYs-hL-INf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="imj-5V-7lP"/>
                             <constraint firstItem="mYs-hL-INf" firstAttribute="top" secondItem="0An-xZ-wX8" secondAttribute="bottom" constant="10" id="lG5-ci-fTX"/>
-                            <constraint firstItem="9kl-mb-3ZE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="p7h-rg-73P"/>
+                            <constraint firstItem="K8h-9f-0Rt" firstAttribute="top" secondItem="GAq-Se-X7V" secondAttribute="bottom" constant="20" id="lTF-ML-Vli"/>
+                            <constraint firstItem="a1N-IQ-les" firstAttribute="centerY" secondItem="RYF-gU-bQu" secondAttribute="centerY" id="o26-bV-cOs"/>
                             <constraint firstItem="9kl-mb-3ZE" firstAttribute="top" secondItem="sZp-sM-QAY" secondAttribute="bottom" constant="10" id="sKt-zb-rkC"/>
+                            <constraint firstItem="gN3-n6-z8X" firstAttribute="top" secondItem="a1N-IQ-les" secondAttribute="bottom" constant="20" id="sPv-73-c0J"/>
+                            <constraint firstItem="gN3-n6-z8X" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sQx-2z-V2k"/>
                             <constraint firstItem="sZp-sM-QAY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tcx-QB-knH"/>
-                            <constraint firstItem="0C7-3L-igy" firstAttribute="leading" secondItem="GAq-Se-X7V" secondAttribute="trailing" constant="10" id="xwU-J2-DSQ"/>
+                            <constraint firstItem="adb-gy-x66" firstAttribute="leading" secondItem="a1N-IQ-les" secondAttribute="trailing" constant="10" id="uGY-pB-A3R"/>
+                            <constraint firstItem="lsE-4w-rQx" firstAttribute="top" secondItem="gN3-n6-z8X" secondAttribute="bottom" constant="10" id="xKJ-6Q-Jch"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="p7h-rg-73P"/>
-                                <exclude reference="xwU-J2-DSQ"/>
-                            </mask>
-                        </variation>
                     </view>
                     <connections>
                         <outlet property="countdownLabel1" destination="9kl-mb-3ZE" id="4dr-oy-sKg"/>
                         <outlet property="countdownLabel2" destination="mYs-hL-INf" id="ELe-fy-d8R"/>
                         <outlet property="countdownLabel3" destination="GAq-Se-X7V" id="4wr-9k-b08"/>
+                        <outlet property="countdownLabel4" destination="a1N-IQ-les" id="ghT-op-9yv"/>
+                        <outlet property="countdownLabel5" destination="lsE-4w-rQx" id="feK-96-EnT"/>
+                        <outlet property="countdownLabel6" destination="eLx-M6-7pP" id="Yef-su-qWL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
