@@ -17,21 +17,90 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1. Nomarl countdown" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZp-sM-QAY" userLabel="Countdown Label1 Desc">
+                                <rect key="frame" x="221" y="30" width="159" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9kl-mb-3ZE" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
-                                <rect key="frame" x="266" y="70" width="68" height="36"/>
+                                <rect key="frame" x="266" y="61" width="68" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="30"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Self as label, free styling just like usual" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0An-xZ-wX8" userLabel="Countdown Label2 Desc">
+                                <rect key="frame" x="147" y="117" width="306" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Get countdown's stauts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWK-Wa-ZIv" userLabel="Countdown Label2 Desc">
+                                <rect key="frame" x="202" y="204" width="197" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYs-hL-INf" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
+                                <rect key="frame" x="266" y="148" width="68" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAq-Se-X7V" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
+                                <rect key="frame" x="266" y="235" width="68" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="30"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0C7-3L-igy">
+                                <rect key="frame" x="174" y="238" width="82" height="30"/>
+                                <state key="normal" title="getCounted"/>
+                                <connections>
+                                    <action selector="getTimerCounted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8KD-EZ-eAo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JqL-2I-38O">
+                                <rect key="frame" x="344" y="238" width="73" height="30"/>
+                                <state key="normal" title="getRemain"/>
+                                <connections>
+                                    <action selector="getTimerRemain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LeF-Xd-BDD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="sZp-sM-QAY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="M87-yI-OHJ"/>
+                            <constraint firstItem="0An-xZ-wX8" firstAttribute="top" secondItem="9kl-mb-3ZE" secondAttribute="bottom" constant="20" id="Q7r-0i-lpI"/>
+                            <constraint firstItem="JqL-2I-38O" firstAttribute="leading" secondItem="GAq-Se-X7V" secondAttribute="trailing" constant="10" id="RGS-5o-OaA"/>
+                            <constraint firstItem="0An-xZ-wX8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TUW-3A-bnE"/>
+                            <constraint firstItem="GAq-Se-X7V" firstAttribute="leading" secondItem="0C7-3L-igy" secondAttribute="trailing" constant="10" id="TWL-Ic-xsp"/>
+                            <constraint firstItem="JqL-2I-38O" firstAttribute="centerY" secondItem="GAq-Se-X7V" secondAttribute="centerY" id="U5a-W2-NFg"/>
                             <constraint firstItem="9kl-mb-3ZE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VQk-kG-12n"/>
+                            <constraint firstItem="GAq-Se-X7V" firstAttribute="top" secondItem="vWK-Wa-ZIv" secondAttribute="bottom" constant="10" id="Wb9-Pz-Ssm"/>
+                            <constraint firstItem="vWK-Wa-ZIv" firstAttribute="top" secondItem="mYs-hL-INf" secondAttribute="bottom" constant="20" id="XzM-Yu-uRD"/>
+                            <constraint firstItem="mYs-hL-INf" firstAttribute="top" secondItem="0An-xZ-wX8" secondAttribute="bottom" constant="10" id="cZy-iS-iQp"/>
+                            <constraint firstItem="GAq-Se-X7V" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ffT-0l-aPj"/>
+                            <constraint firstItem="0C7-3L-igy" firstAttribute="centerY" secondItem="GAq-Se-X7V" secondAttribute="centerY" id="iB1-pk-Po1"/>
+                            <constraint firstItem="vWK-Wa-ZIv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ia1-fX-2iz"/>
+                            <constraint firstItem="mYs-hL-INf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="imj-5V-7lP"/>
+                            <constraint firstItem="mYs-hL-INf" firstAttribute="top" secondItem="0An-xZ-wX8" secondAttribute="bottom" constant="10" id="lG5-ci-fTX"/>
                             <constraint firstItem="9kl-mb-3ZE" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="50" id="p7h-rg-73P"/>
+                            <constraint firstItem="9kl-mb-3ZE" firstAttribute="top" secondItem="sZp-sM-QAY" secondAttribute="bottom" constant="10" id="sKt-zb-rkC"/>
+                            <constraint firstItem="sZp-sM-QAY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tcx-QB-knH"/>
+                            <constraint firstItem="0C7-3L-igy" firstAttribute="leading" secondItem="GAq-Se-X7V" secondAttribute="trailing" constant="10" id="xwU-J2-DSQ"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="p7h-rg-73P"/>
+                                <exclude reference="xwU-J2-DSQ"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="countdownLabel1" destination="9kl-mb-3ZE" id="4dr-oy-sKg"/>
+                        <outlet property="countdownLabel2" destination="mYs-hL-INf" id="ELe-fy-d8R"/>
+                        <outlet property="countdownLabel3" destination="GAq-Se-X7V" id="4wr-9k-b08"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

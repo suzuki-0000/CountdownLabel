@@ -34,6 +34,24 @@ public class SKCountdownLabel: UILabel{
         return df
     }()
     
+    public var countedTime:NSTimeInterval {
+        if startCountDate == nil {
+            return 0
+        }
+        
+        var countedTime = NSDate().timeIntervalSinceDate(startCountDate)
+        if pausedTime != nil {
+            let pausedCountedTime = NSDate().timeIntervalSinceDate(pausedTime)
+            countedTime -= pausedCountedTime
+        }
+        
+        return countedTime
+    }
+    
+    public var timeRemaining: NSTimeInterval {
+        return timeUserValue - countedTime
+    }
+    
     public var timer: NSTimer!
     public var timeFormat: String!
     public var textRange: NSRange = NSRange()
@@ -124,25 +142,7 @@ public class SKCountdownLabel: UILabel{
         
         return timeFormat
     }
-    
-    func findTimeCounted() -> NSTimeInterval {
-        if startCountDate == nil {
-            return 0
-        }
-        
-        var countedTime = NSDate().timeIntervalSinceDate(startCountDate)
-        
-        if pausedTime != nil {
-            let pausedCountedTime = NSDate().timeIntervalSinceDate(pausedTime)
-            countedTime -= pausedCountedTime
-        }
-        
-        return countedTime
-    }
-    
-    func findTimeRemaining() -> NSTimeInterval {
-        return timeUserValue - findTimeCounted()
-    }
+
     
     func updateLabel() {
         let timeDiff = NSDate().timeIntervalSinceDate(startCountDate)
@@ -165,8 +165,6 @@ public class SKCountdownLabel: UILabel{
         } else {
             timeToShow = timeToCountOff
         }
-        
-        //TODO RESPONd TO Selector
         
         if shouldCountBeyondHHLimit {
             
@@ -228,6 +226,7 @@ public class SKCountdownLabel: UILabel{
     
 public extension SKCountdownLabel {
     func start(){
+        debugPrint("start:")
         
         if timer != nil {
             timer.invalidate()
@@ -235,8 +234,10 @@ public extension SKCountdownLabel {
         }
         
         if timeFormat.rangeOfString("SS")?.underestimateCount() > 0 {
+            debugPrint("start: SS")
             timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalHighUse, target: self, selector: "updateLabel:", userInfo: nil, repeats: true)
         } else {
+            debugPrint("start: SS not")
             timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalNormal, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
         }
         
