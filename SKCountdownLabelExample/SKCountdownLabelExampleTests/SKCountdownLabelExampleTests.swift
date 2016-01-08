@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import SKCountdownLabel
 @testable import SKCountdownLabelExample
 
 class SKCountdownLabelExampleTests: XCTestCase {
@@ -21,9 +22,21 @@ class SKCountdownLabelExampleTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testInitWithCoder() {
+        let storyboard = UIStoryboard(name: "StoryboardTests", bundle: NSBundle(forClass: self.dynamicType))
+        let vc = storyboard.instantiateInitialViewController()
+        XCTAssertNotNil(vc)
+        XCTAssertEqual(vc?.view.subviews.count, 3)
+    }
+    
+    func testInitWithFrame() {
+        let l = SKCountdownLabel()
+        XCTAssertNotNil(l)
+    }
+
+    func testCurrentTime() {
+        let l = SKCountdownLabel()
+        let origin = NSDate()
     }
     
     func testPerformanceExample() {
@@ -33,4 +46,11 @@ class SKCountdownLabelExampleTests: XCTestCase {
         }
     }
     
+    func dateFrom(year: Int, month: Int, day: Int, hour: Int, minute: Int) -> NSDate {
+        let string = String(format: "%d-%02d-%dT%d:%02d:28+0900", year, month, day, hour, minute)
+        let formatter = NSDateFormatter()
+        formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        return formatter.dateFromString(string)!
+    }
 }

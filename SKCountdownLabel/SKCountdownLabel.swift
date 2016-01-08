@@ -20,9 +20,9 @@ public class SKCountdownLabel: UILabel{
     public typealias Execution = () -> ()
     
     let defaultTimeFormat = "HH:mm:ss"
-    let hourFormatReplace = "!!!*"
     let defaultFireIntervalNormal = 1.0
     let defaultFireIntervalHighUse = 0.01
+    let date1970 = NSDate(timeIntervalSince1970: 0)
     
     weak var delegate: SKCountdownLabelDelegate?
     
@@ -35,41 +35,45 @@ public class SKCountdownLabel: UILabel{
     }()
     
     public var timeCounted:NSTimeInterval {
-        if startCountDate == nil {
-            return 0
-        }
-        
-        var timeCounted = NSDate().timeIntervalSinceDate(startCountDate)
-        if pausedTime != nil {
-            let pausedCountedTime = NSDate().timeIntervalSinceDate(pausedTime)
+        var timeCounted = NSDate().timeIntervalSinceDate(originCountDate)
+        if pausedDate != nil {
+            let pausedCountedTime = NSDate().timeIntervalSinceDate(pausedDate)
             timeCounted -= pausedCountedTime
         }
-        
         return timeCounted
     }
     
     public var timeRemaining: NSTimeInterval {
-        return timeUserValue - timeCounted
+        return originTimeInterval - timeCounted
     }
     
     public var timer: NSTimer!
-    public var timeFormat: String!
+    public var timeFormat = "HH:mm:ss"
     public var textRange: NSRange = NSRange()
     public var attributedDictionaryForTextInRange: NSDictionary!
     
     public var counting: Bool = false
     public var resetTimerAfterFinish: Bool = false
     public var shouldCountBeyondHHLimit: Bool = false
+    
+    // status: origin
+    private var originCountDate: NSDate = NSDate()
+    private var originTimeInterval: NSTimeInterval = 0
+    private var diffDateFromOrigin: NSDate!
+    // status: current
+    private var currentTimeInterval: NSTimeInterval = 0
+    // status: control
+    private var pausedDate: NSDate!
+    
+    // user controls
+    private var completion: CountdownCompletion?
     public var thens = [NSTimeInterval: Execution]()
     public var lessThans = [NSTimeInterval: Execution]()
     public var moreThans = [NSTimeInterval: Execution]()
     
-    private var timeUserValue: NSTimeInterval = 0
-    private var startCountDate: NSDate!
-    private var pausedTime: NSDate!
-    private var date1970: NSDate!
-    private var timeToCountOff: NSDate!
-    private var completion: CountdownCompletion?
+    private var originalTime: Int {
+        return Int(originTimeInterval)
+    }
     
     // MARK: - Initialize
     required public init?(coder aDecoder: NSCoder) {
@@ -82,32 +86,22 @@ public class SKCountdownLabel: UILabel{
         setup()
     }
     
-    convenience init(label: UILabel) {
-        self.init(frame: CGRectZero)
-        setup()
-    }
-    
-    convenience init(frame: CGRect, label: UILabel) {
-        self.init(frame: frame)
-        setup()
-    }
-    
     // MARK: - Setter Methods
     public func setCountDownTime(time: NSTimeInterval) {
-        timeUserValue = time < 0 ? 0 : time
-        timeToCountOff = date1970.dateByAddingTimeInterval(timeUserValue)
+        originTimeInterval = time > 0 ? time : 0
+        diffDateFromOrigin = date1970.dateByAddingTimeInterval(originTimeInterval)
         
         updateLabel()
     }
     
-    func setCountDownToDate(date: NSDate){
+    public func setCountDownDate(date: NSDate){
         let timeLeft = date.timeIntervalSinceDate(date)
         if timeLeft > 0 {
-            timeUserValue = timeLeft
-            timeToCountOff = date1970.dateByAddingTimeInterval(timeLeft)
+            originTimeInterval = timeLeft
+            diffDateFromOrigin = date1970.dateByAddingTimeInterval(timeLeft)
         } else {
-            timeUserValue = 0
-            timeToCountOff = date1970.dateByAddingTimeInterval(0)
+            originTimeInterval = 0
+            diffDateFromOrigin = date1970.dateByAddingTimeInterval(0)
         }
         
         updateLabel()
@@ -127,27 +121,17 @@ public class SKCountdownLabel: UILabel{
         updateLabel()
     }
     
-    // MARK: - Getter Methods
-    func findTimeFormat() -> String {
-        if timeFormat.isEmpty {
-            return defaultTimeFormat
-        }
-        
-        return timeFormat
-    }
-
-    
     func updateLabel() {
         debugPrint("updateLabel: ")
-        let timeDiff = NSDate().timeIntervalSinceDate(startCountDate)
-        var timeToShow = NSDate()
+        let diffTime = NSDate().timeIntervalSinceDate(originCountDate)
+        var showDate = NSDate()
         var timerEnded = false
         
         if counting {
-            debugPrint("updateLabel: counting timeDiff      \(timeDiff)")
-            debugPrint("updateLabel: counting timeUserValue \(timeUserValue)")
+            debugPrint("updateLabel: counting diffTime      \(diffTime)")
+            debugPrint("updateLabel: counting originTimeInterval \(originTimeInterval)")
             
-            let timeLeft = timeUserValue - timeDiff
+            let timeLeft = originTimeInterval - diffTime
             delegate?.countingTo(timeLeft)
             
             debugPrint("updateLabel: counting timeLeft      \(timeLeft)")
@@ -161,62 +145,44 @@ public class SKCountdownLabel: UILabel{
                 }
             }
             
-            
-            
-            if timeDiff >= timeUserValue {
+            if diffTime >= originTimeInterval {
                 debugPrint("updateLabel: will pause!!")
                 pause()
-                timeToShow = date1970.dateByAddingTimeInterval(0)
-                startCountDate = nil
+                showDate = date1970.dateByAddingTimeInterval(0)
+                debugPrint("updateLabel: no counting \(showDate)")
                 timerEnded = true
             } else {
-                timeToShow = timeToCountOff.dateByAddingTimeInterval(timeDiff * -1)
+                showDate = diffDateFromOrigin.dateByAddingTimeInterval(diffTime * -1)
+                debugPrint("updateLabel: no counting \(showDate)")
             }
         } else {
             debugPrint("updateLabel: no counting")
-            timeToShow = timeToCountOff
+            showDate = diffDateFromOrigin
+            debugPrint("updateLabel: no counting \(showDate)")
         }
         
-        if shouldCountBeyondHHLimit {
-            debugPrint("updateLabel: shouldCountBeyondHHLimit")
-            
-            let originalTimeFormat = timeFormat
-            var beyondFormat = timeFormat.stringByReplacingOccurrencesOfString("HH", withString: hourFormatReplace)
-            beyondFormat = beyondFormat.stringByReplacingOccurrencesOfString("H", withString: hourFormatReplace)
-            
-            dateFormatter.dateFormat = beyondFormat
-            
-            let hours = timeRemaining / 3600
-            let formattedDate = dateFormatter.stringFromDate(timeToShow)
-            let beyondedDate = formattedDate.stringByReplacingOccurrencesOfString(hourFormatReplace, withString: NSString(format: "%02d", hours) as String)
-            
-            text = beyondedDate
-            dateFormatter.dateFormat = originalTimeFormat
-            
-        } else {
-            debugPrint("updateLabel: not shouldCountBeyondHHLimit")
-            debugPrint("updateLabel: \(timeToShow)")
-            
-            if textRange.length > 0 {
-                if attributedDictionaryForTextInRange != nil {
-                    
-                    let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(timeToShow), attributes: attributedDictionaryForTextInRange as? [String : AnyObject])
-                    
-                    let attributedString = NSMutableAttributedString(string: text!)
-                    attributedString.replaceCharactersInRange(textRange, withAttributedString: attrTextInRange)
-                    
-                    attributedText = attributedString
-                } else {
-                    
-                    let labelText = (text! as NSString).stringByReplacingCharactersInRange(textRange, withString: dateFormatter.stringFromDate(timeToShow))
-                    
-                    text = labelText
-                }
+        debugPrint("updateLabel: not shouldCountBeyondHHLimit")
+        debugPrint("updateLabel: \(showDate)")
+        
+        if textRange.length > 0 {
+            if attributedDictionaryForTextInRange != nil {
                 
+                let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(showDate), attributes: attributedDictionaryForTextInRange as? [String : AnyObject])
                 
-            } else  {
-                text = dateFormatter.stringFromDate(timeToShow)
+                let attributedString = NSMutableAttributedString(string: text!)
+                attributedString.replaceCharactersInRange(textRange, withAttributedString: attrTextInRange)
+                
+                attributedText = attributedString
+            } else {
+                
+                let labelText = (text! as NSString).stringByReplacingCharactersInRange(textRange, withString: dateFormatter.stringFromDate(showDate))
+                
+                text = labelText
             }
+            
+            
+        } else  {
+            text = dateFormatter.stringFromDate(showDate)
         }
         
         
@@ -254,18 +220,10 @@ public extension SKCountdownLabel {
         //TODO : what
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
         
-        if startCountDate == nil {
-            startCountDate = NSDate()
-            
-            if timeUserValue > 0 {
-                startCountDate = startCountDate.dateByAddingTimeInterval(-timeUserValue)
-            }
-        }
-        
-        if pausedTime != nil {
-            let countedTime = pausedTime.timeIntervalSinceDate(startCountDate)
-            startCountDate = NSDate().dateByAddingTimeInterval(-countedTime)
-            pausedTime = nil
+        if pausedDate != nil {
+            let countedTime = pausedDate.timeIntervalSinceDate(originCountDate)
+            originCountDate = NSDate().dateByAddingTimeInterval(-countedTime)
+            pausedDate = nil
         }
         
         counting = true
@@ -273,27 +231,29 @@ public extension SKCountdownLabel {
     }
     
     func pause(){
-        if counting {
-            timer.invalidate()
-            timer = nil
-            counting = false
-            pausedTime = NSDate()
+        if !counting {
+            return
         }
+        
+        timer.invalidate()
+        timer = nil
+        counting = false
+        pausedDate = NSDate()
     }
     
     func reset(){
-        pausedTime = nil
-        startCountDate = NSDate()
+        pausedDate = nil
+        originCountDate = NSDate()
         updateLabel()
     }
     
     func addTimeCountedByTime(timeToAdd: NSTimeInterval) {
-        setCountDownTime(timeToAdd + timeUserValue)
+        setCountDownTime(timeToAdd + originTimeInterval)
         updateLabel()
     }
     
     func then(targetTime: NSTimeInterval, completion: () -> ()) -> Self{
-        let t = timeUserValue - (timeUserValue - targetTime)
+        let t = originTimeInterval - (originTimeInterval - targetTime)
         guard t > 0 else {
             return self
         }
@@ -307,9 +267,7 @@ public extension SKCountdownLabel {
 // MARK: - private
 private extension SKCountdownLabel {
     func setup(){
-        date1970 = NSDate(timeIntervalSince1970: 0)
         timeFormat = defaultTimeFormat
-        startCountDate = NSDate()
     }
 }
 

@@ -24,7 +24,7 @@ class ViewController: UIViewController {
         
         // 1. normal
         countdownLabel1.setCountDownTime(30)
-//        countdownLabel1.start()
+        countdownLabel1.start()
         
         // 2. style
         countdownLabel2.setCountDownTime(30)
@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         
         // 4. control countdown
         countdownLabel4.setCountDownTime(30)
-//        countdownLabel4.start()
+        countdownLabel4.start()
         
         // 5. control countdown
         countdownLabel5.setCountDownTime(30)
@@ -54,8 +54,7 @@ class ViewController: UIViewController {
         countdownLabel6.then(20){ [unowned self] in
             self.alert("timer goes 20.")
         }
-        countdownLabel6.start()
-        
+//        countdownLabel6.start()
     }
     
     // MARK: - countdownLabel3's IBAction
