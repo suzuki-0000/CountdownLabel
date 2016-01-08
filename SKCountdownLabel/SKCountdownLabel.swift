@@ -9,8 +9,7 @@
 import UIKit
 
 @objc protocol SKCountdownLabelDelegate {
-    func finishedCountDownTimerWithTime(countTime: NSTimeInterval)
-    func customTextToDisplayAtTime(time: NSTimeInterval)
+    func countdownFinished()
     func countingTo(time: NSTimeInterval)
 }
 
@@ -222,11 +221,8 @@ public class SKCountdownLabel: UILabel{
         
         
         if timerEnded {
-            
-            delegate?.finishedCountDownTimerWithTime(timeUserValue)
-            
+            delegate?.countdownFinished()
             completion?()
-            
             if resetTimerAfterFinish {
                 reset()
             }

@@ -34,6 +34,7 @@
 		892106F11C3CF4300007CDEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		892106F31C3CF4300007CDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		892106F91C3CF43F0007CDEC /* SKCountdownLabel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SKCountdownLabel.xcodeproj; path = ../SKCountdownLabel.xcodeproj; sourceTree = "<group>"; };
+		89993D4E1C3F8CF50099AC14 /* mplus-1p-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mplus-1p-regular.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +74,7 @@
 				892106EB1C3CF4300007CDEC /* Main.storyboard */,
 				892106EE1C3CF4300007CDEC /* Assets.xcassets */,
 				892106F01C3CF4300007CDEC /* LaunchScreen.storyboard */,
+				89993D4E1C3F8CF50099AC14 /* mplus-1p-regular.ttf */,
 				892106F31C3CF4300007CDEC /* Info.plist */,
 			);
 			path = SKCountdownLabelExample;
