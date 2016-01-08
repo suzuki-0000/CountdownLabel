@@ -90,9 +90,7 @@ class ViewController: UIViewController {
     @IBAction func plus(sender: UIButton) {
         countdownLabel4.addTimeCountedByTime(2)
     }
-    
 }
-
 
 extension ViewController {
     func alert(title: String){

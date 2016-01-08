@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "892106E31C3CF4300007CDEC"
+               BlueprintIdentifier = "89993D911C3FAD910099AC14"
                BuildableName = "SKCountdownLabelExample.app"
                BlueprintName = "SKCountdownLabelExample"
                ReferencedContainer = "container:SKCountdownLabelExample.xcodeproj">
@@ -28,11 +28,21 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "89993DA51C3FAD920099AC14"
+               BuildableName = "SKCountdownLabelExampleTests.xctest"
+               BlueprintName = "SKCountdownLabelExampleTests"
+               ReferencedContainer = "container:SKCountdownLabelExample.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "892106E31C3CF4300007CDEC"
+            BlueprintIdentifier = "89993D911C3FAD910099AC14"
             BuildableName = "SKCountdownLabelExample.app"
             BlueprintName = "SKCountdownLabelExample"
             ReferencedContainer = "container:SKCountdownLabelExample.xcodeproj">
@@ -55,7 +65,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "892106E31C3CF4300007CDEC"
+            BlueprintIdentifier = "89993D911C3FAD910099AC14"
             BuildableName = "SKCountdownLabelExample.app"
             BlueprintName = "SKCountdownLabelExample"
             ReferencedContainer = "container:SKCountdownLabelExample.xcodeproj">
@@ -74,7 +84,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "892106E31C3CF4300007CDEC"
+            BlueprintIdentifier = "89993D911C3FAD910099AC14"
             BuildableName = "SKCountdownLabelExample.app"
             BlueprintName = "SKCountdownLabelExample"
             ReferencedContainer = "container:SKCountdownLabelExample.xcodeproj">
