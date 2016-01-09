@@ -81,6 +81,98 @@ class SKCountdownLabelExampleTests: XCTestCase {
         waitForExpectationsWithTimeout(2.0, handler: nil)
     }
     
+    func testReset() {
+        let label = SKCountdownLabel()
+        
+        label.setCountDownTime(30)
+        label.start()
+        
+        let expectation = expectationWithDescription("refreshed")
+        delay(1.0){
+            label.pause()
+            label.reset()
+            
+            XCTAssertEqual(label.counting, false)
+            XCTAssertEqual(label.paused, true)
+            XCTAssertEqual(label.finished, false)
+            XCTAssertEqual(label.timeCounted.int, 0)
+            XCTAssertEqual(label.timeRemaining.int, 30)
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(2.0, handler: nil)
+    }
+    
+    func testRestart() {
+        let label = SKCountdownLabel()
+        
+        label.setCountDownTime(30)
+        label.start()
+        
+        let expectation = expectationWithDescription("refreshed")
+        delay(1.0){
+            label.pause()
+            label.start()
+            
+            XCTAssertEqual(label.counting, true)
+            XCTAssertEqual(label.paused, false)
+            XCTAssertEqual(label.finished, false)
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(2.0, handler: nil)
+    }
+    
+    func testAddTime() {
+        let label = SKCountdownLabel()
+        
+        label.setCountDownTime(30)
+        label.start()
+        label.pause()
+        label.addTimeCountedByTime(1)
+        
+        XCTAssertEqual(label.timeCounted.int, 0)
+        XCTAssertEqual(label.timeRemaining.int, 31)
+    }
+    
+    func testMinusTime() {
+        let label = SKCountdownLabel()
+        
+        label.setCountDownTime(30)
+        label.start()
+        label.pause()
+        label.addTimeCountedByTime(-1)
+        
+        XCTAssertEqual(label.timeCounted.int, 0)
+        XCTAssertEqual(label.timeRemaining.int, 29)
+    }
+    
+    func testResetAfterControl() {
+        let label = SKCountdownLabel()
+        
+        label.setCountDownTime(30)
+        label.start()
+        label.addTimeCountedByTime(+10)
+        
+        let expectation = expectationWithDescription("refreshed")
+        delay(1.0){
+            label.pause()
+            label.reset()
+            
+            XCTAssertEqual(label.counting, false)
+            XCTAssertEqual(label.paused, true)
+            XCTAssertEqual(label.finished, false)
+            XCTAssertEqual(label.timeCounted.int, 0)
+            XCTAssertEqual(label.timeRemaining.int, 30)
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(2.0, handler: nil)
+    }
+    
     func testCountdownFinished() {
         let label = SKCountdownLabel()
         
