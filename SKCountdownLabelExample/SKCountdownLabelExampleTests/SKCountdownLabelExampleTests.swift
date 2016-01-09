@@ -34,9 +34,72 @@ class SKCountdownLabelExampleTests: XCTestCase {
         XCTAssertNotNil(l)
     }
 
-    func testCurrentTime() {
-        let l = SKCountdownLabel()
-        let origin = NSDate()
+    func testStartStatus() {
+        let label = SKCountdownLabel()
+        
+        label.setCountDownTime(30)
+        label.start()
+        
+        XCTAssertEqual(label.counting, true)
+        XCTAssertEqual(label.paused, false)
+        XCTAssertEqual(label.timeFormat, "HH:mm:ss")
+    }
+    
+    func testPauseStatus() {
+        let label = SKCountdownLabel()
+        
+        label.setCountDownTime(30)
+        label.start()
+        label.pause()
+        
+        XCTAssertEqual(label.counting, false)
+        XCTAssertEqual(label.paused, true)
+        XCTAssertEqual(label.finished, false)
+        XCTAssertEqual(label.timeCounted.int, 0)
+        XCTAssertEqual(label.timeRemaining.int, 30)
+    }
+    
+    func testAfterASecond() {
+        let label = SKCountdownLabel()
+        
+        label.setCountDownTime(30)
+        label.start()
+        
+        let expectation = expectationWithDescription("refreshed")
+        delay(1.0){
+            label.pause()
+            
+            XCTAssertEqual(label.counting, false)
+            XCTAssertEqual(label.paused, true)
+            XCTAssertEqual(label.finished, false)
+            XCTAssertEqual(label.timeCounted.int, 1)
+            XCTAssertEqual(label.timeRemaining.int, 29)
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(2.0, handler: nil)
+    }
+    
+    func testCountdownFinished() {
+        let label = SKCountdownLabel()
+        
+        label.setCountDownTime(1)
+        label.start()
+        
+        let expectation = expectationWithDescription("refreshed")
+        delay(1.1){
+            
+            XCTAssertEqual(label.finished, true)
+            XCTAssertEqual(label.counting, false)
+            XCTAssertEqual(label.paused, false)
+            XCTAssertEqual(label.timeCounted.int, 1)
+            XCTAssertEqual(label.timeRemaining.int, 0)
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(2.0, handler: nil)
     }
     
     func testPerformanceExample() {
@@ -52,5 +115,15 @@ class SKCountdownLabelExampleTests: XCTestCase {
         formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return formatter.dateFromString(string)!
+    }
+    
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
     }
 }

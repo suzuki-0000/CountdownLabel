@@ -14,6 +14,12 @@ import UIKit
 }
 
 
+public extension NSTimeInterval {
+    var int: Int {
+        return Int(self)
+    }
+}
+
 public class SKCountdownLabel: UILabel{
     
     public typealias CountdownCompletion = () -> ()?
@@ -35,7 +41,7 @@ public class SKCountdownLabel: UILabel{
     }()
     
     public var timeCounted:NSTimeInterval {
-        var timeCounted = NSDate().timeIntervalSinceDate(originCountDate)
+        var timeCounted = NSDate().timeIntervalSinceDate(currentCountDate)
         if pausedDate != nil {
             let pausedCountedTime = NSDate().timeIntervalSinceDate(pausedDate)
             timeCounted -= pausedCountedTime
@@ -44,7 +50,17 @@ public class SKCountdownLabel: UILabel{
     }
     
     public var timeRemaining: NSTimeInterval {
-        return originTimeInterval - timeCounted
+        return currentTimeInterval - floor(timeCounted)
+    }
+    
+    public var timeDiff: NSTimeInterval {
+        let currentDate = NSDate()
+        let diffTime = currentDate.timeIntervalSinceDate(currentCountDate)
+        return diffTime
+    }
+    
+    public var isEndOfTimer: Bool {
+        return timeDiff >= currentTimeInterval
     }
     
     public var timer: NSTimer!
@@ -52,18 +68,23 @@ public class SKCountdownLabel: UILabel{
     public var textRange: NSRange = NSRange()
     public var attributedDictionaryForTextInRange: NSDictionary!
     
-    public var counting: Bool = false
-    public var resetTimerAfterFinish: Bool = false
-    public var shouldCountBeyondHHLimit: Bool = false
-    
     // status: origin
     private var originCountDate: NSDate = NSDate()
     private var originTimeInterval: NSTimeInterval = 0
-    private var diffDateFromOrigin: NSDate!
     // status: current
+    private var currentCountDate: NSDate = NSDate()
     private var currentTimeInterval: NSTimeInterval = 0
+    private var currentDiffDate: NSDate!
     // status: control
+    public var paused: Bool = false
     private var pausedDate: NSDate!
+    public var counting: Bool = false
+    public var finished: Bool = false {
+        didSet {
+            paused = false
+            counting = false
+        }
+    }
     
     // user controls
     private var completion: CountdownCompletion?
@@ -87,112 +108,93 @@ public class SKCountdownLabel: UILabel{
     }
     
     // MARK: - Setter Methods
+    
     public func setCountDownTime(time: NSTimeInterval) {
-        originTimeInterval = time > 0 ? time : 0
-        diffDateFromOrigin = date1970.dateByAddingTimeInterval(originTimeInterval)
+        setCountDownTime(NSDate(), originTime: time)
+    }
+    
+    public func setCountDownTime(origin: NSDate, originTime: NSTimeInterval) {
+        originCountDate = origin
+        originTimeInterval = originTime
+        currentTimeInterval = originTime
+        currentDiffDate = date1970.dateByAddingTimeInterval(originTimeInterval)
         
         updateLabel()
     }
     
-    public func setCountDownDate(date: NSDate){
-        let timeLeft = date.timeIntervalSinceDate(date)
-        if timeLeft > 0 {
-            originTimeInterval = timeLeft
-            diffDateFromOrigin = date1970.dateByAddingTimeInterval(timeLeft)
-        } else {
-            originTimeInterval = 0
-            diffDateFromOrigin = date1970.dateByAddingTimeInterval(0)
-        }
-        
-        updateLabel()
-    }
-    
-    // MARK: - Update Methods
-    func updateTimeFormat(timeFormat: String){
-        if !timeFormat.isEmpty {
-            self.timeFormat = timeFormat
-        }
-        
-        updateLabel()
-    }
-    
-    func updateShouldCountBeyondHHLimit(shouldCountBeyondHHLimit:Bool){
-        self.shouldCountBeyondHHLimit = shouldCountBeyondHHLimit
-        updateLabel()
-    }
+//    public func setCountDownDate(date: NSDate){
+//        let timeLeft = date.timeIntervalSinceDate(date)
+//        if timeLeft > 0 {
+//            originTimeInterval = timeLeft
+//            currentDiffDate = date1970.dateByAddingTimeInterval(timeLeft)
+//        } else {
+//            originTimeInterval = 0
+//            currentDiffDate = date1970.dateByAddingTimeInterval(0)
+//        }
+//        
+//        updateLabel()
+//    }
     
     func updateLabel() {
-        debugPrint("updateLabel: ")
-        let diffTime = NSDate().timeIntervalSinceDate(originCountDate)
+        debugPrint("[start]updateLabel")
+        
+        if paused {
+            text = dateFormatter.stringFromDate(currentDiffDate)
+        }
+        
+        // start new timer
         var showDate = NSDate()
-        var timerEnded = false
+        let timerEnded = false
         
-        if counting {
-            debugPrint("updateLabel: counting diffTime      \(diffTime)")
-            debugPrint("updateLabel: counting originTimeInterval \(originTimeInterval)")
-            
-            let timeLeft = originTimeInterval - diffTime
-            delegate?.countingTo(timeLeft)
-            
-            debugPrint("updateLabel: counting timeLeft      \(timeLeft)")
-           
-            thens.forEach { k,v in
-               debugPrint(Int(k))
-               debugPrint(Int(timeLeft))
-                if Int(k) == Int(timeLeft) {
-                    debugPrint("inside !!!!")
-                    v()
-                }
+        delegate?.countingTo(timeRemaining)
+        
+        thens.forEach { k,v in
+            if Int(k) == Int(timeRemaining) {
+                debugPrint("inside !!!!")
+                v()
             }
-            
-            if diffTime >= originTimeInterval {
-                debugPrint("updateLabel: will pause!!")
-                pause()
-                showDate = date1970.dateByAddingTimeInterval(0)
-                debugPrint("updateLabel: no counting \(showDate)")
-                timerEnded = true
-            } else {
-                showDate = diffDateFromOrigin.dateByAddingTimeInterval(diffTime * -1)
-                debugPrint("updateLabel: no counting \(showDate)")
-            }
+        }
+        
+        if isEndOfTimer {
+            debugPrint("==============")
+            debugPrint("==============")
+            debugPrint("==============")
+            debugPrint("==============")
+            debugPrint("iSENDOF TIMER")
+            dispose()
+            showDate = date1970.dateByAddingTimeInterval(0)
         } else {
-            debugPrint("updateLabel: no counting")
-            showDate = diffDateFromOrigin
-            debugPrint("updateLabel: no counting \(showDate)")
+            showDate = currentDiffDate.dateByAddingTimeInterval(timeDiff * -1)
         }
         
-        debugPrint("updateLabel: not shouldCountBeyondHHLimit")
-        debugPrint("updateLabel: \(showDate)")
-        
-        if textRange.length > 0 {
-            if attributedDictionaryForTextInRange != nil {
-                
-                let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(showDate), attributes: attributedDictionaryForTextInRange as? [String : AnyObject])
-                
-                let attributedString = NSMutableAttributedString(string: text!)
-                attributedString.replaceCharactersInRange(textRange, withAttributedString: attrTextInRange)
-                
-                attributedText = attributedString
-            } else {
-                
-                let labelText = (text! as NSString).stringByReplacingCharactersInRange(textRange, withString: dateFormatter.stringFromDate(showDate))
-                
-                text = labelText
-            }
-            
-            
-        } else  {
-            text = dateFormatter.stringFromDate(showDate)
-        }
-        
+        text = dateFormatter.stringFromDate(showDate)
         
         if timerEnded {
             delegate?.countdownFinished()
             completion?()
-            if resetTimerAfterFinish {
-                reset()
-            }
+            reset()
         }
+        
+//        if textRange.length > 0 {
+//            if attributedDictionaryForTextInRange != nil {
+//                
+//                let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(showDate), attributes: attributedDictionaryForTextInRange as? [String : AnyObject])
+//                
+//                let attributedString = NSMutableAttributedString(string: text!)
+//                attributedString.replaceCharactersInRange(textRange, withAttributedString: attrTextInRange)
+//                
+//                attributedText = attributedString
+//            } else {
+//                
+//                let labelText = (text! as NSString).stringByReplacingCharactersInRange(textRange, withString: dateFormatter.stringFromDate(showDate))
+//                
+//                text = labelText
+//            }
+//            
+//            
+//        } else  {
+//        }
+//        
     }
 }
 
@@ -200,15 +202,18 @@ public class SKCountdownLabel: UILabel{
 // MARK: - Public
 public extension SKCountdownLabel {
     func start(completion: CountdownCompletion? = nil){
-        debugPrint("start:")
+        debugPrint("[start]start")
         
+        // set completion if needed
         self.completion = completion
         
+        // reset timer if validate
         if timer != nil {
             timer.invalidate()
             timer = nil
         }
         
+        // timer format
         if timeFormat.rangeOfString("SS")?.underestimateCount() > 0 {
             debugPrint("start: SS")
             timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalHighUse, target: self, selector: "updateLabel:", userInfo: nil, repeats: true)
@@ -220,35 +225,66 @@ public extension SKCountdownLabel {
         //TODO : what
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
         
-        if pausedDate != nil {
-            let countedTime = pausedDate.timeIntervalSinceDate(originCountDate)
-            originCountDate = NSDate().dateByAddingTimeInterval(-countedTime)
+        // pause
+        if paused {
+            // reset pause
             pausedDate = nil
+            paused = false
+            
+            // change date
+            let pastedTime = pausedDate.timeIntervalSinceDate(currentCountDate)
+            currentCountDate = NSDate().dateByAddingTimeInterval(-pastedTime)
         }
         
+        debugPrint("[start]end")
+        
+        // fire!
         counting = true
         timer.fire()
     }
     
     func pause(){
-        if !counting {
+        if paused {
             return
         }
         
+        // invalidate timer
         timer.invalidate()
         timer = nil
+        
+        // stop counting
         counting = false
+        paused = true
+        
+        // reset
         pausedDate = NSDate()
     }
     
     func reset(){
-        pausedDate = nil
-        originCountDate = NSDate()
+        // reset
+        finished = false
+        currentDiffDate = NSDate()
+        
+        
         updateLabel()
     }
     
-    func addTimeCountedByTime(timeToAdd: NSTimeInterval) {
-        setCountDownTime(timeToAdd + originTimeInterval)
+    func dispose(){
+        // invalidate timer
+        timer.invalidate()
+        timer = nil
+        
+        // stop counting
+        finished = true
+        
+        pausedDate = nil
+        
+    }
+    
+    func addTimeCountedByTime(time: NSTimeInterval) {
+        currentTimeInterval = time + currentTimeInterval
+        currentDiffDate = date1970.dateByAddingTimeInterval(currentTimeInterval)
+        
         updateLabel()
     }
     
@@ -270,53 +306,3 @@ private extension SKCountdownLabel {
         timeFormat = defaultTimeFormat
     }
 }
-
-
-//static func countDownTimer(origin: NSDate)(_ startAt: NSDate?) -> String {
-//    guard let startAt = startAt else {
-//        return ""
-//    }
-//
-//    let diff = startAt.timeIntervalSinceDate(origin)
-//    let diffDate = NSDate(timeIntervalSince1970: 0).dateByAddingTimeInterval(diff)
-//    let formatter = NSDateFormatter()
-//    formatter.locale = NSLocale(localeIdentifier: "ja_JP")
-//    formatter.dateFormat = countdownFormat
-//    formatter.timeZone = NSTimeZone(name: "GMT")
-//    return formatter.stringFromDate(diffDate)
-//}
-
-//static func withinADay(origin: NSDate)(_ diffDate: NSDate?) -> Bool {
-//    guard let diffDate = diffDate else {
-//        return false
-//    }
-//    let diff = diffDate.timeIntervalSinceDate(origin)
-//    return 0 <= diff && diff < 60*60*24
-//}//
-
-//static func hourMinuteSecond(seconds: Int) -> String {
-//    if seconds < 0 {
-//        return L10n.UndefinedTime.string
-//    }
-//
-//    let minutes = seconds / 60
-//
-//    let s = seconds % 60
-//    let m = minutes % 60
-//    let h = minutes / 60
-//
-//    let hString = h > 0 ? "\(h):" : ""
-//    let mString = h > 0 ? String(format: "%02d:", m) : String(format: "%d:", m)
-//    let sString = String(format: "%02d", s)
-//
-//    return hString + mString + sString
-//}
-
-
-//
-//static func stringFromDate(dateFormat: String)(_ date: NSDate) -> String {
-//    let formatter = NSDateFormatter()
-//    formatter.locale = NSLocale(localeIdentifier: "ja_JP")
-//    formatter.dateFormat = dateFormat
-//    return formatter.stringFromDate(date)
-//}
