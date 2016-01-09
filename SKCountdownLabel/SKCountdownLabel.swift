@@ -50,10 +50,6 @@ public class SKCountdownLabel: UILabel{
     }
     
     public var timeRemaining: NSTimeInterval {
-        debugPrint("a1a1a1a1a1a1a1a1a1a11")
-        debugPrint(currentTimeInterval)
-        debugPrint(floor(timeCounted))
-        debugPrint(ceil(timeCounted))
         return currentTimeInterval - floor(timeCounted)
     }
     
@@ -143,45 +139,33 @@ public class SKCountdownLabel: UILabel{
 //    }
     
     func updateLabel() {
-        debugPrint("[start]updateLabel")
-        
         if paused {
             text = dateFormatter.stringFromDate(currentDiffDate)
         }
         
         // start new timer
-        var showDate = NSDate()
-        let timerEnded = false
         
         delegate?.countingTo(timeRemaining)
         
         thens.forEach { k,v in
-            if Int(k) == Int(timeRemaining) {
+            if k.int == timeRemaining.int {
                 debugPrint("inside !!!!")
                 v()
+                thens[k] = nil
             }
         }
         
         if isEndOfTimer {
-            debugPrint("==============")
-            debugPrint("==============")
-            debugPrint("==============")
-            debugPrint("==============")
-            debugPrint("iSENDOF TIMER")
-            dispose()
-            showDate = date1970.dateByAddingTimeInterval(0)
+            text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
         } else {
-            showDate = currentDiffDate.dateByAddingTimeInterval(timeDiff * -1)
+            text = dateFormatter.stringFromDate(currentDiffDate.dateByAddingTimeInterval(timeDiff * -1))
         }
         
-        text = dateFormatter.stringFromDate(showDate)
-        
-        if timerEnded {
+        if isEndOfTimer {
             delegate?.countdownFinished()
             completion?()
-            reset()
+            dispose()
         }
-        
 //        if textRange.length > 0 {
 //            if attributedDictionaryForTextInRange != nil {
 //                
@@ -222,10 +206,8 @@ public extension SKCountdownLabel {
         
         // timer format
         if timeFormat.rangeOfString("SS")?.underestimateCount() > 0 {
-            debugPrint("start: SS")
             timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalHighUse, target: self, selector: "updateLabel:", userInfo: nil, repeats: true)
         } else {
-            debugPrint("start: SS not")
             timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalNormal, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
         }
         

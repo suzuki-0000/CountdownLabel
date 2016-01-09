@@ -38,13 +38,13 @@ class ViewController: UIViewController {
         
         // 4. control countdown
         countdownLabel4.setCountDownTime(30)
-        countdownLabel4.start()
+//        countdownLabel4.start()
         
         // 5. control countdown
-        countdownLabel5.setCountDownTime(30)
-//        countdownLabel5.start() { [unowned self] in
-//            self.countdownLabel5.text = "timer finished."
-//        }
+        countdownLabel5.setCountDownTime(5)
+        countdownLabel5.start() { [unowned self] in
+            self.countdownLabel5.text = "timer finished."
+        }
         
         // 6. control countdown
         countdownLabel6.setCountDownTime(30)
