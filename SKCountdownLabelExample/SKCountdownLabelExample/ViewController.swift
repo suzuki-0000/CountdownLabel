@@ -30,7 +30,8 @@ class ViewController: UIViewController {
         countdownLabel2.setCountDownTime(30)
         countdownLabel2.textColor = .orangeColor()
         countdownLabel2.font = UIFont.boldSystemFontOfSize(40)
-//        countdownLabel2.start()
+        countdownLabel2.timeFormat = "mm:ss"
+        countdownLabel2.start()
         
         // 3. get status
         countdownLabel3.setCountDownTime(30)
@@ -42,28 +43,33 @@ class ViewController: UIViewController {
         
         // 5. control countdown
         countdownLabel5.setCountDownTime(5)
-        countdownLabel5.start() { [unowned self] in
-            self.countdownLabel5.text = "timer finished."
-        }
+//        countdownLabel5.start() { [unowned self] in
+//            self.countdownLabel5.text = "timer finished."
+//        }
         
         // 6. control countdown
-        countdownLabel6.setCountDownTime(30)
-        countdownLabel6.then(25){ [unowned self] in
-            self.alert("timer goes 25.")
+        countdownLabel6.setCountDownTime(5)
+        countdownLabel6.then(3){ [unowned self] in
+            self.countdownLabel6.textColor = .brownColor()
         }
-        countdownLabel6.then(20){ [unowned self] in
-            self.alert("timer goes 20.")
+        countdownLabel6.then(2){ [unowned self] in
+            self.countdownLabel6.textColor = .greenColor()
         }
-        // countdownLabel6.start()
+        countdownLabel6.then(1){ [unowned self] in
+            self.countdownLabel6.textColor = .redColor()
+        }
+//        countdownLabel6.start(){
+//            self.countdownLabel6.text = "timer finished."
+//        }
     }
     
     // MARK: - countdownLabel3's IBAction
     @IBAction func getTimerCounted(sender: UIButton) {
-        debugPrint(countdownLabel3.timeRemaining)
+        alert("\(countdownLabel3.timeRemaining)")
     }
     
     @IBAction func getTimerRemain(sender: UIButton) {
-        debugPrint(countdownLabel3.timeCounted)
+        alert("\(countdownLabel3.timeCounted)")
     }
     
     // MARK: - countdownLabel4's IBAction

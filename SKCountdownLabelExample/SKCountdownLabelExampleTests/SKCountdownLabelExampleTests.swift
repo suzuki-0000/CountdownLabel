@@ -214,6 +214,30 @@ class SKCountdownLabelExampleTests: XCTestCase {
         waitForExpectationsWithTimeout(2.0, handler: nil)
     }
     
+    func testCountdownThen() {
+        let label = SKCountdownLabel()
+        
+        var completionChangedValue = 1
+        label.setCountDownTime(10)
+        label.then(9){
+            completionChangedValue++
+        }
+        label.then(8){
+            completionChangedValue++
+            completionChangedValue++
+        }
+        label.start()
+        
+        let expectation = expectationWithDescription("refreshed")
+        delay(2.1){
+            XCTAssertEqual(completionChangedValue, 4)
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(3.0, handler: nil)
+    }
+    
     func testPerformanceExample() {
         // This is an example of a performance test case.
         self.measureBlock {
@@ -228,7 +252,6 @@ class SKCountdownLabelExampleTests: XCTestCase {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return formatter.dateFromString(string)!
     }
-    
     
     func delay(delay:Double, closure:()->()) {
         dispatch_after(

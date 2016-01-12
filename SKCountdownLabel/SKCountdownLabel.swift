@@ -24,21 +24,20 @@ public class SKCountdownLabel: UILabel{
     
     public typealias CountdownCompletion = () -> ()?
     public typealias Execution = () -> ()
-    
-    let defaultTimeFormat = "HH:mm:ss"
-    let defaultFireIntervalNormal = 0.1
-    let defaultFireIntervalHighUse = 0.01
-    let date1970 = NSDate(timeIntervalSince1970: 0)
+    private let defaultFireIntervalNormal = 0.1
+    private let defaultFireIntervalHighUse = 0.01
+    private let date1970 = NSDate(timeIntervalSince1970: 0)
     
     weak var delegate: SKCountdownLabelDelegate?
     
-    public lazy var dateFormatter: NSDateFormatter = { [unowned self] in
+    // conputed property
+    public var dateFormatter: NSDateFormatter {
         let df = NSDateFormatter()
-        df.locale = NSLocale(localeIdentifier: "ja_JP")
+        df.locale = NSLocale.currentLocale()
         df.timeZone = NSTimeZone(name: "GMT")
-        df.dateFormat = self.timeFormat
+        df.dateFormat = timeFormat
         return df
-    }()
+    }
     
     public var timeCounted:NSTimeInterval {
         var timeCounted = NSDate().timeIntervalSinceDate(currentCountDate)
@@ -91,8 +90,6 @@ public class SKCountdownLabel: UILabel{
     // user controls
     private var completion: CountdownCompletion?
     public var thens = [NSTimeInterval: Execution]()
-    public var lessThans = [NSTimeInterval: Execution]()
-    public var moreThans = [NSTimeInterval: Execution]()
     
     private var originalTime: Int {
         return Int(originTimeInterval)
@@ -149,14 +146,28 @@ public class SKCountdownLabel: UILabel{
         
         thens.forEach { k,v in
             if k.int == timeRemaining.int {
-                debugPrint("inside !!!!")
                 v()
                 thens[k] = nil
             }
         }
         
         if isEndOfTimer {
-            text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
+            if textRange.length > 0 {
+                if attributedDictionaryForTextInRange != nil {
+                    let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0)), attributes: attributedDictionaryForTextInRange as? [String : AnyObject])
+                    
+                    let attributedString = NSMutableAttributedString(string: text!)
+                    attributedString.replaceCharactersInRange(textRange, withAttributedString: attrTextInRange)
+                    
+                    attributedText = attributedString
+                } else {
+                    let labelText = (text! as NSString).stringByReplacingCharactersInRange(textRange, withString: dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0)))
+                    
+                    text = labelText
+                }
+            } else {
+                text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
+            }
         } else {
             text = dateFormatter.stringFromDate(currentDiffDate.dateByAddingTimeInterval(timeDiff * -1))
         }
@@ -166,26 +177,7 @@ public class SKCountdownLabel: UILabel{
             completion?()
             dispose()
         }
-//        if textRange.length > 0 {
-//            if attributedDictionaryForTextInRange != nil {
-//                
-//                let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(showDate), attributes: attributedDictionaryForTextInRange as? [String : AnyObject])
-//                
-//                let attributedString = NSMutableAttributedString(string: text!)
-//                attributedString.replaceCharactersInRange(textRange, withAttributedString: attrTextInRange)
-//                
-//                attributedText = attributedString
-//            } else {
-//                
-//                let labelText = (text! as NSString).stringByReplacingCharactersInRange(textRange, withString: dateFormatter.stringFromDate(showDate))
-//                
-//                text = labelText
-//            }
-//            
-//            
-//        } else  {
-//        }
-//        
+        
     }
 }
 
@@ -289,7 +281,6 @@ public extension SKCountdownLabel {
             return self
         }
         
-        debugPrint(t)
         thens[t] = completion
         return self
     }
@@ -298,6 +289,5 @@ public extension SKCountdownLabel {
 // MARK: - private
 private extension SKCountdownLabel {
     func setup(){
-        timeFormat = defaultTimeFormat
     }
 }
