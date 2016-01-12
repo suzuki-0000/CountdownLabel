@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         countdownLabel2.textColor = .orangeColor()
         countdownLabel2.font = UIFont.boldSystemFontOfSize(40)
         countdownLabel2.timeFormat = "mm:ss"
-        countdownLabel2.start()
+//        countdownLabel2.start()
         
         // 3. get status
         countdownLabel3.setCountDownTime(30)
