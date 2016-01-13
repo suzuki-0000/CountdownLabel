@@ -54,12 +54,6 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. Self as label, free styling just like usual" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0An-xZ-wX8" userLabel="Countdown Label2 Desc">
-                                        <rect key="frame" x="129" y="136" width="343" height="24"/>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYs-hL-INf" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
                                         <rect key="frame" x="261" y="170" width="78" height="42"/>
                                         <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
@@ -168,6 +162,12 @@
                                             <action selector="controlReset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lil-8P-aeY"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2. style changed as usual" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0An-xZ-wX8" userLabel="Countdown Label2 Desc">
+                                        <rect key="frame" x="199" y="136" width="203" height="24"/>
+                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="lsE-4w-rQx" firstAttribute="centerX" secondItem="pEN-Mo-nE5" secondAttribute="centerX" id="1AE-xh-Zmt"/>

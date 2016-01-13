@@ -44,7 +44,7 @@ public class SKCountdownLabel: UILabel{
             let pausedCountedTime = NSDate().timeIntervalSinceDate(pausedDate)
             timeCounted -= pausedCountedTime
         }
-        return timeCounted < 0 ? 0 : timeCounted
+        return round(timeCounted < 0 ? 0 : timeCounted)
     }
     
     public var timeRemaining: NSTimeInterval {
@@ -81,6 +81,7 @@ public class SKCountdownLabel: UILabel{
     private var range: NSRange!
     // status: control
     private var pausedDate: NSDate!
+    public var loop: Bool = false
     public var paused: Bool = false
     public var counting: Bool = false
     public var finished: Bool = false {
@@ -143,9 +144,6 @@ public class SKCountdownLabel: UILabel{
     }
     
     func updateLabel() {
-        if paused {
-            text = dateFormatter.stringFromDate(currentDiffDate)
-        }
         
         // delegate
         delegate?.countingTo(timeRemaining)
@@ -163,9 +161,10 @@ public class SKCountdownLabel: UILabel{
         
         // if end of timer
         if isEndOfTimer {
+            text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
             delegate?.countdownFinished()
-            completion?()
             dispose()
+            completion?()
         }
     }
 }
@@ -178,23 +177,11 @@ public extension SKCountdownLabel {
         // set completion if needed
         self.completion = completion
         
+        // pause status check
+        updatePauseStatusIfNeeded()
+        
         // create timer
         createTimer()
-        
-        //TODO : what
-        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
-        
-        // pause
-        if paused {
-            // change date
-            let pastedTime = pausedDate.timeIntervalSinceDate(currentCountDate)
-            currentCountDate = NSDate().dateByAddingTimeInterval(-pastedTime)
-            
-            // reset pause
-            pausedDate = nil
-            paused = false
-            
-        }
         
         debugPrint("[start]end")
         
@@ -263,6 +250,19 @@ private extension SKCountdownLabel {
         }
     }
     
+    func updatePauseStatusIfNeeded() {
+        guard paused else {
+            return
+        }
+        // change date
+        let pastedTime = pausedDate.timeIntervalSinceDate(currentCountDate)
+        currentCountDate = NSDate().dateByAddingTimeInterval(-pastedTime)
+        
+        // reset pause
+        pausedDate = nil
+        paused = false
+    }
+    
     func createTimer(){
         // dispose
         disposeTimer()
@@ -273,6 +273,9 @@ private extension SKCountdownLabel {
         } else {
             timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalNormal, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
         }
+        
+        // register to NSrunloop
+        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
     }
     
     func disposeTimer(){
@@ -284,7 +287,6 @@ private extension SKCountdownLabel {
     
     func dispose(){
         // reset
-        text = nil
         pausedDate = nil
         
         // invalidate timer

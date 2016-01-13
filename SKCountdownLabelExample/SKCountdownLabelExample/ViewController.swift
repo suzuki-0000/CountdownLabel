@@ -23,29 +23,28 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // 1. normal
-        countdownLabel1.setCountDownTime(30)
-//        countdownLabel1.start()
+        countdownLabel1.setCountDownTime(-30)
+        countdownLabel1.start()
         
         // 2. style
-        countdownLabel2.setCountDownTime(30)
+        countdownLabel2.setCountDownTime(3)
         countdownLabel2.textColor = .orangeColor()
         countdownLabel2.font = UIFont.boldSystemFontOfSize(40)
-        countdownLabel2.timeFormat = "mm:ss"
-//        countdownLabel2.start()
+        countdownLabel2.start()
         
         // 3. get status
         countdownLabel3.setCountDownTime(30)
-//        countdownLabel3.start()
+        countdownLabel3.start()
         
         // 4. control countdown
         countdownLabel4.setCountDownTime(30)
-//        countdownLabel4.start()
+        countdownLabel4.start()
         
         // 5. control countdown
         countdownLabel5.setCountDownTime(5)
-//        countdownLabel5.start() { [unowned self] in
-//            self.countdownLabel5.text = "timer finished."
-//        }
+        countdownLabel5.start() { [unowned self] in
+            self.countdownLabel5.text = "timer finished."
+        }
         
         // 6. control countdown
         countdownLabel6.setCountDownTime(5)
@@ -58,25 +57,26 @@ class ViewController: UIViewController {
         countdownLabel6.then(1){ [unowned self] in
             self.countdownLabel6.textColor = .redColor()
         }
-//        countdownLabel6.start(){
-//            self.countdownLabel6.text = "timer finished."
-//        }
+        countdownLabel6.start(){
+            self.countdownLabel6.text = "timer finished."
+        }
        
         // 7. attributed text
         countdownLabel7.setCountDownTime(10)
         countdownLabel7.timeFormat = "ss"
         countdownLabel7.timerInText = SKTimerInText(text: "timer here in text", replacement: "here")
-        countdownLabel7.start()
-        
+        countdownLabel7.start() {
+            self.countdownLabel7.text = "timer finished."
+        }
     }
     
     // MARK: - countdownLabel3's IBAction
     @IBAction func getTimerCounted(sender: UIButton) {
-        alert("\(countdownLabel3.timeRemaining)")
+        alert("\(countdownLabel3.timeCounted)")
     }
     
     @IBAction func getTimerRemain(sender: UIButton) {
-        alert("\(countdownLabel3.timeCounted)")
+        alert("\(countdownLabel3.timeRemaining)")
     }
     
     // MARK: - countdownLabel4's IBAction

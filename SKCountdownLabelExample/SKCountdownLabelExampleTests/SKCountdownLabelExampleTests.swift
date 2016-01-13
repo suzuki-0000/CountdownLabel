@@ -293,6 +293,17 @@ class SKCountdownLabelExampleTests: XCTestCase {
         XCTAssert( label.attributedText!.string.containsString("text"))
     }
     
+    
+    // MARK: - unexpected text
+    func textUnexpectedDate(){
+        let label = SKCountdownLabel(frame: CGRectZero, time: -30)
+        label.start()
+        
+        XCTAssertEqual(label.counting, false)
+        XCTAssertEqual(label.paused, true)
+        XCTAssertEqual(label.finished, true)
+    }
+    
     func delay(delay:Double, closure:()->()) {
         dispatch_after(
             dispatch_time(
