@@ -7,12 +7,12 @@
 //
 
 import UIKit
+import LTMorphingLabel
 
 @objc protocol SKCountdownLabelDelegate {
     func countdownFinished()
     func countingTo(time: NSTimeInterval)
 }
-
 
 public extension NSTimeInterval {
     var int: Int {
@@ -20,10 +20,11 @@ public extension NSTimeInterval {
     }
 }
 
-public class SKCountdownLabel: UILabel{
+public class SKCountdownLabel: LTMorphingLabel {
     
     public typealias SKCountdownCompletion = () -> ()?
     public typealias SKCountdownExecution = () -> ()
+    private let defaultFireIntervalSlow = 1.0
     private let defaultFireIntervalNormal = 0.1
     private let defaultFireIntervalHighUse = 0.01
     private let date1970 = NSDate(timeIntervalSince1970: 0)
@@ -61,7 +62,7 @@ public class SKCountdownLabel: UILabel{
         return timeDiff >= currentTimeInterval
     }
     
-    weak var delegate: SKCountdownLabelDelegate?
+    weak var skDelegate: SKCountdownLabelDelegate?
     
     // timer
     public var timeFormat = "HH:mm:ss"
@@ -146,7 +147,7 @@ public class SKCountdownLabel: UILabel{
     func updateLabel() {
         
         // delegate
-        delegate?.countingTo(timeRemaining)
+        skDelegate?.countingTo(timeRemaining)
         
         // then function execute if needed
         thens.forEach { k,v in
@@ -162,7 +163,7 @@ public class SKCountdownLabel: UILabel{
         // if end of timer
         if isEndOfTimer {
             text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
-            delegate?.countdownFinished()
+            skDelegate?.countdownFinished()
             dispose()
             completion?()
         }
@@ -174,6 +175,7 @@ public extension SKCountdownLabel {
     func start(completion: (()->())? = nil){
         debugPrint("[start]start")
         
+        morphingEffect = .Fall
         // set completion if needed
         self.completion = completion
         
@@ -248,6 +250,7 @@ private extension SKCountdownLabel {
         } else {
             text = dateFormatter.stringFromDate(currentDiffDate.dateByAddingTimeInterval(timeDiff * -1))
         }
+        setNeedsDisplay()
     }
     
     func updatePauseStatusIfNeeded() {
@@ -271,7 +274,7 @@ private extension SKCountdownLabel {
         if timeFormat.rangeOfString("SS")?.underestimateCount() > 0 {
             timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalHighUse, target: self, selector: "updateLabel:", userInfo: nil, repeats: true)
         } else {
-            timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalNormal, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
+            timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalSlow, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
         }
         
         // register to NSrunloop

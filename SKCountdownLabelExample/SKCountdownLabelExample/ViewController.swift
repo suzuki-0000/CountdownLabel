@@ -23,7 +23,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // 1. normal
-        countdownLabel1.setCountDownTime(-30)
+        countdownLabel1.setCountDownTime(30)
+//        countdownLabel1.morphingEffect = .Fall
         countdownLabel1.start()
         
         // 2. style
