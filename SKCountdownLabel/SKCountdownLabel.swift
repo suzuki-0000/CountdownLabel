@@ -22,14 +22,11 @@ public extension NSTimeInterval {
 
 public class SKCountdownLabel: UILabel{
     
-    public typealias CountdownCompletion = () -> ()?
-    public typealias Execution = () -> ()
-    public static let replacementText = "[SKCountdownLabelReplacement]"
+    public typealias SKCountdownCompletion = () -> ()?
+    public typealias SKCountdownExecution = () -> ()
     private let defaultFireIntervalNormal = 0.1
     private let defaultFireIntervalHighUse = 0.01
     private let date1970 = NSDate(timeIntervalSince1970: 0)
-    
-    weak var delegate: SKCountdownLabelDelegate?
     
     // conputed property
     public var dateFormatter: NSDateFormatter {
@@ -42,6 +39,7 @@ public class SKCountdownLabel: UILabel{
     
     public var timeCounted:NSTimeInterval {
         var timeCounted = NSDate().timeIntervalSinceDate(currentCountDate)
+        
         if pausedDate != nil {
             let pausedCountedTime = NSDate().timeIntervalSinceDate(pausedDate)
             timeCounted -= pausedCountedTime
@@ -50,7 +48,7 @@ public class SKCountdownLabel: UILabel{
     }
     
     public var timeRemaining: NSTimeInterval {
-        return currentTimeInterval - floor(timeCounted)
+        return round(currentTimeInterval) - round(timeCounted)
     }
     
     public var timeDiff: NSTimeInterval {
@@ -63,27 +61,27 @@ public class SKCountdownLabel: UILabel{
         return timeDiff >= currentTimeInterval
     }
     
-    public var timer: NSTimer!
-    public var timeFormat = "HH:mm:ss"
+    weak var delegate: SKCountdownLabelDelegate?
     
+    // timer
+    public var timeFormat = "HH:mm:ss"
+    private var timer: NSTimer!
     // status: origin
-    private var originCountDate: NSDate = NSDate()
     private var originTimeInterval: NSTimeInterval = 0
     // status: current
     private var currentCountDate: NSDate = NSDate()
     private var currentTimeInterval: NSTimeInterval = 0
     private var currentDiffDate: NSDate!
     // status: style
-    public var attrText: String? {
+    public var timerInText: SKTimerInText! {
         didSet {
-            range = (attrText! as NSString).rangeOfString(SKCountdownLabel.replacementText)
+            range = (timerInText.text as NSString).rangeOfString(timerInText.replacement)
         }
     }
-    public var attributes: [String: AnyObject]!
     private var range: NSRange!
     // status: control
-    public var paused: Bool = false
     private var pausedDate: NSDate!
+    public var paused: Bool = false
     public var counting: Bool = false
     public var finished: Bool = false {
         didSet {
@@ -95,22 +93,25 @@ public class SKCountdownLabel: UILabel{
     }
     
     // user controls
-    private var completion: CountdownCompletion?
-    public var thens = [NSTimeInterval: Execution]()
+    private var completion: SKCountdownCompletion?
+    public var thens = [NSTimeInterval: SKCountdownExecution]()
     
     private var originalTime: Int {
         return Int(originTimeInterval)
     }
     
     // MARK: - Initialize
-    required public init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+    }
+    
+    public convenience init(frame: CGRect, time: NSTimeInterval) {
+        self.init(frame: frame)
+        setCountDownTime(time)
     }
     
     // MARK: - Setter Methods
@@ -120,7 +121,6 @@ public class SKCountdownLabel: UILabel{
     }
     
     public func setCountDownTime(origin: NSDate, originTime: NSTimeInterval) {
-        originCountDate = origin
         originTimeInterval = originTime
         currentCountDate = origin
         currentTimeInterval = originTime
@@ -129,18 +129,18 @@ public class SKCountdownLabel: UILabel{
         updateLabel()
     }
     
-//    public func setCountDownDate(date: NSDate){
-//        let timeLeft = date.timeIntervalSinceDate(date)
-//        if timeLeft > 0 {
-//            originTimeInterval = timeLeft
-//            currentDiffDate = date1970.dateByAddingTimeInterval(timeLeft)
-//        } else {
-//            originTimeInterval = 0
-//            currentDiffDate = date1970.dateByAddingTimeInterval(0)
-//        }
-//        
-//        updateLabel()
-//    }
+    public func setCountDownDate(origin: NSDate){
+        setCountDownDate(NSDate(), originDate: origin)
+    }
+    
+    public func setCountDownDate(origin: NSDate, originDate: NSDate) {
+        originTimeInterval = originDate.timeIntervalSinceDate(origin)
+        currentCountDate = origin
+        currentTimeInterval = originDate.timeIntervalSinceDate(origin)
+        currentDiffDate = date1970.dateByAddingTimeInterval(originTimeInterval)
+        
+        updateLabel()
+    }
     
     func updateLabel() {
         if paused {
@@ -158,37 +158,21 @@ public class SKCountdownLabel: UILabel{
             }
         }
         
-        if isEndOfTimer {
-            text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
-        } else {
-            if attributes != nil {
-                debugPrint("1 HEKKLLO  ATTRIBTUEDMS \(attrText)")
-                let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(currentDiffDate.dateByAddingTimeInterval(timeDiff * -1)), attributes: attributes)
-                debugPrint("2 HEKKLLO  ATTRIBTUEDMS \(attrText)")
-                let attributedString = NSMutableAttributedString(string: attrText!)
-                debugPrint("3 HEKKLLO  ATTRIBTUEDMS \(attrText)")
-                attributedString.replaceCharactersInRange(range, withAttributedString: attrTextInRange)
-                
-                debugPrint("4 HEKKLLO  ATTRIBTUEDMS \(attrText)")
-                attributedText = attributedString
-            } else {
-                debugPrint("HEKKLLO  NO NONO NOO 1ATTRIBTUEDMS")
-                text = dateFormatter.stringFromDate(currentDiffDate.dateByAddingTimeInterval(timeDiff * -1))
-            }
-        }
+        // update text
+        updateText()
         
+        // if end of timer
         if isEndOfTimer {
             delegate?.countdownFinished()
             completion?()
             dispose()
         }
-        
     }
 }
 
 // MARK: - Public
 public extension SKCountdownLabel {
-    func start(completion: CountdownCompletion? = nil){
+    func start(completion: (()->())? = nil){
         debugPrint("[start]start")
         
         // set completion if needed
@@ -245,17 +229,7 @@ public extension SKCountdownLabel {
         
         updateLabel()
     }
-    
-    func dispose(){
-        // invalidate timer
-        disposeTimer()
-        
-        // stop counting
-        finished = true
-        
-        pausedDate = nil
-    }
-    
+   
     func addTimeCountedByTime(time: NSTimeInterval) {
         currentTimeInterval = time + currentTimeInterval
         currentDiffDate = date1970.dateByAddingTimeInterval(currentTimeInterval)
@@ -276,7 +250,17 @@ public extension SKCountdownLabel {
 
 // MARK: - private
 private extension SKCountdownLabel {
-    func setup(){
+    func updateText() {
+        if let timerInText = timerInText {
+            let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(currentDiffDate.dateByAddingTimeInterval(timeDiff * -1)), attributes: timerInText.attributes)
+            let attributedString = NSMutableAttributedString(string: timerInText.text)
+            attributedString.replaceCharactersInRange(range, withAttributedString: attrTextInRange)
+            
+            attributedText = attributedString
+            text = attributedString.string
+        } else {
+            text = dateFormatter.stringFromDate(currentDiffDate.dateByAddingTimeInterval(timeDiff * -1))
+        }
     }
     
     func createTimer(){
@@ -296,5 +280,30 @@ private extension SKCountdownLabel {
             timer.invalidate()
             timer = nil
         }
+    }
+    
+    func dispose(){
+        // reset
+        text = nil
+        pausedDate = nil
+        
+        // invalidate timer
+        disposeTimer()
+        
+        // stop counting
+        finished = true
+        
+    }
+}
+
+public class SKTimerInText: NSObject {
+    private let text: String
+    private let replacement: String
+    private let attributes: [String: AnyObject]?
+   
+    public init(text: String, replacement: String, attributes: [String: AnyObject]? = nil) {
+        self.text = text
+        self.replacement = replacement
+        self.attributes = attributes
     }
 }

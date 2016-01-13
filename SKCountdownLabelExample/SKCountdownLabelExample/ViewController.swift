@@ -61,33 +61,12 @@ class ViewController: UIViewController {
 //        countdownLabel6.start(){
 //            self.countdownLabel6.text = "timer finished."
 //        }
-        
-        
+       
         // 7. attributed text
         countdownLabel7.setCountDownTime(10)
         countdownLabel7.timeFormat = "ss"
-        countdownLabel7.attrText = "hello \(SKCountdownLabel.replacementText)"
-        countdownLabel7.attributes = [NSForegroundColorAttributeName: UIColor.redColor()]
+        countdownLabel7.timerInText = SKTimerInText(text: "timer here in text", replacement: "here")
         countdownLabel7.start()
-        
-        
-//        timerExample13 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample13 andTimerType:MZTimerLabelTypeTimer];
-//        [timerExample13 setCountDownTime:999];
-//        NSString* text = @"timer here in text";
-//        NSRange r = [text rangeOfString:@"here"];
-//        
-//        UIColor* fgColor = [UIColor redColor];
-//        NSDictionary* attributesForRange = @{
-//            NSForegroundColorAttributeName: fgColor,
-//        };
-//        timerExample13.attributedDictionaryForTextInRange = attributesForRange;
-//        timerExample13.text = text;
-//        timerExample13.textRange = r;
-//        timerExample13.timeFormat = @"ss";
-//        timerExample13.resetTimerAfterFinish = YES;
-//        [timerExample13 start];
-//        
-//
         
     }
     
