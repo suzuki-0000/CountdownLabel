@@ -17,10 +17,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var countdownLabel4: SKCountdownLabel!
     @IBOutlet weak var countdownLabel5: SKCountdownLabel!
     @IBOutlet weak var countdownLabel6: SKCountdownLabel!
+    @IBOutlet weak var countdownLabel7: SKCountdownLabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // 1. normal
         countdownLabel1.setCountDownTime(30)
@@ -61,6 +61,32 @@ class ViewController: UIViewController {
 //        countdownLabel6.start(){
 //            self.countdownLabel6.text = "timer finished."
 //        }
+        
+        
+        // 7. attributed text
+        countdownLabel7.setCountDownTime(10)
+        countdownLabel7.timeFormat = "ss"
+        countdownLabel7.start()
+        
+        
+//        timerExample13 = [[MZTimerLabel alloc] initWithLabel:_lblTimerExample13 andTimerType:MZTimerLabelTypeTimer];
+//        [timerExample13 setCountDownTime:999];
+//        NSString* text = @"timer here in text";
+//        NSRange r = [text rangeOfString:@"here"];
+//        
+//        UIColor* fgColor = [UIColor redColor];
+//        NSDictionary* attributesForRange = @{
+//            NSForegroundColorAttributeName: fgColor,
+//        };
+//        timerExample13.attributedDictionaryForTextInRange = attributesForRange;
+//        timerExample13.text = text;
+//        timerExample13.textRange = r;
+//        timerExample13.timeFormat = @"ss";
+//        timerExample13.resetTimerAfterFinish = YES;
+//        [timerExample13 start];
+//        
+//
+        
     }
     
     // MARK: - countdownLabel3's IBAction

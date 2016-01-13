@@ -2,8 +2,8 @@
 //  SKCountdownLabelExampleTests.swift
 //  SKCountdownLabelExampleTests
 //
-//  Created by 鈴木 啓司 on 2016/01/08.
-//  Copyright © 2016年 suzuki_keishi. All rights reserved.
+//  Created by suzuki keishi on 2016/01/08.
+//  Copyright © 2016 suzuki_keishi. All rights reserved.
 //
 
 import XCTest
@@ -253,6 +253,15 @@ class SKCountdownLabelExampleTests: XCTestCase {
         return formatter.dateFromString(string)!
     }
     
+    func testAttributedText(){
+        let label = SKCountdownLabel()
+        label.setCountDownTime(10)
+        label.text = "hello \(SKCountdownLabel.replacementText)"
+        label.attributes = [NSForegroundColorAttributeName, UIColor.redColor()]
+        
+        
+    }
+    
     func delay(delay:Double, closure:()->()) {
         dispatch_after(
             dispatch_time(
@@ -260,5 +269,11 @@ class SKCountdownLabelExampleTests: XCTestCase {
                 Int64(delay * Double(NSEC_PER_SEC))
             ),
             dispatch_get_main_queue(), closure)
+    }
+    
+    func rangeCheck(string: String)(_ from: Int, _ len: Int) -> Range<String.Index> {
+        let start = string.startIndex.advancedBy(from)
+        let end = start.advancedBy(len)
+        return Range(start: start, end: end)
     }
 }
