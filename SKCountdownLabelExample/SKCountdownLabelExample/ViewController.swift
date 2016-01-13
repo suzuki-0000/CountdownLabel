@@ -66,6 +66,8 @@ class ViewController: UIViewController {
         // 7. attributed text
         countdownLabel7.setCountDownTime(10)
         countdownLabel7.timeFormat = "ss"
+        countdownLabel7.attrText = "hello \(SKCountdownLabel.replacementText)"
+        countdownLabel7.attributes = [NSForegroundColorAttributeName: UIColor.redColor()]
         countdownLabel7.start()
         
         

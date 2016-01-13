@@ -74,7 +74,13 @@ public class SKCountdownLabel: UILabel{
     private var currentTimeInterval: NSTimeInterval = 0
     private var currentDiffDate: NSDate!
     // status: style
+    public var attrText: String? {
+        didSet {
+            range = (attrText! as NSString).rangeOfString(SKCountdownLabel.replacementText)
+        }
+    }
     public var attributes: [String: AnyObject]!
+    private var range: NSRange!
     // status: control
     public var paused: Bool = false
     private var pausedDate: NSDate!
@@ -141,10 +147,10 @@ public class SKCountdownLabel: UILabel{
             text = dateFormatter.stringFromDate(currentDiffDate)
         }
         
-        // start new timer
-        
+        // delegate
         delegate?.countingTo(timeRemaining)
         
+        // then function execute if needed
         thens.forEach { k,v in
             if k.int == timeRemaining.int {
                 v()
@@ -153,18 +159,22 @@ public class SKCountdownLabel: UILabel{
         }
         
         if isEndOfTimer {
+            text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
+        } else {
             if attributes != nil {
-                let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0)), attributes: attributes)
+                debugPrint("1 HEKKLLO  ATTRIBTUEDMS \(attrText)")
+                let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(currentDiffDate.dateByAddingTimeInterval(timeDiff * -1)), attributes: attributes)
+                debugPrint("2 HEKKLLO  ATTRIBTUEDMS \(attrText)")
+                let attributedString = NSMutableAttributedString(string: attrText!)
+                debugPrint("3 HEKKLLO  ATTRIBTUEDMS \(attrText)")
+                attributedString.replaceCharactersInRange(range, withAttributedString: attrTextInRange)
                 
-                let attributedString = NSMutableAttributedString(string: text!)
-                attributedString.replaceCharactersInRange((text! as NSString).rangeOfString(SKCountdownLabel.replacementText), withAttributedString: attrTextInRange)
-                
+                debugPrint("4 HEKKLLO  ATTRIBTUEDMS \(attrText)")
                 attributedText = attributedString
             } else {
-                text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
+                debugPrint("HEKKLLO  NO NONO NOO 1ATTRIBTUEDMS")
+                text = dateFormatter.stringFromDate(currentDiffDate.dateByAddingTimeInterval(timeDiff * -1))
             }
-        } else {
-            text = dateFormatter.stringFromDate(currentDiffDate.dateByAddingTimeInterval(timeDiff * -1))
         }
         
         if isEndOfTimer {
@@ -184,18 +194,8 @@ public extension SKCountdownLabel {
         // set completion if needed
         self.completion = completion
         
-        // reset timer if validate
-        if timer != nil {
-            timer.invalidate()
-            timer = nil
-        }
-        
-        // timer format
-        if timeFormat.rangeOfString("SS")?.underestimateCount() > 0 {
-            timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalHighUse, target: self, selector: "updateLabel:", userInfo: nil, repeats: true)
-        } else {
-            timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalNormal, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
-        }
+        // create timer
+        createTimer()
         
         //TODO : what
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
@@ -225,10 +225,7 @@ public extension SKCountdownLabel {
         }
         
         // invalidate timer
-        if timer != nil {
-            timer.invalidate()
-            timer = nil
-        }
+        disposeTimer()
         
         // stop counting
         counting = false
@@ -251,10 +248,7 @@ public extension SKCountdownLabel {
     
     func dispose(){
         // invalidate timer
-        if timer != nil {
-            timer.invalidate()
-            timer = nil
-        }
+        disposeTimer()
         
         // stop counting
         finished = true
@@ -284,146 +278,23 @@ public extension SKCountdownLabel {
 private extension SKCountdownLabel {
     func setup(){
     }
+    
+    func createTimer(){
+        // dispose
+        disposeTimer()
+        
+        // create
+        if timeFormat.rangeOfString("SS")?.underestimateCount() > 0 {
+            timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalHighUse, target: self, selector: "updateLabel:", userInfo: nil, repeats: true)
+        } else {
+            timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireIntervalNormal, target: self, selector: "updateLabel", userInfo: nil, repeats: true)
+        }
+    }
+    
+    func disposeTimer(){
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
+        }
+    }
 }
-//
-//extension NSMutableParagraphStyle {
-//    convenience init(lineSpacing: CGFloat, lineBreakMode: NSLineBreakMode? = nil, alignment: NSTextAlignment? = nil) {
-//        self.init()
-//        
-//        self.lineSpacing = lineSpacing
-//        if let lineBreakMode = lineBreakMode {
-//            self.lineBreakMode = lineBreakMode
-//        }
-//        if let alignment = alignment {
-//            self.alignment = alignment
-//        }
-//    }
-//}
-
-//extension NSMutableAttributedString {
-//    convenience init(text: String, lineSpacing: CGFloat, lineBreakMode: NSLineBreakMode? = nil, alignment: NSTextAlignment? = nil, kerningWidth: CGFloat? = nil) {
-//        self.init(string: text)
-//        
-//        let style = NSMutableParagraphStyle(lineSpacing: lineSpacing, lineBreakMode: lineBreakMode, alignment: alignment)
-//        addAttribute(NSAttribute.ParagraphStyle(style))
-//        if let kerningWidth = kerningWidth {
-//            addAttribute(NSAttribute.Kern(kerningWidth))
-//        }
-//    }
-//    
-//    func appendString(string: String, attributes: NSAttributes) -> NSMutableAttributedString {
-//        appendAttributedString(NSAttributedString(string: string, attributes: attributes))
-//        return self
-//    }
-//    
-//    func addAttribute(attribute: NSAttribute) -> NSMutableAttributedString {
-//        return addAttribute(attribute, range: NSRange(location: 0, length: length))
-//    }
-//    
-//    func addAttribute(attribute: NSAttribute, range: NSRange) -> NSMutableAttributedString {
-//        addAttribute(attribute.name, value: attribute.value, range: range)
-//        return self
-//    }
-//    
-//    func addAttributes(attributes: NSAttributes) -> NSMutableAttributedString {
-//        return addAttributes(attributes, range: NSRange(location: 0, length: length))
-//    }
-//    
-//    func addAttributes(attributes: NSAttributes, range: NSRange) -> NSMutableAttributedString {
-//        addAttributes(attributes.attributes, range: range)
-//        return self
-//    }
-//}
-//
-//extension NSAttributedString {
-//    convenience init(string: String, attributes: NSAttributes) {
-//        self.init(string: string, attributes: attributes.attributes)
-//    }
-//}
-//
-////
-//enum NSAttribute {
-//    case Font(UIFont)
-//    case IconFont(CGFloat)
-//    case Color(UIColor)
-//    case BaselineOffset(Float)
-//    case ParagraphStyle(NSParagraphStyle)
-//    case UnderlineStyle(NSUnderlineStyle)
-//    case Kern(CGFloat)
-//    case Link(NSURL)
-//    
-//    var name: String {
-//        switch self {
-//        case .Font: return NSFontAttributeName
-//        case .IconFont: return NSFontAttributeName
-//        case .Color: return NSForegroundColorAttributeName
-//        case .BaselineOffset: return NSBaselineOffsetAttributeName
-//        case .ParagraphStyle: return NSParagraphStyleAttributeName
-//        case .UnderlineStyle: return NSUnderlineStyleAttributeName
-//        case .Kern: return NSKernAttributeName
-//        case .Link: return NSLinkAttributeName
-//        }
-//    }
-//    
-//    var value: AnyObject {
-//        switch self {
-//        case .Font(let font): return font
-//        case .IconFont(let size): return UIFont.systemFontOfSize(size)
-//        case .Color(let color): return color
-//        case .BaselineOffset(let offset): return offset
-//        case .ParagraphStyle(let style): return style
-//        case .UnderlineStyle(let style): return style.rawValue
-//        case .Kern(let kern): return kern
-//        case .Link(let URL): return URL
-//        }
-//    }
-//}
-//
-//class NSAttributes {
-//    private var attrs: [String: NSAttribute] = [:]
-//    
-//    var attributes: [String: AnyObject] {
-//        var result: [String: AnyObject] = [:]
-//        
-//        for (_, attr) in attrs {
-//            result[attr.name] = attr.value
-//        }
-//        return result
-//    }
-//    
-//    init() {
-//    }
-//    
-//    init(_ attr: NSAttribute) {
-//        set(attr)
-//    }
-//    
-//    init(_ attrs: NSAttribute...) {
-//        for attr in attrs {
-//            set(attr)
-//        }
-//    }
-//    
-//    func set(attr: NSAttribute) -> Self {
-//        attrs[attr.name] = attr
-//        return self
-//    }
-//    
-//    convenience init(font: UIFont) {
-//        self.init(NSAttribute.Font(font))
-//    }
-//    
-//    convenience init(font: UIFont, color: UIColor) {
-//        self.init(.Font(font), .Color(color))
-//    }
-//    
-//    convenience init(iconSize: CGFloat) {
-//        self.init(NSAttribute.IconFont(iconSize))
-//    }
-//    
-//    convenience init(iconSize: CGFloat, color: UIColor) {
-//        self.init(.IconFont(iconSize), .Color(color))
-//    }
-//}
-//
-//

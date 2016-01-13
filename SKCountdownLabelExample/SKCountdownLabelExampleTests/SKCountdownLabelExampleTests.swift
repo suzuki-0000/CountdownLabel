@@ -257,9 +257,13 @@ class SKCountdownLabelExampleTests: XCTestCase {
         let label = SKCountdownLabel()
         label.setCountDownTime(10)
         label.text = "hello \(SKCountdownLabel.replacementText)"
-        label.attributes = [NSForegroundColorAttributeName, UIColor.redColor()]
+        label.attributes = [NSForegroundColorAttributeName: UIColor.redColor()]
+        label.start()
         
-        
+        debugPrint("===-----------")
+        debugPrint("===-----------")
+        debugPrint(label.attributedText!.string)
+        XCTAssert(label.attributedText!.string.containsString("hello"))
     }
     
     func delay(delay:Double, closure:()->()) {
