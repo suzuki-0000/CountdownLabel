@@ -32,6 +32,18 @@ class SKCountdownLabelExampleTests: XCTestCase {
         XCTAssertEqual(label.counting, true)
         XCTAssertEqual(label.paused, false)
         XCTAssertEqual(label.timeFormat, "HH:mm:ss")
+        XCTAssertEqual(label.morphingEnabled, false)
+    }
+    
+    func testStartWithMorphing() {
+        let label = SKCountdownLabel(frame: CGRectZero, time: 30)
+        label.animationType = .Fall
+        label.start()
+        
+        XCTAssertEqual(label.counting, true)
+        XCTAssertEqual(label.paused, false)
+        XCTAssertEqual(label.timeFormat, "HH:mm:ss")
+        XCTAssertEqual(label.morphingEnabled, true)
     }
     
     func testSettingCountdownTime() {

@@ -12,6 +12,13 @@ import SKCountdownLabel
 class ViewController: UIViewController {
 
     @IBOutlet weak var countdownLabel1: SKCountdownLabel!
+    @IBOutlet weak var countdownLabelAnvil: SKCountdownLabel!
+    @IBOutlet weak var countdownLabelBurn: SKCountdownLabel!
+    @IBOutlet weak var countdownLabelEvaporate: SKCountdownLabel!
+    @IBOutlet weak var countdownLabelFall: SKCountdownLabel!
+    @IBOutlet weak var countdownLabelPixelate: SKCountdownLabel!
+    @IBOutlet weak var countdownLabelScale: SKCountdownLabel!
+    @IBOutlet weak var countdownLabelSparkle: SKCountdownLabel!
     @IBOutlet weak var countdownLabel2: SKCountdownLabel!
     @IBOutlet weak var countdownLabel3: SKCountdownLabel!
     @IBOutlet weak var countdownLabel4: SKCountdownLabel!
@@ -24,8 +31,36 @@ class ViewController: UIViewController {
         
         // 1. normal
         countdownLabel1.setCountDownTime(30)
-//        countdownLabel1.morphingEffect = .Fall
         countdownLabel1.start()
+        
+        // option animation ( using LTMorphing inside )
+        countdownLabelAnvil.setCountDownTime(30)
+        countdownLabelAnvil.animationType = .Anvil
+        countdownLabelAnvil.start()
+        
+        countdownLabelBurn.setCountDownTime(30)
+        countdownLabelBurn.animationType = .Burn
+        countdownLabelBurn.start()
+        
+        countdownLabelEvaporate.setCountDownTime(30)
+        countdownLabelEvaporate.animationType = .Evaporate
+        countdownLabelEvaporate.start()
+        
+        countdownLabelFall.setCountDownTime(30)
+        countdownLabelFall.animationType = .Fall
+        countdownLabelFall.start()
+        
+        countdownLabelPixelate.setCountDownTime(30)
+        countdownLabelPixelate.animationType = .Pixelate
+        countdownLabelPixelate.start()
+        
+        countdownLabelScale.setCountDownTime(30)
+        countdownLabelScale.animationType = .Scale
+        countdownLabelScale.start()
+        
+        countdownLabelSparkle.setCountDownTime(30)
+        countdownLabelSparkle.animationType = .Sparkle
+        countdownLabelSparkle.start()
         
         // 2. style
         countdownLabel2.setCountDownTime(3)
