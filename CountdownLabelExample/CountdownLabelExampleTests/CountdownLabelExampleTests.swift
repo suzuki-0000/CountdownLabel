@@ -26,9 +26,9 @@ class CountdownLabelExampleTests: XCTestCase {
     }
 
     func testStartStatus() {
-        let label = CountdownLabel(frame: CGRectZero, time: 30)
+        let label = CountdownLabel(frame: CGRectZero, minutes: 30)
         label.start()
-        
+
         XCTAssertEqual(label.isCounting, true)
         XCTAssertEqual(label.isPaused, false)
         XCTAssertEqual(label.timeFormat, "HH:mm:ss")
@@ -36,7 +36,7 @@ class CountdownLabelExampleTests: XCTestCase {
     }
     
     func testStartWithMorphing() {
-        let label = CountdownLabel(frame: CGRectZero, time: 30)
+        let label = CountdownLabel(frame: CGRectZero, minutes: 30)
         label.animationType = .Fall
         label.start()
         
@@ -61,10 +61,7 @@ class CountdownLabelExampleTests: XCTestCase {
     }
     
     func testSettingCountdownDate() {
-        let label = CountdownLabel()
-        let targetDate = NSDate().dateByAddingTimeInterval(30)
-        
-        label.setCountDownDate(targetDate)
+        let label = CountdownLabel(frame: CGRectZero, date: NSDate().dateByAddingTimeInterval(30))
         label.start()
         label.pause()
         
@@ -75,6 +72,30 @@ class CountdownLabelExampleTests: XCTestCase {
         XCTAssertEqual(label.timeRemaining.int, 30)
     }
     
+    func testSettingCountdownDateFromFuture() {
+        let fromDate   = NSDate().dateByAddingTimeInterval(10)
+        let targetDate = NSDate().dateByAddingTimeInterval(20)
+        let label = CountdownLabel(frame: CGRectZero, fromDate: fromDate, targetDate: targetDate)
+        
+        label.start()
+        label.pause()
+        
+        let expectation = expectationWithDescription("expect")
+        delay(1.0) {
+            label.pause()
+            
+            XCTAssertEqual(label.isCounting, false)
+            XCTAssertEqual(label.isPaused, true)
+            XCTAssertEqual(label.isFinished, false)
+            XCTAssertEqual(label.timeCounted.int, 0)
+            XCTAssertEqual(label.timeRemaining.int, 10)
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(2.0, handler: nil)
+    }
+    
     func testPauseStatus() {
         let label = CountdownLabel()
         
@@ -82,11 +103,42 @@ class CountdownLabelExampleTests: XCTestCase {
         label.start()
         label.pause()
         
-        XCTAssertEqual(label.isCounting, false)
-        XCTAssertEqual(label.isPaused, true)
-        XCTAssertEqual(label.isFinished, false)
-        XCTAssertEqual(label.timeCounted.int, 0)
-        XCTAssertEqual(label.timeRemaining.int, 30)
+        let expectation = expectationWithDescription("expect")
+        delay(1.0) {
+            
+            XCTAssertEqual(label.isCounting, false)
+            XCTAssertEqual(label.isPaused, true)
+            XCTAssertEqual(label.isFinished, false)
+            XCTAssertEqual(label.timeCounted.int, 1)
+            XCTAssertEqual(label.timeRemaining.int, 29)
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(2.0, handler: nil)
+    }
+    
+    func testRestart() {
+        let label = CountdownLabel()
+        
+        label.setCountDownTime(30)
+        label.start()
+        label.pause()
+        
+        let expectation = expectationWithDescription("expect")
+        delay(1.0) {
+            label.start()
+            
+            XCTAssertEqual(label.isCounting, true)
+            XCTAssertEqual(label.isPaused, false)
+            XCTAssertEqual(label.isFinished, false)
+            XCTAssertEqual(label.timeCounted.int, 1)
+            XCTAssertEqual(label.timeRemaining.int, 29)
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(2.0, handler: nil)
     }
     
     func testAfterASecond() {
@@ -119,7 +171,7 @@ class CountdownLabelExampleTests: XCTestCase {
         label.start()
         
         let expectation = expectationWithDescription("expect")
-        delay(1.0) {
+        delay(1.1) {
             label.pause()
             
             XCTAssertEqual(label.isCounting, false)
@@ -127,50 +179,6 @@ class CountdownLabelExampleTests: XCTestCase {
             XCTAssertEqual(label.isFinished, false)
             XCTAssertEqual(label.timeCounted.int, 1)
             XCTAssertEqual(label.timeRemaining.int, 29)
-            
-            expectation.fulfill()
-        }
-        
-        waitForExpectationsWithTimeout(2.0, handler: nil)
-    }
-    
-    func testReset() {
-        let label = CountdownLabel()
-        
-        label.setCountDownTime(30)
-        label.start()
-        
-        let expectation = expectationWithDescription("expect")
-        delay(1.0) {
-            label.pause()
-            label.reset()
-            
-            XCTAssertEqual(label.isCounting, false)
-            XCTAssertEqual(label.isPaused, true)
-            XCTAssertEqual(label.isFinished, false)
-            XCTAssertEqual(label.timeCounted.int, 0)
-            XCTAssertEqual(label.timeRemaining.int, 30)
-            
-            expectation.fulfill()
-        }
-        
-        waitForExpectationsWithTimeout(2.0, handler: nil)
-    }
-    
-    func testRestart() {
-        let label = CountdownLabel()
-        
-        label.setCountDownTime(30)
-        label.start()
-        
-        let expectation = expectationWithDescription("expect")
-        delay(1.0) {
-            label.pause()
-            label.start()
-            
-            XCTAssertEqual(label.isCounting, true)
-            XCTAssertEqual(label.isPaused, false)
-            XCTAssertEqual(label.isFinished, false)
             
             expectation.fulfill()
         }
@@ -200,30 +208,6 @@ class CountdownLabelExampleTests: XCTestCase {
         
         XCTAssertEqual(label.timeCounted.int, 0)
         XCTAssertEqual(label.timeRemaining.int, 29)
-    }
-    
-    func testResetAfterControl() {
-        let label = CountdownLabel()
-        
-        label.setCountDownTime(30)
-        label.start()
-        label.addTimeCountedByTime(+10)
-        
-        let expectation = expectationWithDescription("expect")
-        delay(1.0) {
-            label.pause()
-            label.reset()
-            
-            XCTAssertEqual(label.isCounting, false)
-            XCTAssertEqual(label.isPaused, true)
-            XCTAssertEqual(label.isFinished, false)
-            XCTAssertEqual(label.timeCounted.int, 0)
-            XCTAssertEqual(label.timeRemaining.int, 30)
-            
-            expectation.fulfill()
-        }
-        
-        waitForExpectationsWithTimeout(2.0, handler: nil)
     }
     
     func testCountdownisFinished() {
@@ -308,7 +292,7 @@ class CountdownLabelExampleTests: XCTestCase {
     
     // MARK: - unexpected text
     func textUnexpectedDate() {
-        let label = CountdownLabel(frame: CGRectZero, time: -30)
+        let label = CountdownLabel(frame: CGRectZero, minutes: -30)
         label.start()
         
         XCTAssertEqual(label.isCounting, false)

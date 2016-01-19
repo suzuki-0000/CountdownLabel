@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8993AAA81C4E07A900C4A6D2 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8993AAA71C4E07A900C4A6D2 /* ViewController2.swift */; };
 		89993D961C3FAD910099AC14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89993D951C3FAD910099AC14 /* AppDelegate.swift */; };
 		89993D981C3FAD910099AC14 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89993D971C3FAD910099AC14 /* ViewController.swift */; };
 		89993D9B1C3FAD910099AC14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89993D991C3FAD910099AC14 /* Main.storyboard */; };
@@ -16,8 +15,7 @@
 		89993DAB1C3FAD920099AC14 /* CountdownLabelExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89993DAA1C3FAD920099AC14 /* CountdownLabelExampleTests.swift */; };
 		89993DB61C3FADAB0099AC14 /* mplus-1p-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89993DB51C3FADAB0099AC14 /* mplus-1p-regular.ttf */; };
 		89993DC11C3FB8410099AC14 /* StoryboardTests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89993DC01C3FB8410099AC14 /* StoryboardTests.storyboard */; };
-		89CA989C1C4E3C8500C74EF9 /* CountdownLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CA989B1C4E3C5B00C74EF9 /* CountdownLabel.framework */; };
-		89CA989E1C4E3C8900C74EF9 /* CountdownLabel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 89CA989B1C4E3C5B00C74EF9 /* CountdownLabel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		89CA98A21C4E412200C74EF9 /* CountdownLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CA989B1C4E3C5B00C74EF9 /* CountdownLabel.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,31 +33,9 @@
 			remoteGlobalIDString = 892106D01C3CF4140007CDEC;
 			remoteInfo = CountdownLabel;
 		};
-		89CA989F1C4E3C8900C74EF9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 89993DB71C3FAE1C0099AC14 /* CountdownLabel.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 892106CF1C3CF4140007CDEC;
-			remoteInfo = CountdownLabel;
-		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		89CA98A11C4E3C8900C74EF9 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				89CA989E1C4E3C8900C74EF9 /* CountdownLabel.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		8993AAA71C4E07A900C4A6D2 /* ViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		89993D921C3FAD910099AC14 /* CountdownLabelExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CountdownLabelExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89993D951C3FAD910099AC14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89993D971C3FAD910099AC14 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89CA989C1C4E3C8500C74EF9 /* CountdownLabel.framework in Frameworks */,
+				89CA98A21C4E412200C74EF9 /* CountdownLabel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,7 +94,6 @@
 			children = (
 				89993D951C3FAD910099AC14 /* AppDelegate.swift */,
 				89993D971C3FAD910099AC14 /* ViewController.swift */,
-				8993AAA71C4E07A900C4A6D2 /* ViewController2.swift */,
 				89993D991C3FAD910099AC14 /* Main.storyboard */,
 				89993D9C1C3FAD910099AC14 /* Assets.xcassets */,
 				89993DB51C3FADAB0099AC14 /* mplus-1p-regular.ttf */,
@@ -156,12 +131,10 @@
 				89993D8E1C3FAD910099AC14 /* Sources */,
 				89993D8F1C3FAD910099AC14 /* Frameworks */,
 				89993D901C3FAD910099AC14 /* Resources */,
-				89CA98A11C4E3C8900C74EF9 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				89CA98A01C4E3C8900C74EF9 /* PBXTargetDependency */,
 			);
 			name = CountdownLabelExample;
 			productName = CountdownLabelExample;
@@ -269,7 +242,6 @@
 			files = (
 				89993D981C3FAD910099AC14 /* ViewController.swift in Sources */,
 				89993D961C3FAD910099AC14 /* AppDelegate.swift in Sources */,
-				8993AAA81C4E07A900C4A6D2 /* ViewController2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,11 +260,6 @@
 			isa = PBXTargetDependency;
 			target = 89993D911C3FAD910099AC14 /* CountdownLabelExample */;
 			targetProxy = 89993DA71C3FAD920099AC14 /* PBXContainerItemProxy */;
-		};
-		89CA98A01C4E3C8900C74EF9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CountdownLabel;
-			targetProxy = 89CA989F1C4E3C8900C74EF9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -403,7 +370,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = CountdownLabelExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.CountdownLabelExample;
@@ -415,7 +381,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = CountdownLabelExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.CountdownLabelExample;
