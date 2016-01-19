@@ -19,28 +19,11 @@ Simple countdown UIlabel with morphing animation, and some useful function.
 - XCTest assertion
 
 ## Usage
-You need only 2 lines.
+You need only 2 lines. you can set as NSDate too.
 
 ```swift
 // from current Date, after 30 minutes.
 let countdownLabel = SKCountdownLabel(frame: frame, time: 30)
-countdownLabel.start()
-```
-
-you can set as NSDate too.
-```swift
-// from current Date, after 30 minutes as NSDate.
-let targetDate = NSDate().dateByAddingTimeInterval(30)
-let countdownLabel = SKCountdownLabel(frame: frame, targetDate: targetDate)
-countdownLabel.start()
-```
-
-you can start specified date(NSDate) to endDate.
-```swift
-// from current Date, after 30 minutes as NSDate.
-let fromDate   = NSDate().dateByAddingTimeInterval(10)
-let targetDate = fromDate.dateByAddingTimeInterval(30)
-let countdownLabel = SKCountdownLabel(frame: frame, fromDate: fromDate, targetDate: targetDate)
 countdownLabel.start()
 ```
 
@@ -132,13 +115,15 @@ countdownLabel.start() {
 #### Attributed Text
 you can set as attributedText too. note:but morphing animation will be disabled.
 ```
-countdownLabel7.setCountDownTime(30)
-countdownLabel7.timeFormat = "ss"
-countdownLabel7.timerInText = SKTimerInText(text: "timer here in text", replacement: "here")
-countdownLabel7.start() {
-    self.countdownLabel7.text = "timer finished."
+countdownLabel.setCountDownTime(30)
+countdownLabel.timeFormat = "ss"
+countdownLabel.timerInText = SKTimerInText(text: "timer here in text", replacement: "here")
+countdownLabel.start() {
+    self.countdownLabel.text = "timer finished."
 }
 ```
+
+![sample](Screenshots/example07.gif) 
 
 
 #### Format
