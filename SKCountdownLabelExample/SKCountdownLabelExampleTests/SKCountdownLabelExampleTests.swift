@@ -96,7 +96,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
         label.start()
         
         let expectation = expectationWithDescription("expect")
-        delay(1.0){
+        delay(1.0) {
             label.pause()
             
             XCTAssertEqual(label.isCounting, false)
@@ -119,7 +119,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
         label.start()
         
         let expectation = expectationWithDescription("expect")
-        delay(1.0){
+        delay(1.0) {
             label.pause()
             
             XCTAssertEqual(label.isCounting, false)
@@ -141,7 +141,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
         label.start()
         
         let expectation = expectationWithDescription("expect")
-        delay(1.0){
+        delay(1.0) {
             label.pause()
             label.reset()
             
@@ -164,7 +164,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
         label.start()
         
         let expectation = expectationWithDescription("expect")
-        delay(1.0){
+        delay(1.0) {
             label.pause()
             label.start()
             
@@ -210,7 +210,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
         label.addTimeCountedByTime(+10)
         
         let expectation = expectationWithDescription("expect")
-        delay(1.0){
+        delay(1.0) {
             label.pause()
             label.reset()
             
@@ -233,7 +233,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
         label.start()
         
         let expectation = expectationWithDescription("expect")
-        delay(1.1){
+        delay(1.1) {
             
             XCTAssertEqual(label.isFinished, true)
             XCTAssertEqual(label.isCounting, false)
@@ -257,7 +257,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
         }
         
         let expectation = expectationWithDescription("expect")
-        delay(1.1){
+        delay(1.1) {
             
             XCTAssertEqual(completionChangedValue, 2)
             
@@ -266,23 +266,23 @@ class SKCountdownLabelExampleTests: XCTestCase {
         
         waitForExpectationsWithTimeout(2.0, handler: nil)
     }
-    
+
     func testCountdownThen() {
         let label = SKCountdownLabel()
         
         var completionChangedValue = 1
         label.setCountDownTime(10)
-        label.then(9){
+        label.then(9) {
             completionChangedValue++
         }
-        label.then(8){
+        label.then(8) {
             completionChangedValue++
             completionChangedValue++
         }
         label.start()
         
         let expectation = expectationWithDescription("expect")
-        delay(2.1){
+        delay(2.1) {
             XCTAssertEqual(completionChangedValue, 4)
             
             expectation.fulfill()
@@ -291,7 +291,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
         waitForExpectationsWithTimeout(3.0, handler: nil)
     }
 
-    func testAttributedText(){
+    func testAttributedText() {
         let label = SKCountdownLabel()
         label.setCountDownTime(10)
         label.timerInText = SKTimerInText(text: "hello timer in text",
@@ -307,7 +307,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     
     
     // MARK: - unexpected text
-    func textUnexpectedDate(){
+    func textUnexpectedDate() {
         let label = SKCountdownLabel(frame: CGRectZero, time: -30)
         label.start()
         
@@ -316,7 +316,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
         XCTAssertEqual(label.isFinished, true)
     }
     
-    func delay(delay:Double, closure:()->()) {
+    func delay(delay: Double, closure: ()->()) {
         dispatch_after(
             dispatch_time(
                 DISPATCH_TIME_NOW,

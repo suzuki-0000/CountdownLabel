@@ -78,23 +78,23 @@ class ViewController: UIViewController {
         
         // 5. control countdown
         countdownLabel5.setCountDownTime(5)
-        countdownLabel5.delegate = self
+        countdownLabel5.countdownDelegate = self
         countdownLabel5.start() { [unowned self] in
             self.countdownLabel5.text = "timer finished."
         }
         
         // 6. control countdown
         countdownLabel6.setCountDownTime(5)
-        countdownLabel6.then(3){ [unowned self] in
+        countdownLabel6.then(3) { [unowned self] in
             self.countdownLabel6.textColor = .brownColor()
         }
-        countdownLabel6.then(2){ [unowned self] in
+        countdownLabel6.then(2) { [unowned self] in
             self.countdownLabel6.textColor = .greenColor()
         }
-        countdownLabel6.then(1){ [unowned self] in
+        countdownLabel6.then(1) { [unowned self] in
             self.countdownLabel6.textColor = .redColor()
         }
-        countdownLabel6.start(){
+        countdownLabel6.start() {
             self.countdownLabel6.text = "timer finished."
         }
        
@@ -141,8 +141,20 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController: SKCountdownLabelDelegate {
+    func countdownFinished() {
+        alert("countdownFinished at delegate.")
+    }
+    
+    func countingAt(timeCounted timeCounted: NSTimeInterval, timeRemaining: NSTimeInterval) {
+        debugPrint("time counted at delegate=\(timeCounted)")
+        debugPrint("time remaining at delegate=\(timeRemaining)")
+    }
+    
+}
+
 extension ViewController {
-    func alert(title: String){
+    func alert(title: String) {
         let vc = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
         vc.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
         presentViewController(vc, animated: true, completion: nil)

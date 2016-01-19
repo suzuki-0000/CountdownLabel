@@ -9,9 +9,9 @@
 import UIKit
 import LTMorphingLabel
 
-@objc protocol SKCountdownLabelDelegate {
-    func countdownFinished()
-    func countingAt(time: NSTimeInterval)
+@objc public protocol SKCountdownLabelDelegate {
+    optional func countdownFinished()
+    optional func countingAt(timeCounted timeCounted: NSTimeInterval, timeRemaining: NSTimeInterval)
 }
 
 public extension NSTimeInterval {
@@ -38,7 +38,7 @@ public class SKCountdownLabel: LTMorphingLabel {
         return df
     }
     
-    public var timeCounted:NSTimeInterval {
+    public var timeCounted: NSTimeInterval {
         var timeCounted = NSDate().timeIntervalSinceDate(currentDate)
         
         if pausedDate != nil {
@@ -73,7 +73,7 @@ public class SKCountdownLabel: LTMorphingLabel {
         return finished
     }
     
-    weak var skDelegate: SKCountdownLabelDelegate?
+    public weak var countdownDelegate: SKCountdownLabelDelegate?
     
     // user settings
     public var animationType: SKAnimationEffect? {
@@ -144,7 +144,7 @@ public class SKCountdownLabel: LTMorphingLabel {
         updateLabel()
     }
     
-    public func setCountDownDate(origin: NSDate){
+    public func setCountDownDate(origin: NSDate) {
         setCountDownDate(NSDate(), originDate: origin)
     }
     
@@ -161,10 +161,10 @@ public class SKCountdownLabel: LTMorphingLabel {
     func updateLabel() {
         
         // delegate
-        skDelegate?.countingAt(timeRemaining)
+        countdownDelegate?.countingAt?(timeCounted: timeCounted, timeRemaining: timeRemaining)
         
         // then function execute if needed
-        thens.forEach { k,v in
+        thens.forEach { k, v in
             if k.int == timeRemaining.int {
                 v()
                 thens[k] = nil
@@ -177,7 +177,7 @@ public class SKCountdownLabel: LTMorphingLabel {
         // if end of timer
         if isEndOfTimer {
             text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
-            skDelegate?.countdownFinished()
+            countdownDelegate?.countdownFinished?()
             dispose()
             completion?()
         }
@@ -186,9 +186,7 @@ public class SKCountdownLabel: LTMorphingLabel {
 
 // MARK: - Public
 public extension SKCountdownLabel {
-    func start(completion: (()->())? = nil){
-        debugPrint("[start]start")
-        
+    func start(completion: ( () -> () )? = nil) {
         // set completion if needed
         self.completion = completion
         
@@ -196,16 +194,13 @@ public extension SKCountdownLabel {
         updatePauseStatusIfNeeded()
         
         // create timer
-        createTimer()
-        
-        debugPrint("[start]end")
+        updateTimer()
         
         // fire!
-        counting = true
         timer.fire()
     }
     
-    func pause(){
+    func pause() {
         if paused {
             return
         }
@@ -221,7 +216,7 @@ public extension SKCountdownLabel {
         pausedDate = NSDate()
     }
     
-    func reset(){
+    func reset() {
         // reset if finished
         finished = false
         
@@ -239,7 +234,7 @@ public extension SKCountdownLabel {
         updateLabel()
     }
     
-    func then(targetTime: NSTimeInterval, completion: () -> ()) -> Self{
+    func then(targetTime: NSTimeInterval, completion: () -> ()) -> Self {
         let t = originTimeInterval - (originTimeInterval - targetTime)
         guard t > 0 else {
             return self
@@ -252,7 +247,7 @@ public extension SKCountdownLabel {
 
 // MARK: - private
 private extension SKCountdownLabel {
-    func setup(){
+    func setup() {
         morphingEnabled = false
         
     }
@@ -284,7 +279,7 @@ private extension SKCountdownLabel {
         paused = false
     }
     
-    func createTimer(){
+    func updateTimer() {
         // dispose
         disposeTimer()
         
@@ -297,16 +292,17 @@ private extension SKCountdownLabel {
         
         // register to NSrunloop
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+        counting = true
     }
     
-    func disposeTimer(){
+    func disposeTimer() {
         if timer != nil {
             timer.invalidate()
             timer = nil
         }
     }
     
-    func dispose(){
+    func dispose() {
         // reset
         pausedDate = nil
         
