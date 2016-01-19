@@ -78,6 +78,7 @@ class ViewController: UIViewController {
         
         // 5. control countdown
         countdownLabel5.setCountDownTime(5)
+        countdownLabel5.delegate = self
         countdownLabel5.start() { [unowned self] in
             self.countdownLabel5.text = "timer finished."
         }
@@ -117,7 +118,7 @@ class ViewController: UIViewController {
     
     // MARK: - countdownLabel4's IBAction
     @IBAction func controlStartStop(sender: UIButton) {
-        if countdownLabel4.paused {
+        if countdownLabel4.isPaused {
             countdownLabel4.start()
             sender.setTitle("pause", forState: .Normal)
         } else {

@@ -29,8 +29,8 @@ class SKCountdownLabelExampleTests: XCTestCase {
         let label = SKCountdownLabel(frame: CGRectZero, time: 30)
         label.start()
         
-        XCTAssertEqual(label.counting, true)
-        XCTAssertEqual(label.paused, false)
+        XCTAssertEqual(label.isCounting, true)
+        XCTAssertEqual(label.isPaused, false)
         XCTAssertEqual(label.timeFormat, "HH:mm:ss")
         XCTAssertEqual(label.morphingEnabled, false)
     }
@@ -40,8 +40,8 @@ class SKCountdownLabelExampleTests: XCTestCase {
         label.animationType = .Fall
         label.start()
         
-        XCTAssertEqual(label.counting, true)
-        XCTAssertEqual(label.paused, false)
+        XCTAssertEqual(label.isCounting, true)
+        XCTAssertEqual(label.isPaused, false)
         XCTAssertEqual(label.timeFormat, "HH:mm:ss")
         XCTAssertEqual(label.morphingEnabled, true)
     }
@@ -53,9 +53,9 @@ class SKCountdownLabelExampleTests: XCTestCase {
         label.start()
         label.pause()
         
-        XCTAssertEqual(label.counting, false)
-        XCTAssertEqual(label.paused, true)
-        XCTAssertEqual(label.finished, false)
+        XCTAssertEqual(label.isCounting, false)
+        XCTAssertEqual(label.isPaused, true)
+        XCTAssertEqual(label.isFinished, false)
         XCTAssertEqual(label.timeCounted.int, 0)
         XCTAssertEqual(label.timeRemaining.int, 30)
     }
@@ -68,9 +68,9 @@ class SKCountdownLabelExampleTests: XCTestCase {
         label.start()
         label.pause()
         
-        XCTAssertEqual(label.counting, false)
-        XCTAssertEqual(label.paused, true)
-        XCTAssertEqual(label.finished, false)
+        XCTAssertEqual(label.isCounting, false)
+        XCTAssertEqual(label.isPaused, true)
+        XCTAssertEqual(label.isFinished, false)
         XCTAssertEqual(label.timeCounted.int, 0)
         XCTAssertEqual(label.timeRemaining.int, 30)
     }
@@ -82,9 +82,9 @@ class SKCountdownLabelExampleTests: XCTestCase {
         label.start()
         label.pause()
         
-        XCTAssertEqual(label.counting, false)
-        XCTAssertEqual(label.paused, true)
-        XCTAssertEqual(label.finished, false)
+        XCTAssertEqual(label.isCounting, false)
+        XCTAssertEqual(label.isPaused, true)
+        XCTAssertEqual(label.isFinished, false)
         XCTAssertEqual(label.timeCounted.int, 0)
         XCTAssertEqual(label.timeRemaining.int, 30)
     }
@@ -99,9 +99,9 @@ class SKCountdownLabelExampleTests: XCTestCase {
         delay(1.0){
             label.pause()
             
-            XCTAssertEqual(label.counting, false)
-            XCTAssertEqual(label.paused, true)
-            XCTAssertEqual(label.finished, false)
+            XCTAssertEqual(label.isCounting, false)
+            XCTAssertEqual(label.isPaused, true)
+            XCTAssertEqual(label.isFinished, false)
             XCTAssertEqual(label.timeCounted.int, 1)
             XCTAssertEqual(label.timeRemaining.int, 29)
             
@@ -122,9 +122,9 @@ class SKCountdownLabelExampleTests: XCTestCase {
         delay(1.0){
             label.pause()
             
-            XCTAssertEqual(label.counting, false)
-            XCTAssertEqual(label.paused, true)
-            XCTAssertEqual(label.finished, false)
+            XCTAssertEqual(label.isCounting, false)
+            XCTAssertEqual(label.isPaused, true)
+            XCTAssertEqual(label.isFinished, false)
             XCTAssertEqual(label.timeCounted.int, 1)
             XCTAssertEqual(label.timeRemaining.int, 29)
             
@@ -145,9 +145,9 @@ class SKCountdownLabelExampleTests: XCTestCase {
             label.pause()
             label.reset()
             
-            XCTAssertEqual(label.counting, false)
-            XCTAssertEqual(label.paused, true)
-            XCTAssertEqual(label.finished, false)
+            XCTAssertEqual(label.isCounting, false)
+            XCTAssertEqual(label.isPaused, true)
+            XCTAssertEqual(label.isFinished, false)
             XCTAssertEqual(label.timeCounted.int, 0)
             XCTAssertEqual(label.timeRemaining.int, 30)
             
@@ -168,9 +168,9 @@ class SKCountdownLabelExampleTests: XCTestCase {
             label.pause()
             label.start()
             
-            XCTAssertEqual(label.counting, true)
-            XCTAssertEqual(label.paused, false)
-            XCTAssertEqual(label.finished, false)
+            XCTAssertEqual(label.isCounting, true)
+            XCTAssertEqual(label.isPaused, false)
+            XCTAssertEqual(label.isFinished, false)
             
             expectation.fulfill()
         }
@@ -214,9 +214,9 @@ class SKCountdownLabelExampleTests: XCTestCase {
             label.pause()
             label.reset()
             
-            XCTAssertEqual(label.counting, false)
-            XCTAssertEqual(label.paused, true)
-            XCTAssertEqual(label.finished, false)
+            XCTAssertEqual(label.isCounting, false)
+            XCTAssertEqual(label.isPaused, true)
+            XCTAssertEqual(label.isFinished, false)
             XCTAssertEqual(label.timeCounted.int, 0)
             XCTAssertEqual(label.timeRemaining.int, 30)
             
@@ -226,7 +226,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
         waitForExpectationsWithTimeout(2.0, handler: nil)
     }
     
-    func testCountdownFinished() {
+    func testCountdownisFinished() {
         let label = SKCountdownLabel()
         
         label.setCountDownTime(1)
@@ -235,9 +235,9 @@ class SKCountdownLabelExampleTests: XCTestCase {
         let expectation = expectationWithDescription("expect")
         delay(1.1){
             
-            XCTAssertEqual(label.finished, true)
-            XCTAssertEqual(label.counting, false)
-            XCTAssertEqual(label.paused, false)
+            XCTAssertEqual(label.isFinished, true)
+            XCTAssertEqual(label.isCounting, false)
+            XCTAssertEqual(label.isPaused, false)
             XCTAssertEqual(label.timeCounted.int, 1)
             XCTAssertEqual(label.timeRemaining.int, 0)
             
@@ -247,7 +247,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
         waitForExpectationsWithTimeout(2.0, handler: nil)
     }
     
-    func testCountdownFinishedWithCompletion() {
+    func testCountdownisFinishedWithCompletion() {
         let label = SKCountdownLabel()
         
         var completionChangedValue = 1
@@ -311,9 +311,9 @@ class SKCountdownLabelExampleTests: XCTestCase {
         let label = SKCountdownLabel(frame: CGRectZero, time: -30)
         label.start()
         
-        XCTAssertEqual(label.counting, false)
-        XCTAssertEqual(label.paused, true)
-        XCTAssertEqual(label.finished, true)
+        XCTAssertEqual(label.isCounting, false)
+        XCTAssertEqual(label.isPaused, true)
+        XCTAssertEqual(label.isFinished, true)
     }
     
     func delay(delay:Double, closure:()->()) {
