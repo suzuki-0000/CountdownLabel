@@ -271,6 +271,7 @@ private extension CountdownLabel {
         // change date
         let pastedTime = pausedDate.timeIntervalSinceDate(currentDate)
         currentDate = NSDate().dateByAddingTimeInterval(-pastedTime)
+        fromDate = currentDate
         
         // reset pause
         pausedDate = nil

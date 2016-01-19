@@ -10,7 +10,7 @@ Simple countdown UIlabel with morphing animation, and some useful function.
 
 ## features
 - Simple creation
-- Easily get status of countdown from property and delegate
+- Easily get status of countdown from property and delegate.
 - Insert some of function, and completion
 - Style change as usual as UILabel do
 - Morphing animation from [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel).
@@ -134,6 +134,24 @@ CountdownLabel uses `00:00:00 (HH:mm:ss)` as default format.
 if you prefer using another format, Your can set your time format like below.
 
 `countdownLabel.timeFormat = @"mm:ss"`
+
+#### Scheduled
+you can set as scheduled timer
+
+```swift
+// 1. schedule
+let fromDate   = NSDate().dateByAddingTimeInterval(10)
+let targetDate = NSDate().dateByAddingTimeInterval(20)
+let upperLabel = CountdownLabel(frame: CGRectZero, fromDate: fromDate, targetDate: targetDate)
+upperLabel.start()
+
+// 2. default
+let targetDate = NSDate().dateByAddingTimeInterval(30)
+let bottomLabel = CountdownLabel(frame: CGRectZero, targetDate: targetDate)
+bottomLabel.start()
+```
+
+![sample](Screenshots/example08.gif) 
 
 #### Check Status
 some public properties are useful. 

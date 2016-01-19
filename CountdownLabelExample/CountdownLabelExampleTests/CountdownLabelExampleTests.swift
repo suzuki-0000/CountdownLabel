@@ -132,8 +132,8 @@ class CountdownLabelExampleTests: XCTestCase {
             XCTAssertEqual(label.isCounting, true)
             XCTAssertEqual(label.isPaused, false)
             XCTAssertEqual(label.isFinished, false)
-            XCTAssertEqual(label.timeCounted.int, 1)
-            XCTAssertEqual(label.timeRemaining.int, 29)
+            XCTAssertEqual(label.timeCounted.int, 0)
+            XCTAssertEqual(label.timeRemaining.int, 30)
             
             expectation.fulfill()
         }
@@ -290,7 +290,7 @@ class CountdownLabelExampleTests: XCTestCase {
     }
     
     
-    // MARK: - unexpected text
+//    // MARK: - unexpected text
     func textUnexpectedDate() {
         let label = CountdownLabel(frame: CGRectZero, minutes: -30)
         label.start()

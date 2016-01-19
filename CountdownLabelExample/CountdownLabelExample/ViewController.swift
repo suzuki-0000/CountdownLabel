@@ -30,42 +30,39 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // 1. normal
-        let fromDate   = NSDate().dateByAddingTimeInterval(10)
-        let targetDate = NSDate().dateByAddingTimeInterval(30)
-        countdownLabel1.setCountDownDate(fromDate, targetDate: targetDate)
+        countdownLabel1.setCountDownTime(60*60)
         countdownLabel1.start()
 
         // option animation ( using LTMorphing inside )
-        countdownLabelAnvil.setCountDownTime(30)
-        countdownLabelAnvil.animationType = .Anvil
+        countdownLabelAnvil.setCountDownTime(60*60)
         countdownLabelAnvil.start()
 
-        countdownLabelBurn.setCountDownTime(60*60+10)
+        countdownLabelBurn.setCountDownTime(60*60)
         countdownLabelBurn.animationType = .Burn
         countdownLabelBurn.start()
         
-        countdownLabelEvaporate.setCountDownTime(60*60+10)
+        countdownLabelEvaporate.setCountDownTime(60*60)
         countdownLabelEvaporate.animationType = .Evaporate
         countdownLabelEvaporate.start()
         
-        countdownLabelFall.setCountDownTime(60*60+10)
+        countdownLabelFall.setCountDownTime(60*60)
         countdownLabelFall.animationType = .Fall
         countdownLabelFall.start()
         
-        countdownLabelPixelate.setCountDownTime(60*60+10)
+        countdownLabelPixelate.setCountDownTime(60*60)
         countdownLabelPixelate.animationType = .Pixelate
         countdownLabelPixelate.start()
         
-        countdownLabelScale.setCountDownTime(60*60+10)
+        countdownLabelScale.setCountDownTime(60*60)
         countdownLabelScale.animationType = .Scale
         countdownLabelScale.start()
         
-        countdownLabelSparkle.setCountDownTime(60*60+10)
+        countdownLabelSparkle.setCountDownTime(60*60)
         countdownLabelSparkle.animationType = .Sparkle
         countdownLabelSparkle.start()
         
         // 2. style
-        countdownLabel2.setCountDownTime(60*60+15)
+        countdownLabel2.setCountDownTime(60*60)
         countdownLabel2.animationType = .Evaporate
         countdownLabel2.textColor = .orangeColor()
         countdownLabel2.font = UIFont(name:"Courier", size:UIFont.labelFontSize())
