@@ -7,14 +7,15 @@ CountdownLabel
 
 Simple countdown UIlabel with some of function, with morphing animation from [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel).
 
+![sample](Screenshots/example01.gif)
+
+
 ## features
 - Create countdown label only oneline.
 - Style change as usual as UILabel do.
 - Easily get status of countdown from property and delegate.
 - Insert some of function, and completion. 
 - Morphing animation from [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel).
-
-![sample](Screenshots/example01.gif)
 
 ## Requirements
 - iOS 8.0+
