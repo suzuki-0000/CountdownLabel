@@ -90,17 +90,17 @@ class ViewController: UIViewController {
         // 6. control countdown
         countdownLabel6.setCountDownTime(30)
         countdownLabel5.animationType = .Scale
-        countdownLabel6.then(10) { [unowned self] in
-            self.countdownLabel6.animationType = .Pixelate
-            self.countdownLabel6.textColor = .greenColor()
-        }
-        countdownLabel6.then(5) { [unowned self] in
-            self.countdownLabel6.animationType = .Sparkle
-            self.countdownLabel6.textColor = .yellowColor()
-        }
-        countdownLabel6.start() {
-            self.countdownLabel6.textColor = .whiteColor()
-        }
+countdownLabel6.then(10) { [unowned self] in
+    self.countdownLabel6.animationType = .Pixelate
+    self.countdownLabel6.textColor = .greenColor()
+}
+countdownLabel6.then(5) { [unowned self] in
+    self.countdownLabel6.animationType = .Sparkle
+    self.countdownLabel6.textColor = .yellowColor()
+}
+countdownLabel6.start() {
+    self.countdownLabel6.textColor = .whiteColor()
+}
        
         // 7. attributed text
         countdownLabel7.setCountDownTime(30)

@@ -100,16 +100,16 @@ if countdownLabel.isPaused {
 Using `then` function or `delegate`, you can set your function anywhere you like.
 
 ```swift
-countdownLabel.setCountDownTime(30)
-countdownLabel.then(10) { [unowned self] in
-    self.countdownLabel.textColor = .blueColor()
+countdownLabel6.then(10) { [unowned self] in
+    self.countdownLabel6.animationType = .Pixelate
+    self.countdownLabel6.textColor = .greenColor()
 }
-countdownLabel.then(5) { [unowned self] in
-    self.countdownLabel.textColor = .yellowColor()
+countdownLabel6.then(5) { [unowned self] in
+    self.countdownLabel6.animationType = .Sparkle
+    self.countdownLabel6.textColor = .yellowColor()
 }
-countdownLabel.start() {
-    self.countdownLabel.textColor = .redColor()
-    self.countdownLabel.text = "timer finished."
+countdownLabel6.start() {
+    self.countdownLabel6.textColor = .whiteColor()
 }
 ```
 
