@@ -63,21 +63,25 @@ class ViewController: UIViewController {
         countdownLabelSparkle.start()
         
         // 2. style
-        countdownLabel2.setCountDownTime(60*60+10)
+        countdownLabel2.setCountDownTime(60*60+15)
+        countdownLabel2.animationType = .Evaporate
         countdownLabel2.textColor = .orangeColor()
-        countdownLabel2.font = UIFont.boldSystemFontOfSize(30)
+        countdownLabel2.font = UIFont(name:"Courier", size:UIFont.labelFontSize())
         countdownLabel2.start()
         
         // 3. get status
         countdownLabel3.setCountDownTime(30)
+        countdownLabel3.animationType = .Sparkle
         countdownLabel3.start()
         
         // 4. control countdown
         countdownLabel4.setCountDownTime(30)
+        countdownLabel4.animationType = .Pixelate
         countdownLabel4.start()
         
         // 5. control countdown
         countdownLabel5.setCountDownTime(10)
+        countdownLabel5.animationType = .Pixelate
         countdownLabel5.countdownDelegate = self
         countdownLabel5.start() { [unowned self] in
             self.countdownLabel5.text = "timer finished."
@@ -85,15 +89,17 @@ class ViewController: UIViewController {
         
         // 6. control countdown
         countdownLabel6.setCountDownTime(30)
+        countdownLabel5.animationType = .Scale
         countdownLabel6.then(10) { [unowned self] in
-            self.countdownLabel6.textColor = .blueColor()
+            self.countdownLabel6.animationType = .Pixelate
+            self.countdownLabel6.textColor = .greenColor()
         }
         countdownLabel6.then(5) { [unowned self] in
+            self.countdownLabel6.animationType = .Sparkle
             self.countdownLabel6.textColor = .yellowColor()
         }
         countdownLabel6.start() {
-            self.countdownLabel6.textColor = .redColor()
-            self.countdownLabel6.text = "timer finished."
+            self.countdownLabel6.textColor = .whiteColor()
         }
        
         // 7. attributed text
