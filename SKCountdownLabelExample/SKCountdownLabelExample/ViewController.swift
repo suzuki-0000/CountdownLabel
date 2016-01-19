@@ -30,42 +30,42 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         // 1. normal
-        countdownLabel1.setCountDownTime(30)
+        countdownLabel1.setCountDownTime(60*60+10)
         countdownLabel1.start()
         
         // option animation ( using LTMorphing inside )
-        countdownLabelAnvil.setCountDownTime(30)
+        countdownLabelAnvil.setCountDownTime(60*60+10)
         countdownLabelAnvil.animationType = .Anvil
         countdownLabelAnvil.start()
         
-        countdownLabelBurn.setCountDownTime(30)
+        countdownLabelBurn.setCountDownTime(60*60+10)
         countdownLabelBurn.animationType = .Burn
         countdownLabelBurn.start()
         
-        countdownLabelEvaporate.setCountDownTime(30)
+        countdownLabelEvaporate.setCountDownTime(60*60+10)
         countdownLabelEvaporate.animationType = .Evaporate
         countdownLabelEvaporate.start()
         
-        countdownLabelFall.setCountDownTime(30)
+        countdownLabelFall.setCountDownTime(60*60+10)
         countdownLabelFall.animationType = .Fall
         countdownLabelFall.start()
         
-        countdownLabelPixelate.setCountDownTime(30)
+        countdownLabelPixelate.setCountDownTime(60*60+10)
         countdownLabelPixelate.animationType = .Pixelate
         countdownLabelPixelate.start()
         
-        countdownLabelScale.setCountDownTime(30)
+        countdownLabelScale.setCountDownTime(60*60+10)
         countdownLabelScale.animationType = .Scale
         countdownLabelScale.start()
         
-        countdownLabelSparkle.setCountDownTime(30)
+        countdownLabelSparkle.setCountDownTime(60*60+10)
         countdownLabelSparkle.animationType = .Sparkle
         countdownLabelSparkle.start()
         
         // 2. style
-        countdownLabel2.setCountDownTime(3)
+        countdownLabel2.setCountDownTime(60*60+10)
         countdownLabel2.textColor = .orangeColor()
-        countdownLabel2.font = UIFont.boldSystemFontOfSize(40)
+        countdownLabel2.font = UIFont.boldSystemFontOfSize(30)
         countdownLabel2.start()
         
         // 3. get status
@@ -77,29 +77,27 @@ class ViewController: UIViewController {
         countdownLabel4.start()
         
         // 5. control countdown
-        countdownLabel5.setCountDownTime(5)
+        countdownLabel5.setCountDownTime(10)
         countdownLabel5.countdownDelegate = self
         countdownLabel5.start() { [unowned self] in
             self.countdownLabel5.text = "timer finished."
         }
         
         // 6. control countdown
-        countdownLabel6.setCountDownTime(5)
-        countdownLabel6.then(3) { [unowned self] in
-            self.countdownLabel6.textColor = .brownColor()
+        countdownLabel6.setCountDownTime(30)
+        countdownLabel6.then(10) { [unowned self] in
+            self.countdownLabel6.textColor = .blueColor()
         }
-        countdownLabel6.then(2) { [unowned self] in
-            self.countdownLabel6.textColor = .greenColor()
-        }
-        countdownLabel6.then(1) { [unowned self] in
-            self.countdownLabel6.textColor = .redColor()
+        countdownLabel6.then(5) { [unowned self] in
+            self.countdownLabel6.textColor = .yellowColor()
         }
         countdownLabel6.start() {
+            self.countdownLabel6.textColor = .redColor()
             self.countdownLabel6.text = "timer finished."
         }
        
         // 7. attributed text
-        countdownLabel7.setCountDownTime(10)
+        countdownLabel7.setCountDownTime(30)
         countdownLabel7.timeFormat = "ss"
         countdownLabel7.timerInText = SKTimerInText(text: "timer here in text", replacement: "here")
         countdownLabel7.start() {
@@ -143,7 +141,7 @@ class ViewController: UIViewController {
 
 extension ViewController: SKCountdownLabelDelegate {
     func countdownFinished() {
-        alert("countdownFinished at delegate.")
+        debugPrint("countdownFinished at delegate.")
     }
     
     func countingAt(timeCounted timeCounted: NSTimeInterval, timeRemaining: NSTimeInterval) {
