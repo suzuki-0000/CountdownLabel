@@ -131,27 +131,27 @@ public class SKCountdownLabel: LTMorphingLabel {
     }
     
     // MARK: - Setter Methods
-    public func setCountDownTime(time: NSTimeInterval) {
-        setCountDownTime(NSDate(), originTime: time)
+    public func setCountDownTime(minutes: NSTimeInterval) {
+        setCountDownTime(NSDate(), minutes: minutes)
     }
     
-    public func setCountDownTime(origin: NSDate, originTime: NSTimeInterval) {
-        originTimeInterval = originTime
+    public func setCountDownTime(origin: NSDate, minutes: NSTimeInterval) {
+        originTimeInterval = minutes
         currentDate = origin
-        currentTimeInterval = originTime
+        currentTimeInterval = minutes
         currentDiffDate = date1970.dateByAddingTimeInterval(originTimeInterval)
         
         updateLabel()
     }
     
-    public func setCountDownDate(origin: NSDate) {
-        setCountDownDate(NSDate(), originDate: origin)
+    public func setCountDownDate(targetDate: NSDate) {
+        setCountDownDate(NSDate(), targetDate: targetDate)
     }
     
-    public func setCountDownDate(origin: NSDate, originDate: NSDate) {
-        originTimeInterval = originDate.timeIntervalSinceDate(origin)
+    public func setCountDownDate(origin: NSDate, targetDate: NSDate) {
+        originTimeInterval = targetDate.timeIntervalSinceDate(origin)
         currentDate = origin
-        currentTimeInterval = originDate.timeIntervalSinceDate(origin)
+        currentTimeInterval = targetDate.timeIntervalSinceDate(origin)
         currentDiffDate = date1970.dateByAddingTimeInterval(originTimeInterval)
         
         updateLabel()

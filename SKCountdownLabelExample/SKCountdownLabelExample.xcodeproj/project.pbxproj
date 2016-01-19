@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8993AAA81C4E07A900C4A6D2 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8993AAA71C4E07A900C4A6D2 /* ViewController2.swift */; };
 		89993D961C3FAD910099AC14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89993D951C3FAD910099AC14 /* AppDelegate.swift */; };
 		89993D981C3FAD910099AC14 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89993D971C3FAD910099AC14 /* ViewController.swift */; };
 		89993D9B1C3FAD910099AC14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89993D991C3FAD910099AC14 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8993AAA71C4E07A900C4A6D2 /* ViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		89993D921C3FAD910099AC14 /* SKCountdownLabelExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKCountdownLabelExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		89993D951C3FAD910099AC14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		89993D971C3FAD910099AC14 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				89993D951C3FAD910099AC14 /* AppDelegate.swift */,
 				89993D971C3FAD910099AC14 /* ViewController.swift */,
+				8993AAA71C4E07A900C4A6D2 /* ViewController2.swift */,
 				89993D991C3FAD910099AC14 /* Main.storyboard */,
 				89993D9C1C3FAD910099AC14 /* Assets.xcassets */,
 				89993DB51C3FADAB0099AC14 /* mplus-1p-regular.ttf */,
@@ -242,6 +245,7 @@
 			files = (
 				89993D981C3FAD910099AC14 /* ViewController.swift in Sources */,
 				89993D961C3FAD910099AC14 /* AppDelegate.swift in Sources */,
+				8993AAA81C4E07A900C4A6D2 /* ViewController2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

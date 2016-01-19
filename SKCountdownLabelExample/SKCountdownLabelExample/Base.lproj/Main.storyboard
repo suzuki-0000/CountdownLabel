@@ -1,23 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4da-zU-HEc">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="mplus-1p-regular.ttf">
-            <string>mplus-1p-regular</string>
-            <string>mplus-1p-regular</string>
-            <string>mplus-1p-regular</string>
-            <string>mplus-1p-regular</string>
-            <string>mplus-1p-regular</string>
-            <string>mplus-1p-regular</string>
-            <string>mplus-1p-regular</string>
-            <string>mplus-1p-regular</string>
-            <string>mplus-1p-regular</string>
-            <string>mplus-1p-regular</string>
-            <string>mplus-1p-regular</string>
-            <string>mplus-1p-regular</string>
             <string>mplus-1p-regular</string>
             <string>mplus-1p-regular</string>
             <string>mplus-1p-regular</string>
@@ -58,7 +46,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="NNc-Qu-C1v"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -68,7 +56,7 @@
                                             <constraint firstAttribute="width" constant="200" id="DsM-Yx-PFc"/>
                                             <constraint firstAttribute="height" constant="100" id="H8d-Rx-oOO"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -78,7 +66,7 @@
                                             <constraint firstAttribute="height" constant="100" id="92w-kK-fhC"/>
                                             <constraint firstAttribute="width" constant="200" id="zGs-85-VSY"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -88,7 +76,7 @@
                                             <constraint firstAttribute="width" constant="200" id="GIp-hO-EAc"/>
                                             <constraint firstAttribute="height" constant="100" id="msT-pX-wkT"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -98,7 +86,7 @@
                                             <constraint firstAttribute="height" constant="100" id="5a8-gC-UUk"/>
                                             <constraint firstAttribute="width" constant="200" id="uft-bi-hrO"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -108,7 +96,7 @@
                                             <constraint firstAttribute="height" constant="100" id="Yaw-cl-srS"/>
                                             <constraint firstAttribute="width" constant="200" id="ny1-kO-5LD"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -118,7 +106,7 @@
                                             <constraint firstAttribute="width" constant="200" id="3Pj-ny-XJ8"/>
                                             <constraint firstAttribute="height" constant="100" id="5si-Gc-2Bk"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -128,7 +116,7 @@
                                             <constraint firstAttribute="height" constant="100" id="IS8-Q6-x62"/>
                                             <constraint firstAttribute="width" constant="200" id="tmN-ga-7E0"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -138,27 +126,18 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYs-hL-INf" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
-                                        <rect key="frame" x="264" y="928" width="73" height="100"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="eBI-Kr-7nZ"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3. Get countdown's status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vWK-Wa-ZIv" userLabel="Countdown Label3 Desc">
                                         <rect key="frame" x="194" y="1048" width="213" height="24"/>
                                         <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAq-Se-X7V" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAq-Se-X7V" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
                                         <rect key="frame" x="261" y="1082" width="78" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="IzN-qs-4CQ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -168,12 +147,12 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1N-IQ-les" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1N-IQ-les" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
                                         <rect key="frame" x="261" y="1236" width="78" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="Nk7-Km-8OG"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -183,12 +162,12 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lsE-4w-rQx" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lsE-4w-rQx" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
                                         <rect key="frame" x="261" y="1390" width="78" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="n24-fk-RQB"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -198,12 +177,12 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLx-M6-7pP" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eLx-M6-7pP" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
                                         <rect key="frame" x="261" y="1544" width="78" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="AMi-je-rU7"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -213,16 +192,16 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGv-gb-bhO" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGv-gb-bhO" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
                                         <rect key="frame" x="262" y="1691" width="78" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="ttW-Zb-YDt"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="mplus-1p-regular" family="M+ 1p" pointSize="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfS-nR-UfG">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfS-nR-UfG">
                                         <rect key="frame" x="394" y="1272" width="43" height="30"/>
                                         <state key="normal" title="+2sec">
                                             <color key="titleColor" red="0.015686274510000001" green="0.61960784310000006" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -231,7 +210,7 @@
                                             <action selector="plus:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iN6-p0-He0"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYF-gU-bQu">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYF-gU-bQu">
                                         <rect key="frame" x="159" y="1272" width="40" height="30"/>
                                         <state key="normal" title="-2sec">
                                             <color key="titleColor" red="0.015686274510000001" green="0.61960784310000006" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -240,7 +219,7 @@
                                             <action selector="minus:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FGs-Qt-5jd"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jdC-e5-Zsd">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jdC-e5-Zsd">
                                         <rect key="frame" x="209" y="1272" width="42" height="30"/>
                                         <state key="normal" title="pause">
                                             <color key="titleColor" red="0.015686274510000001" green="0.61960784310000006" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -249,7 +228,7 @@
                                             <action selector="controlStartStop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f6O-1p-bIW"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JqL-2I-38O">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JqL-2I-38O">
                                         <rect key="frame" x="349" y="1118" width="73" height="30"/>
                                         <state key="normal" title="getRemain">
                                             <color key="titleColor" red="0.015686274510000001" green="0.61960784310000006" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -258,7 +237,7 @@
                                             <action selector="getTimerRemain:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LeF-Xd-BDD"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0C7-3L-igy">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0C7-3L-igy">
                                         <rect key="frame" x="169" y="1118" width="82" height="30"/>
                                         <state key="normal" title="getCounted">
                                             <color key="titleColor" red="0.015686274510000001" green="0.61960784310000006" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -267,7 +246,7 @@
                                             <action selector="getTimerCounted:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8KD-EZ-eAo"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adb-gy-x66">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adb-gy-x66">
                                         <rect key="frame" x="349" y="1272" width="35" height="30"/>
                                         <state key="normal" title="reset">
                                             <color key="titleColor" red="0.015686274510000001" green="0.61960784310000006" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -276,6 +255,15 @@
                                             <action selector="controlReset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lil-8P-aeY"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mYs-hL-INf" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
+                                        <rect key="frame" x="264" y="926" width="73" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="eBI-Kr-7nZ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="lsE-4w-rQx" firstAttribute="centerX" secondItem="pEN-Mo-nE5" secondAttribute="centerX" id="1AE-xh-Zmt"/>
@@ -394,6 +382,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="672" y="251"/>
+        </scene>
+        <!--View Controller2-->
+        <scene sceneID="9Co-Tm-NNf">
+            <objects>
+                <viewController id="4da-zU-HEc" customClass="ViewController2" customModule="SKCountdownLabelExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qAi-RZ-4zS"/>
+                        <viewControllerLayoutGuide type="bottom" id="bXH-xM-IZr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eEm-s1-O41">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rg-V2-jqJ" customClass="SKCountdownLabel" customModule="SKCountdownLabel">
+                                <rect key="frame" x="150" y="250" width="300" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="300" id="4m4-89-xQc"/>
+                                    <constraint firstAttribute="height" constant="100" id="gCF-eE-pRc"/>
+                                    <constraint firstAttribute="width" constant="300" id="p4U-P9-1Sp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="50"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="4m4-89-xQc"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6Rg-V2-jqJ" firstAttribute="centerY" secondItem="eEm-s1-O41" secondAttribute="centerY" id="8IJ-Jc-zmH"/>
+                            <constraint firstItem="6Rg-V2-jqJ" firstAttribute="centerX" secondItem="eEm-s1-O41" secondAttribute="centerX" id="lHM-ME-a19"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="countdownLabel" destination="6Rg-V2-jqJ" id="605-ET-xZM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZE5-kV-iMe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="490" y="1436"/>
         </scene>
     </scenes>
 </document>
