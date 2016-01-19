@@ -19,28 +19,11 @@ Simple countdown UIlabel with morphing animation, and some useful function.
 - XCTest assertion
 
 ## Usage
-You need only 2 lines.
+You need only 2 lines. you can set as NSDate too.
 
 ```swift
 // from current Date, after 30 minutes.
 let countdownLabel = SKCountdownLabel(frame: frame, time: 30)
-countdownLabel.start()
-```
-
-you can set as NSDate too.
-```swift
-// from current Date, after 30 minutes as NSDate.
-let targetDate = NSDate().dateByAddingTimeInterval(30)
-let countdownLabel = SKCountdownLabel(frame: frame, targetDate: targetDate)
-countdownLabel.start()
-```
-
-you can start specified date(NSDate) to endDate.
-```swift
-// from current Date, after 30 minutes as NSDate.
-let fromDate   = NSDate().dateByAddingTimeInterval(10)
-let targetDate = fromDate.dateByAddingTimeInterval(30)
-let countdownLabel = SKCountdownLabel(frame: frame, fromDate: fromDate, targetDate: targetDate)
 countdownLabel.start()
 ```
 
