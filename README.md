@@ -57,8 +57,13 @@ countdownLabel.start()
 
 #### Get Status of timer
 ```swift
-timeCounted       // timer has been counted
-timetimeRemaining // timer remaining
+@IBAction func getTimerCounted(sender: UIButton) {
+    debugPrint("\(countdownLabel.timeCounted)")
+}
+
+@IBAction func getTimerRemain(sender: UIButton) {
+    debugPrint("\(countdownLabel.timeRemaining)")
+}
 ```
 
 ![sample](Screenshots/example03.gif) 
@@ -68,12 +73,12 @@ You can pause, reset, add timer using custom control.
 
 ```swift
 // check if pause or not
-if countdownLabel4.isPaused {
+if countdownLabel.isPaused {
     // timer start
-    countdownLabel4.start()
+    countdownLabel.start()
 } else {
     // timer pause
-    countdownLabel4.pause()
+    countdownLabel.pause()
 }
 ```
 
@@ -105,6 +110,20 @@ countdownLabel.then(5) { [unowned self] in
 countdownLabel.start() {
     self.countdownLabel.textColor = .redColor()
     self.countdownLabel.text = "timer finished."
+}
+```
+
+```swift
+countdownLabel.countdownDelegate = self
+
+// MARK: - CountdownLabelDelegate
+func countdownFinished() {
+    debugPrint("countdownFinished at delegate.")
+}
+
+func countingAt(timeCounted timeCounted: NSTimeInterval, timeRemaining: NSTimeInterval) {
+    debugPrint("time counted at delegate=\(timeCounted)")
+    debugPrint("time remaining at delegate=\(timeRemaining)")
 }
 ```
 
