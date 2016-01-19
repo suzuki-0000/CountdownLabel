@@ -51,16 +51,21 @@ you can directly allocate it as a normal UILabel property just like usual.
 
 ```swift
 countdownLabel.textColor = .orangeColor()
-countdownLabel.font = UIFont.boldSystemFontOfSize(30)
-countdownLabel.start(6
+countdownLabel.font = UIFont(name:"Courier", size:UIFont.labelFontSize())
+countdownLabel.start()
 ```
 
 ![sample](Screenshots/example02.gif) 
 
 #### Get Status of timer
 ```swift
-timeCounted       // timer has been counted
-timetimeRemaining // timer remaining
+@IBAction func getTimerCounted(sender: UIButton) {
+    debugPrint("\(countdownLabel.timeCounted)")
+}
+
+@IBAction func getTimerRemain(sender: UIButton) {
+    debugPrint("\(countdownLabel.timeRemaining)")
+}
 ```
 
 ![sample](Screenshots/example03.gif) 
@@ -70,12 +75,12 @@ You can pause, reset, add timer using custom control.
 
 ```swift
 // check if pause or not
-if countdownLabel4.isPaused {
+if countdownLabel.isPaused {
     // timer start
-    countdownLabel4.start()
+    countdownLabel.start()
 } else {
     // timer pause
-    countdownLabel4.pause()
+    countdownLabel.pause()
 }
 ```
 
