@@ -115,6 +115,20 @@ countdownLabel.start() {
 }
 ```
 
+```swift
+countdownLabel.countdownDelegate = self
+
+// MARK: - CountdownLabelDelegate
+func countdownFinished() {
+    debugPrint("countdownFinished at delegate.")
+}
+
+func countingAt(timeCounted timeCounted: NSTimeInterval, timeRemaining: NSTimeInterval) {
+    debugPrint("time counted at delegate=\(timeCounted)")
+    debugPrint("time remaining at delegate=\(timeRemaining)")
+}
+```
+
 ![sample](Screenshots/example06.gif) 
 
 #### Attributed Text
