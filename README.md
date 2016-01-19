@@ -21,7 +21,7 @@ You need only 2 lines.
 
 ```swift
 // from current Date, after 30 minutes.
-let countdownLabel = CountdownLabel(frame: frame, time: 30)
+let countdownLabel = CountdownLabel(frame: frame, minutes: 30) // you can use NSDate as well
 countdownLabel.start()
 ```
 
@@ -69,7 +69,7 @@ countdownLabel.start()
 ![sample](Screenshots/example03.gif) 
 
 #### Control countdown
-You can pause, reset, add timer using custom control.
+You can pause, start, add time.
 
 ```swift
 // check if pause or not
@@ -100,30 +100,16 @@ if countdownLabel.isPaused {
 Using `then` function or `delegate`, you can set your function anywhere you like.
 
 ```swift
-countdownLabel6.then(10) { [unowned self] in
-    self.countdownLabel6.animationType = .Pixelate
-    self.countdownLabel6.textColor = .greenColor()
+countdownLabel.then(10) { [unowned self] in
+    self.countdownLabel.animationType = .Pixelate
+    self.countdownLabel.textColor = .greenColor()
 }
-countdownLabel6.then(5) { [unowned self] in
-    self.countdownLabel6.animationType = .Sparkle
-    self.countdownLabel6.textColor = .yellowColor()
+countdownLabel.then(5) { [unowned self] in
+    self.countdownLabel.animationType = .Sparkle
+    self.countdownLabel.textColor = .yellowColor()
 }
-countdownLabel6.start() {
-    self.countdownLabel6.textColor = .whiteColor()
-}
-```
-
-```swift
-countdownLabel.countdownDelegate = self
-
-// MARK: - CountdownLabelDelegate
-func countdownFinished() {
-    debugPrint("countdownFinished at delegate.")
-}
-
-func countingAt(timeCounted timeCounted: NSTimeInterval, timeRemaining: NSTimeInterval) {
-    debugPrint("time counted at delegate=\(timeCounted)")
-    debugPrint("time remaining at delegate=\(timeRemaining)")
+countdownLabel.start() {
+    self.countdownLabel.textColor = .whiteColor()
 }
 ```
 
@@ -147,7 +133,17 @@ countdownLabel.start() {
 CountdownLabel uses `00:00:00 (HH:mm:ss)` as default format.
 if you prefer using another format, Your can set your time format like below.
 
-`countdownLabel.timeFormat = @"mm:ss";`
+`countdownLabel.timeFormat = @"mm:ss"`
+
+#### Check Status
+some public properties are useful. 
+
+```swift
+countdownLabel.isCounting      // check timer is counting now
+countdownLabel.isPaused        // check timer was stopped
+countdownLabel.isFinished      // check timer has ended
+countdownLabel.morphingEnabled // check morphing is enabled
+```
 
 ## Requirements
 - iOS 8.0+
