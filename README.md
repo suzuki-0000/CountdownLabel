@@ -115,13 +115,15 @@ countdownLabel.start() {
 #### Attributed Text
 you can set as attributedText too. note:but morphing animation will be disabled.
 ```
-countdownLabel7.setCountDownTime(30)
-countdownLabel7.timeFormat = "ss"
-countdownLabel7.timerInText = SKTimerInText(text: "timer here in text", replacement: "here")
-countdownLabel7.start() {
-    self.countdownLabel7.text = "timer finished."
+countdownLabel.setCountDownTime(30)
+countdownLabel.timeFormat = "ss"
+countdownLabel.timerInText = SKTimerInText(text: "timer here in text", replacement: "here")
+countdownLabel.start() {
+    self.countdownLabel.text = "timer finished."
 }
 ```
+
+![sample](Screenshots/example07.gif) 
 
 
 #### Format
