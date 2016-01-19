@@ -1,30 +1,30 @@
 //
 //  ViewController.swift
-//  SKCountdownLabelExample
+//  CountdownLabelExample
 //
 //  Created by suzuki keishi on 2016/01/06.
 //  Copyright © 2016 suzuki_keishi. All rights reserved.
 //
 
 import UIKit
-import SKCountdownLabel
+import CountdownLabel
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var countdownLabel1: SKCountdownLabel!
-    @IBOutlet weak var countdownLabelAnvil: SKCountdownLabel!
-    @IBOutlet weak var countdownLabelBurn: SKCountdownLabel!
-    @IBOutlet weak var countdownLabelEvaporate: SKCountdownLabel!
-    @IBOutlet weak var countdownLabelFall: SKCountdownLabel!
-    @IBOutlet weak var countdownLabelPixelate: SKCountdownLabel!
-    @IBOutlet weak var countdownLabelScale: SKCountdownLabel!
-    @IBOutlet weak var countdownLabelSparkle: SKCountdownLabel!
-    @IBOutlet weak var countdownLabel2: SKCountdownLabel!
-    @IBOutlet weak var countdownLabel3: SKCountdownLabel!
-    @IBOutlet weak var countdownLabel4: SKCountdownLabel!
-    @IBOutlet weak var countdownLabel5: SKCountdownLabel!
-    @IBOutlet weak var countdownLabel6: SKCountdownLabel!
-    @IBOutlet weak var countdownLabel7: SKCountdownLabel!
+    @IBOutlet weak var countdownLabel1: CountdownLabel!
+    @IBOutlet weak var countdownLabelAnvil: CountdownLabel!
+    @IBOutlet weak var countdownLabelBurn: CountdownLabel!
+    @IBOutlet weak var countdownLabelEvaporate: CountdownLabel!
+    @IBOutlet weak var countdownLabelFall: CountdownLabel!
+    @IBOutlet weak var countdownLabelPixelate: CountdownLabel!
+    @IBOutlet weak var countdownLabelScale: CountdownLabel!
+    @IBOutlet weak var countdownLabelSparkle: CountdownLabel!
+    @IBOutlet weak var countdownLabel2: CountdownLabel!
+    @IBOutlet weak var countdownLabel3: CountdownLabel!
+    @IBOutlet weak var countdownLabel4: CountdownLabel!
+    @IBOutlet weak var countdownLabel5: CountdownLabel!
+    @IBOutlet weak var countdownLabel6: CountdownLabel!
+    @IBOutlet weak var countdownLabel7: CountdownLabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,7 +145,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: SKCountdownLabelDelegate {
+extension ViewController: CountdownLabelDelegate {
     func countdownFinished() {
         debugPrint("countdownFinished at delegate.")
     }

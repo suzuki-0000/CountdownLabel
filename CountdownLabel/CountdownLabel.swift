@@ -1,6 +1,6 @@
 //
-//  SKCountdownLabel.swift
-//  SKCountdownLabel
+//  CountdownLabel.swift
+//  CountdownLabel
 //
 //  Created by suzuki keishi on 2016/01/06.
 //  Copyright © 2016 suzuki_keishi. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 import LTMorphingLabel
 
-@objc public protocol SKCountdownLabelDelegate {
+@objc public protocol CountdownLabelDelegate {
     optional func countdownFinished()
     optional func countingAt(timeCounted timeCounted: NSTimeInterval, timeRemaining: NSTimeInterval)
 }
@@ -20,10 +20,10 @@ public extension NSTimeInterval {
     }
 }
 
-public class SKCountdownLabel: LTMorphingLabel {
+public class CountdownLabel: LTMorphingLabel {
     
-    public typealias SKCountdownCompletion = () -> ()?
-    public typealias SKCountdownExecution = () -> ()
+    public typealias CountdownCompletion = () -> ()?
+    public typealias CountdownExecution = () -> ()
     private let defaultFireIntervalSlow = 1.0
     private let defaultFireIntervalNormal = 0.1
     private let defaultFireIntervalHighUse = 0.01
@@ -73,7 +73,7 @@ public class SKCountdownLabel: LTMorphingLabel {
         return finished
     }
     
-    public weak var countdownDelegate: SKCountdownLabelDelegate?
+    public weak var countdownDelegate: CountdownLabelDelegate?
     
     // user settings
     public var animationType: SKAnimationEffect? {
@@ -87,14 +87,14 @@ public class SKCountdownLabel: LTMorphingLabel {
         }
     }
     public var timeFormat = "HH:mm:ss"
-    public var thens = [NSTimeInterval: SKCountdownExecution]()
+    public var thens = [NSTimeInterval: CountdownExecution]()
     public var timerInText: SKTimerInText! {
         didSet {
             range = (timerInText.text as NSString).rangeOfString(timerInText.replacement)
         }
     }
     
-    private var completion: SKCountdownCompletion?
+    private var completion: CountdownCompletion?
     private var currentDate: NSDate = NSDate()
     private var currentTimeInterval: NSTimeInterval = 0
     private var currentDiffDate: NSDate!
@@ -185,7 +185,7 @@ public class SKCountdownLabel: LTMorphingLabel {
 }
 
 // MARK: - Public
-public extension SKCountdownLabel {
+public extension CountdownLabel {
     func start(completion: ( () -> () )? = nil) {
         // set completion if needed
         self.completion = completion
@@ -246,7 +246,7 @@ public extension SKCountdownLabel {
 }
 
 // MARK: - private
-private extension SKCountdownLabel {
+private extension CountdownLabel {
     func setup() {
         morphingEnabled = false
         

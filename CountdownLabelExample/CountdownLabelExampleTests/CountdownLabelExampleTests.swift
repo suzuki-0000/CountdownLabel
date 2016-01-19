@@ -1,16 +1,16 @@
 //
-//  SKCountdownLabelExampleTests.swift
-//  SKCountdownLabelExampleTests
+//  CountdownLabelExampleTests.swift
+//  CountdownLabelExampleTests
 //
 //  Created by suzuki keishi on 2016/01/08.
 //  Copyright © 2016 suzuki_keishi. All rights reserved.
 //
 
 import XCTest
-import SKCountdownLabel
-@testable import SKCountdownLabelExample
+import CountdownLabel
+@testable import CountdownLabelExample
 
-class SKCountdownLabelExampleTests: XCTestCase {
+class CountdownLabelExampleTests: XCTestCase {
     
     func testInitWithCoder() {
         let storyboard = UIStoryboard(name: "StoryboardTests", bundle: NSBundle(forClass: self.dynamicType))
@@ -20,13 +20,13 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testInitWithFrame() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         XCTAssertNotNil(label)
     }
 
     func testStartStatus() {
-        let label = SKCountdownLabel(frame: CGRectZero, time: 30)
+        let label = CountdownLabel(frame: CGRectZero, time: 30)
         label.start()
         
         XCTAssertEqual(label.isCounting, true)
@@ -36,7 +36,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testStartWithMorphing() {
-        let label = SKCountdownLabel(frame: CGRectZero, time: 30)
+        let label = CountdownLabel(frame: CGRectZero, time: 30)
         label.animationType = .Fall
         label.start()
         
@@ -47,7 +47,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testSettingCountdownTime() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         label.setCountDownTime(30)
         label.start()
@@ -61,7 +61,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testSettingCountdownDate() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         let targetDate = NSDate().dateByAddingTimeInterval(30)
         
         label.setCountDownDate(targetDate)
@@ -76,7 +76,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testPauseStatus() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         label.setCountDownTime(30)
         label.start()
@@ -90,7 +90,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testAfterASecond() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         label.setCountDownTime(30)
         label.start()
@@ -112,7 +112,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testAfterASecondDate() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         let targetDate = NSDate().dateByAddingTimeInterval(30)
         label.setCountDownDate(targetDate)
@@ -135,7 +135,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testReset() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         label.setCountDownTime(30)
         label.start()
@@ -158,7 +158,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testRestart() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         label.setCountDownTime(30)
         label.start()
@@ -179,7 +179,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testAddTime() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         label.setCountDownTime(30)
         label.start()
@@ -191,7 +191,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testMinusTime() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         label.setCountDownTime(30)
         label.start()
@@ -203,7 +203,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testResetAfterControl() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         label.setCountDownTime(30)
         label.start()
@@ -227,7 +227,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testCountdownisFinished() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         label.setCountDownTime(1)
         label.start()
@@ -248,7 +248,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
     
     func testCountdownisFinishedWithCompletion() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         var completionChangedValue = 1
         label.setCountDownTime(1)
@@ -268,7 +268,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
 
     func testCountdownThen() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         
         var completionChangedValue = 1
         label.setCountDownTime(10)
@@ -292,7 +292,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     }
 
     func testAttributedText() {
-        let label = SKCountdownLabel()
+        let label = CountdownLabel()
         label.setCountDownTime(10)
         label.timerInText = SKTimerInText(text: "hello timer in text",
             replacement: "timer",
@@ -308,7 +308,7 @@ class SKCountdownLabelExampleTests: XCTestCase {
     
     // MARK: - unexpected text
     func textUnexpectedDate() {
-        let label = SKCountdownLabel(frame: CGRectZero, time: -30)
+        let label = CountdownLabel(frame: CGRectZero, time: -30)
         label.start()
         
         XCTAssertEqual(label.isCounting, false)

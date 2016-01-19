@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "892106CF1C3CF4140007CDEC"
-               BuildableName = "SKCountdownLabel.framework"
-               BlueprintName = "SKCountdownLabel"
-               ReferencedContainer = "container:SKCountdownLabel.xcodeproj">
+               BuildableName = "CountdownLabel.framework"
+               BlueprintName = "CountdownLabel"
+               ReferencedContainer = "container:CountdownLabel.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "892106CF1C3CF4140007CDEC"
-            BuildableName = "SKCountdownLabel.framework"
-            BlueprintName = "SKCountdownLabel"
-            ReferencedContainer = "container:SKCountdownLabel.xcodeproj">
+            BuildableName = "CountdownLabel.framework"
+            BlueprintName = "CountdownLabel"
+            ReferencedContainer = "container:CountdownLabel.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -64,9 +64,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "892106CF1C3CF4140007CDEC"
-            BuildableName = "SKCountdownLabel.framework"
-            BlueprintName = "SKCountdownLabel"
-            ReferencedContainer = "container:SKCountdownLabel.xcodeproj">
+            BuildableName = "CountdownLabel.framework"
+            BlueprintName = "CountdownLabel"
+            ReferencedContainer = "container:CountdownLabel.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

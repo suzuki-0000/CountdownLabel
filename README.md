@@ -9,7 +9,6 @@ Simple countdown UIlabel with morphing animation, and some useful function.
 
 ![sample](Screenshots/example01.gif)
 
-
 ## features
 - Simple creation
 - Easily get status of countdown from property and delegate
@@ -23,7 +22,7 @@ You need only 2 lines. you can set as NSDate too.
 
 ```swift
 // from current Date, after 30 minutes.
-let countdownLabel = SKCountdownLabel(frame: frame, time: 30)
+let countdownLabel = CountdownLabel(frame: frame, time: 30)
 countdownLabel.start()
 ```
 
@@ -32,7 +31,7 @@ Set at `animationType`.
 Those effect come from [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel).
 
 ```swift
-let countdownLabel = SKCountdownLabel(frame: CGRectZero, time: 30)
+let countdownLabel = CountdownLabel(frame: CGRectZero, time: 30)
 countdownLabel.animationType = .Pixelate
 countdownLabel.start()
 ```
