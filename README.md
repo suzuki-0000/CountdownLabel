@@ -5,7 +5,7 @@ CountdownLabel
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/CountdownLabel.svg?style=flat)](http://cocoadocs.org/docsets/CountdownLabel)
 [![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 
-Simple countdown UIlabel with morphing animation from [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel), and some useful function.
+Simple countdown UIlabel with morphing animation, and some useful function.
 
 ![sample](Screenshots/example01.gif)
 
@@ -88,11 +88,11 @@ You can pause, reset, add timer using custom control.
 ```swift
 // check if pause or not
 if countdownLabel4.isPaused {
-	// timer start
-	countdownLabel4.start()
+    // timer start
+    countdownLabel4.start()
 } else {
-	// timer pause
-    	countdownLabel4.pause()
+    // timer pause
+    countdownLabel4.pause()
 }
 ```
 
@@ -129,13 +129,23 @@ countdownLabel.start() {
 
 ![sample](Screenshots/example06.gif) 
 
+#### Attributed Text
+you can set as attributedText too. note:but morphing animation will be disabled.
+```
+countdownLabel7.setCountDownTime(30)
+countdownLabel7.timeFormat = "ss"
+countdownLabel7.timerInText = SKTimerInText(text: "timer here in text", replacement: "here")
+countdownLabel7.start() {
+    self.countdownLabel7.text = "timer finished."
+}
+```
+
+
 #### Format
-`countdownLabel.timeFormat = @"mm:ss";`
-
-
 CountdownLabel uses `00:00:00 (HH:mm:ss)` as default format.
 if you prefer using another format, Your can set your time format like below.
 
+`countdownLabel.timeFormat = @"mm:ss";`
 
 ## Requirements
 - iOS 8.0+
@@ -158,6 +168,9 @@ To integrate into your Xcode project using Carthage, specify it in your Cartfile
 github "suzuki-0000/CountdownLabel"
 ```
 
+## Inspirations
+* [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel) is motivation for creating this.
+* [MZTimerLabel](https://github.com/mineschan/MZTimerLabel), in many reference from this project.
 
 ## License
 available under the MIT license. See the LICENSE file for more info.
