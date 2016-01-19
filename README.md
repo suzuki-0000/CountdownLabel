@@ -2,7 +2,6 @@ CountdownLabel
 ========================
 
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Cocoapods Compatible](https://img.shields.io/cocoapods/v/CountdownLabel.svg?style=flat)](http://cocoadocs.org/docsets/CountdownLabel)
 [![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 
 Simple countdown UIlabel with morphing animation, and some useful function.
@@ -18,7 +17,7 @@ Simple countdown UIlabel with morphing animation, and some useful function.
 - XCTest assertion
 
 ## Usage
-You need only 2 lines. you can set as NSDate too.
+You need only 2 lines. 
 
 ```swift
 // from current Date, after 30 minutes.
@@ -27,7 +26,7 @@ countdownLabel.start()
 ```
 
 #### Morphing example
-Set at `animationType`.
+Use `animationType`.
 Those effect come from [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel).
 
 ```swift
@@ -50,8 +49,8 @@ you can directly allocate it as a normal UILabel property just like usual.
 
 ```swift
 countdownLabel.textColor = .orangeColor()
-countdownLabel.font = UIFont.boldSystemFontOfSize(30)
-countdownLabel.start(6
+countdownLabel.font = UIFont(name:"Courier", size:UIFont.labelFontSize())
+countdownLabel.start()
 ```
 
 ![sample](Screenshots/example02.gif) 
