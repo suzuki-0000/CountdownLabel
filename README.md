@@ -30,7 +30,7 @@ Use `animationType`.
 Those effect come from [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel).
 
 ```swift
-let countdownLabel = CountdownLabel(frame: CGRectZero, time: 30)
+let countdownLabel = CountdownLabel(frame: CGRectZero, time: 60*60)
 countdownLabel.animationType = .Pixelate
 countdownLabel.start()
 ```
@@ -139,19 +139,12 @@ if you prefer using another format, Your can set your time format like below.
 you can set as scheduled timer
 
 ```swift
-// 1. schedule
+// after 10 minutes will start a countdown.
 let fromDate   = NSDate().dateByAddingTimeInterval(10)
 let targetDate = NSDate().dateByAddingTimeInterval(20)
-let upperLabel = CountdownLabel(frame: CGRectZero, fromDate: fromDate, targetDate: targetDate)
-upperLabel.start()
-
-// 2. default
-let targetDate = NSDate().dateByAddingTimeInterval(30)
-let bottomLabel = CountdownLabel(frame: CGRectZero, targetDate: targetDate)
-bottomLabel.start()
+let countdownLabel = CountdownLabel(frame: CGRectZero, fromDate: fromDate, targetDate: targetDate)
+countdownLabel.start()
 ```
-
-![sample](Screenshots/example08.gif) 
 
 #### Check Status
 some public properties are useful. 
