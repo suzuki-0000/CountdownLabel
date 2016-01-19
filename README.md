@@ -179,7 +179,7 @@ github "suzuki-0000/CountdownLabel"
 
 ## Inspirations
 * [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel) is motivation for creating this.
-* [MZTimerLabel](https://github.com/mineschan/MZTimerLabel), in many reference from this project.
+* In many reference from [MZTimerLabel](https://github.com/mineschan/MZTimerLabel).  
 
 ## License
 available under the MIT license. See the LICENSE file for more info.
