@@ -103,8 +103,11 @@ class ViewController: UIViewController {
        
         // 7. attributed text
         countdownLabel7.setCountDownTime(30)
+        countdownLabel7.animationType = .Anvil
         countdownLabel7.timeFormat = "ss"
-        countdownLabel7.timerInText = SKTimerInText(text: "timer here in text", replacement: "here")
+        countdownLabel7.timerInText = SKTimerInText(text: "HELLO TIME IS HERE NOW",
+            replacement: "HERE",
+            attributes: [NSForegroundColorAttributeName: UIColor.redColor()])
         countdownLabel7.start() {
             self.countdownLabel7.text = "timer finished."
         }
@@ -131,11 +134,11 @@ class ViewController: UIViewController {
     }
     
     @IBAction func minus(sender: UIButton) {
-        countdownLabel4.addTimeCountedByTime(-2)
+        countdownLabel4.addTime(-2)
     }
     
     @IBAction func plus(sender: UIButton) {
-        countdownLabel4.addTimeCountedByTime(2)
+        countdownLabel4.addTime(2)
     }
 }
 

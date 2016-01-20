@@ -74,7 +74,7 @@ countdownLabel.timeRemaining    // timer's remaining
 ![sample](Screenshots/example03.gif) 
 
 #### Control countdown
-You can pause, start, add time.
+You can pause, start, change time.
 
 ```swift
 // check if pause or not
@@ -89,13 +89,13 @@ if countdownLabel.isPaused {
 
 ```swift
 // -2 minutes for ending
-@IBAction func minus(countdownLabel: UIButton) {
-    countdownLabel.addTimeCountedByTime(-2)
+@IBAction func minus(btn: UIButton) {
+    countdownLabel.addTime(-2)
 }
     
 // +2 minutes for ending
-@IBAction func plus(countdownLabel: UIButton) {
-    countdownLabel.addTimeCountedByTime(2)
+@IBAction func plus(btn: UIButton) {
+    countdownLabel.addTime(2)
 }
 ```
 
@@ -141,13 +141,11 @@ func countdownFinished() {
 
 #### Attributed Text
 you can set as attributedText too. note:but morphing animation will be disabled.
-```
+```swift
 countdownLabel.setCountDownTime(30)
 countdownLabel.timeFormat = "ss"
-countdownLabel.timerInText = SKTimerInText(text: "timer here in text", replacement: "here")
-countdownLabel.start() {
-    self.countdownLabel.text = "timer finished."
-}
+countdownLabel.timerInText = SKTimerInText(text: "timer HERE in text", replacement: "HERE")
+countdownLabel.start() 
 ```
 
 ![sample](Screenshots/example07.gif) 
@@ -163,9 +161,9 @@ if you prefer using another format, Your can set your time format like below.
 you can set scheduled timer
 
 ```swift
-// after 10 minutes will start a countdown.
+// after 10 minutes will start a countdown from 20.
 let fromDate   = NSDate().dateByAddingTimeInterval(10)
-let targetDate = NSDate().dateByAddingTimeInterval(20)
+let targetDate = fromDate.dateByAddingTimeInterval(20)
 let countdownLabel = CountdownLabel(frame: CGRectZero, fromDate: fromDate, targetDate: targetDate)
 countdownLabel.start()
 ```
@@ -181,7 +179,7 @@ countdownLabel.morphingEnabled // check morphing is enabled
 ```
 
 ## Requirements
-- iOS 8.0+
+- iOS 8.4+
 - Swift 2.0+
 - ARC
 

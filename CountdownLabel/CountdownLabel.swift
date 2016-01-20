@@ -218,7 +218,7 @@ public extension CountdownLabel {
         pausedDate = NSDate()
     }
    
-    func addTimeCountedByTime(time: NSTimeInterval) {
+    func addTime(time: NSTimeInterval) {
         currentTime = time + currentTime
         diffDate = date1970.dateByAddingTimeInterval(currentTime)
         

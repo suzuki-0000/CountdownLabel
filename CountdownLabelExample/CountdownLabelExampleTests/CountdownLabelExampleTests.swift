@@ -7,8 +7,7 @@
 //
 
 import XCTest
-import CountdownLabel
-@testable import CountdownLabelExample
+@testable import CountdownLabel
 
 class CountdownLabelExampleTests: XCTestCase {
     
@@ -72,7 +71,7 @@ class CountdownLabelExampleTests: XCTestCase {
         XCTAssertEqual(label.timeRemaining.int, 30)
     }
     
-    func testSettingCountdownDateFromFuture() {
+    func testSettingCountdownDateScheduled() {
         let fromDate   = NSDate().dateByAddingTimeInterval(10)
         let targetDate = NSDate().dateByAddingTimeInterval(20)
         let label = CountdownLabel(frame: CGRectZero, fromDate: fromDate, targetDate: targetDate)
@@ -192,7 +191,7 @@ class CountdownLabelExampleTests: XCTestCase {
         label.setCountDownTime(30)
         label.start()
         label.pause()
-        label.addTimeCountedByTime(1)
+        label.addTime(1)
         
         XCTAssertEqual(label.timeCounted.int, 0)
         XCTAssertEqual(label.timeRemaining.int, 31)
@@ -204,7 +203,7 @@ class CountdownLabelExampleTests: XCTestCase {
         label.setCountDownTime(30)
         label.start()
         label.pause()
-        label.addTimeCountedByTime(-1)
+        label.addTime(-1)
         
         XCTAssertEqual(label.timeCounted.int, 0)
         XCTAssertEqual(label.timeRemaining.int, 29)
@@ -278,25 +277,60 @@ class CountdownLabelExampleTests: XCTestCase {
     func testAttributedText() {
         let label = CountdownLabel()
         label.setCountDownTime(10)
-        label.timerInText = SKTimerInText(text: "hello timer in text",
-            replacement: "timer",
+        label.timerInText = SKTimerInText(text: "HELLO TIME IS HERE NOW",
+            replacement: "HERE",
             attributes: [NSForegroundColorAttributeName: UIColor.redColor()])
         label.start()
         
-        XCTAssert( label.attributedText!.string.containsString("hello"))
-        XCTAssert(!label.attributedText!.string.containsString("timer"))
-        XCTAssert( label.attributedText!.string.containsString("in"))
-        XCTAssert( label.attributedText!.string.containsString("text"))
+        XCTAssertEqual(label.attributedText!.string, "HELLO TIME IS 00:00:10 NOW")
+    }
+    
+    func testAttributedTextScheduled() {
+        let fromDate   = NSDate().dateByAddingTimeInterval(10)
+        let targetDate = fromDate.dateByAddingTimeInterval(30)
+        let label = CountdownLabel(frame: CGRectZero, fromDate: fromDate, targetDate: targetDate)
+        label.timerInText = SKTimerInText(text: "HELLO TIME IS HERE NOW",
+            replacement: "HERE",
+            attributes: [NSForegroundColorAttributeName: UIColor.redColor()])
+        label.start()
+        
+        
+        let expectation = expectationWithDescription("expect")
+        delay(1.0) {
+            label.pause()
+            
+            XCTAssertEqual(label.isCounting, false)
+            XCTAssertEqual(label.isPaused, true)
+            XCTAssertEqual(label.isFinished, false)
+            XCTAssertEqual(label.timeCounted.int, 0)
+            XCTAssertEqual(label.timeRemaining.int, 30)
+            XCTAssertEqual(label.attributedText!.string, "HELLO TIME IS 00:00:30 NOW")
+            
+            expectation.fulfill()
+        }
+        
+        waitForExpectationsWithTimeout(2.0, handler: nil)
     }
     
     
-//    // MARK: - unexpected text
-    func textUnexpectedDate() {
-        let label = CountdownLabel(frame: CGRectZero, minutes: -30)
+    // MARK: - Unexpect inserting
+    func testMinutesZero() {
+        let label = CountdownLabel(frame: CGRectZero, minutes: 0)
         label.start()
         
+        XCTAssertEqual(label.text, "00:00:00")
         XCTAssertEqual(label.isCounting, false)
-        XCTAssertEqual(label.isPaused, true)
+        XCTAssertEqual(label.isPaused, false)
+        XCTAssertEqual(label.isFinished, true)
+    }
+    
+    func testMinutesMinus() {
+        let label = CountdownLabel(frame: CGRectZero, minutes: -1)
+        label.start()
+        
+        XCTAssertEqual(label.text, "00:00:00")
+        XCTAssertEqual(label.isCounting, false)
+        XCTAssertEqual(label.isPaused, false)
         XCTAssertEqual(label.isFinished, true)
     }
     
