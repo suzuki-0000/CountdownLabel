@@ -5,7 +5,7 @@ branches:
     - master
 env:
   matrix:
-    - DESTINATION="OS=9.4,name=iPhone 6"
+    - DESTINATION="OS=9.2,name=iPhone 6"
 before_install:
   - gem install xcpretty
 script:
