@@ -27,7 +27,7 @@ countdownLabel.start()
 
 #### Morphing example
 Use `animationType`.
-Those effect come from [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel).
+Those effect comes from [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel).
 
 ```swift
 let countdownLabel = CountdownLabel(frame: CGRectZero, time: 60*60)
@@ -45,7 +45,7 @@ countdownLabel.start()
 | .Sparkle | ![sample](Screenshots/exampleSparkle.gif) |
 
 #### Style
-you can directly allocate it as a normal UILabel property just like usual.
+you can directly allocate it as a UILabel property just like usual.
 
 ```swift
 countdownLabel.textColor = .orangeColor()
@@ -56,7 +56,12 @@ countdownLabel.start()
 ![sample](Screenshots/example02.gif) 
 
 #### Get Status of timer
+there's some property for reading status.
 ```swift
+countdownLabel.timeCounted      // timer that has been counted
+countdownLabel.timeRemaining    // timer's remaining
+
+// example
 @IBAction func getTimerCounted(sender: UIButton) {
     debugPrint("\(countdownLabel.timeCounted)")
 }
@@ -100,6 +105,7 @@ if countdownLabel.isPaused {
 Using `then` function or `delegate`, you can set your function anywhere you like.
 
 ```swift
+// then property 
 countdownLabel.then(10) { [unowned self] in
     self.countdownLabel.animationType = .Pixelate
     self.countdownLabel.textColor = .greenColor()
@@ -111,6 +117,24 @@ countdownLabel.then(5) { [unowned self] in
 countdownLabel.start() {
     self.countdownLabel.textColor = .whiteColor()
 }
+
+// delegate
+func countingAt(timeCounted timeCounted: NSTimeInterval, timeRemaining: NSTimeInterval) {
+    switch timeRemaining {
+    case 10:
+        self.countdownLabel6.animationType = .Pixelate
+        self.countdownLabel6.textColor = .greenColor()
+    case 5:
+        self.countdownLabel6.animationType = .Sparkle
+        self.countdownLabel6.textColor = .yellowColor()
+    default:
+        break
+    }
+}
+func countdownFinished() {
+    self.countdownLabel.textColor = .whiteColor()
+}
+
 ```
 
 ![sample](Screenshots/example06.gif) 
@@ -136,7 +160,7 @@ if you prefer using another format, Your can set your time format like below.
 `countdownLabel.timeFormat = @"mm:ss"`
 
 #### Scheduled
-you can set as scheduled timer
+you can set scheduled timer
 
 ```swift
 // after 10 minutes will start a countdown.
@@ -146,7 +170,7 @@ let countdownLabel = CountdownLabel(frame: CGRectZero, fromDate: fromDate, targe
 countdownLabel.start()
 ```
 
-#### Check Status
+#### Check Status 
 some public properties are useful. 
 
 ```swift
@@ -183,4 +207,5 @@ github "suzuki-0000/CountdownLabel"
 
 ## License
 available under the MIT license. See the LICENSE file for more info.
+
 
