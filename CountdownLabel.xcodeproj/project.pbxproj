@@ -118,7 +118,6 @@
 				892106CC1C3CF4140007CDEC /* Frameworks */,
 				892106CD1C3CF4140007CDEC /* Headers */,
 				892106CE1C3CF4140007CDEC /* Resources */,
-				891A80A91C4631EC007706BF /* ShellScript */,
 				8993AA3F1C4E028900C4A6D2 /* ShellScript */,
 			);
 			buildRules = (
@@ -203,20 +202,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		891A80A91C4631EC007706BF /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/LTMorphingLabel.framework",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "/usr/local/bin/carthage copy-frameworks";
-			shellScript = "";
-		};
 		8993AA3F1C4E028900C4A6D2 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
