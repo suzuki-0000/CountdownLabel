@@ -23,11 +23,11 @@ class CountdownLabelExampleTests: XCTestCase {
         
         XCTAssertNotNil(label)
     }
-
+    
     func testStartStatus() {
         let label = CountdownLabel(frame: CGRectZero, minutes: 30)
         label.start()
-
+        
         XCTAssertEqual(label.isCounting, true)
         XCTAssertEqual(label.isPaused, false)
         XCTAssertEqual(label.timeFormat, "HH:mm:ss")
@@ -249,7 +249,7 @@ class CountdownLabelExampleTests: XCTestCase {
         
         waitForExpectationsWithTimeout(2.0, handler: nil)
     }
-
+    
     func testCountdownThen() {
         let label = CountdownLabel()
         
@@ -273,11 +273,11 @@ class CountdownLabelExampleTests: XCTestCase {
         
         waitForExpectationsWithTimeout(3.0, handler: nil)
     }
-
+    
     func testAttributedText() {
         let label = CountdownLabel()
         label.setCountDownTime(10)
-        label.timerInText = SKTimerInText(text: "HELLO TIME IS HERE NOW",
+        label.timerInText = CountdownAttributedText(text: "HELLO TIME IS HERE NOW",
             replacement: "HERE",
             attributes: [NSForegroundColorAttributeName: UIColor.redColor()])
         label.start()
@@ -289,7 +289,7 @@ class CountdownLabelExampleTests: XCTestCase {
         let fromDate   = NSDate().dateByAddingTimeInterval(10)
         let targetDate = fromDate.dateByAddingTimeInterval(30)
         let label = CountdownLabel(frame: CGRectZero, fromDate: fromDate, targetDate: targetDate)
-        label.timerInText = SKTimerInText(text: "HELLO TIME IS HERE NOW",
+        label.timerInText = CountdownAttributedText(text: "HELLO TIME IS HERE NOW",
             replacement: "HERE",
             attributes: [NSForegroundColorAttributeName: UIColor.redColor()])
         label.start()

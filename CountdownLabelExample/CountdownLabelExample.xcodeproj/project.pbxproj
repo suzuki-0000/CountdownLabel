@@ -12,9 +12,6 @@
 		89993D9B1C3FAD910099AC14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89993D991C3FAD910099AC14 /* Main.storyboard */; };
 		89993D9D1C3FAD910099AC14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89993D9C1C3FAD910099AC14 /* Assets.xcassets */; };
 		89993DA01C3FAD910099AC14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89993D9E1C3FAD910099AC14 /* LaunchScreen.storyboard */; };
-		89993DAB1C3FAD920099AC14 /* CountdownLabelExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89993DAA1C3FAD920099AC14 /* CountdownLabelExampleTests.swift */; };
-		89993DB61C3FADAB0099AC14 /* mplus-1p-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89993DB51C3FADAB0099AC14 /* mplus-1p-regular.ttf */; };
-		89993DC11C3FB8410099AC14 /* StoryboardTests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89993DC01C3FB8410099AC14 /* StoryboardTests.storyboard */; };
 		89CA98A21C4E412200C74EF9 /* CountdownLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89CA989B1C4E3C5B00C74EF9 /* CountdownLabel.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +22,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 89993D911C3FAD910099AC14;
 			remoteInfo = CountdownLabelExample;
+		};
+		8999B52B1C4F300300C46F10 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 89993DB71C3FAE1C0099AC14 /* CountdownLabel.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8999B51B1C4F2F7200C46F10;
+			remoteInfo = CountdownLabelTests;
 		};
 		89CA989A1C4E3C5B00C74EF9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -44,11 +48,7 @@
 		89993D9F1C3FAD910099AC14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89993DA11C3FAD910099AC14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89993DA61C3FAD920099AC14 /* CountdownLabelExample.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountdownLabelExample.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		89993DAA1C3FAD920099AC14 /* CountdownLabelExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownLabelExampleTests.swift; sourceTree = "<group>"; };
-		89993DAC1C3FAD920099AC14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		89993DB51C3FADAB0099AC14 /* mplus-1p-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mplus-1p-regular.ttf"; sourceTree = "<group>"; };
 		89993DB71C3FAE1C0099AC14 /* CountdownLabel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CountdownLabel.xcodeproj; path = ../CountdownLabel.xcodeproj; sourceTree = "<group>"; };
-		89993DC01C3FB8410099AC14 /* StoryboardTests.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StoryboardTests.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +75,6 @@
 			children = (
 				89993DB71C3FAE1C0099AC14 /* CountdownLabel.xcodeproj */,
 				89993D941C3FAD910099AC14 /* CountdownLabelExample */,
-				89993DA91C3FAD920099AC14 /* CountdownLabelExampleTests */,
 				89993D931C3FAD910099AC14 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,27 +95,17 @@
 				89993D971C3FAD910099AC14 /* ViewController.swift */,
 				89993D991C3FAD910099AC14 /* Main.storyboard */,
 				89993D9C1C3FAD910099AC14 /* Assets.xcassets */,
-				89993DB51C3FADAB0099AC14 /* mplus-1p-regular.ttf */,
 				89993D9E1C3FAD910099AC14 /* LaunchScreen.storyboard */,
 				89993DA11C3FAD910099AC14 /* Info.plist */,
 			);
 			path = CountdownLabelExample;
 			sourceTree = "<group>";
 		};
-		89993DA91C3FAD920099AC14 /* CountdownLabelExampleTests */ = {
-			isa = PBXGroup;
-			children = (
-				89993DAA1C3FAD920099AC14 /* CountdownLabelExampleTests.swift */,
-				89993DAC1C3FAD920099AC14 /* Info.plist */,
-				89993DC01C3FB8410099AC14 /* StoryboardTests.storyboard */,
-			);
-			path = CountdownLabelExampleTests;
-			sourceTree = "<group>";
-		};
 		89CA98971C4E3C5B00C74EF9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				89CA989B1C4E3C5B00C74EF9 /* CountdownLabel.framework */,
+				8999B52C1C4F300300C46F10 /* CountdownLabelTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -204,6 +193,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		8999B52C1C4F300300C46F10 /* CountdownLabelTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = CountdownLabelTests.xctest;
+			remoteRef = 8999B52B1C4F300300C46F10 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		89CA989B1C4E3C5B00C74EF9 /* CountdownLabel.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -220,7 +216,6 @@
 			files = (
 				89993DA01C3FAD910099AC14 /* LaunchScreen.storyboard in Resources */,
 				89993D9D1C3FAD910099AC14 /* Assets.xcassets in Resources */,
-				89993DB61C3FADAB0099AC14 /* mplus-1p-regular.ttf in Resources */,
 				89993D9B1C3FAD910099AC14 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -229,7 +224,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89993DC11C3FB8410099AC14 /* StoryboardTests.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,7 +243,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89993DAB1C3FAD920099AC14 /* CountdownLabelExampleTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

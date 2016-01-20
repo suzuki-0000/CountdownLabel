@@ -60,7 +60,7 @@ public class CountdownLabel: LTMorphingLabel {
     public weak var countdownDelegate: CountdownLabelDelegate?
     
     // user settings
-    public var animationType: SKAnimationEffect? {
+    public var animationType: CountdownEffect? {
         didSet {
             if let effect = animationType?.toLTMorphing() {
                 morphingEffect = effect
@@ -72,7 +72,7 @@ public class CountdownLabel: LTMorphingLabel {
     }
     public var timeFormat = "HH:mm:ss"
     public var thens = [NSTimeInterval: CountdownExecution]()
-    public var timerInText: SKTimerInText! {
+    public var timerInText: CountdownAttributedText! {
         didSet {
             range = (timerInText.text as NSString).rangeOfString(timerInText.replacement)
         }
@@ -313,7 +313,7 @@ private extension CountdownLabel {
     }
 }
 
-public enum SKAnimationEffect {
+public enum CountdownEffect {
     case Scale
     case Evaporate
     case Fall
@@ -337,7 +337,7 @@ public enum SKAnimationEffect {
     }
 }
 
-public class SKTimerInText: NSObject {
+public class CountdownAttributedText: NSObject {
     private let text: String
     private let replacement: String
     private let attributes: [String: AnyObject]?

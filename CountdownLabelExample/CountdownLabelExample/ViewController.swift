@@ -105,7 +105,7 @@ class ViewController: UIViewController {
         countdownLabel7.setCountDownTime(30)
         countdownLabel7.animationType = .Anvil
         countdownLabel7.timeFormat = "ss"
-        countdownLabel7.timerInText = SKTimerInText(text: "HELLO TIME IS HERE NOW",
+        countdownLabel7.timerInText = CountdownAttributedText(text: "HELLO TIME IS HERE NOW",
             replacement: "HERE",
             attributes: [NSForegroundColorAttributeName: UIColor.redColor()])
         countdownLabel7.start() {
