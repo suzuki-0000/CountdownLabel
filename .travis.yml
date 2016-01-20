@@ -11,6 +11,7 @@ before_install:
 script:
   - xcodebuild -version
 #  - xcodebuild -project CountdownLabelExample/CountdownLabelExample.xcodeproj -scheme CountdownLabelTests -sdk iphonesimulator -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=YES GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES GCC_GENERATE_TEST_COVERAGE_FILES=YES test | xcpretty -c 
-  - xcodebuild -project CountdownLabel.xcodeproj -scheme CountdownLabelTests -sdk iphonesimulator -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=YES test | xcpretty -c 
+#  - xcodebuild -project CountdownLabel.xcodeproj -scheme CountdownLabelTests -sdk iphonesimulator -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=YES test | xcpretty -c 
+  - xcodebuild -project CountdownLabel.xcodeproj -scheme CountdownLabelTests -sdk iphonesimulator -destination "$DESTINATION" -configuration Release ONLY_ACTIVE_ARCH=YES test | xcpretty -c 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
