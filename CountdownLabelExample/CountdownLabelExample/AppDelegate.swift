@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  CountdownLabelExample
 //
-//  Created by 鈴木 啓司 on 2016/01/08.
+//  Created by suzuki keishi on 2016/01/08.
 //  Copyright © 2016年 suzuki_keishi. All rights reserved.
 //
 
