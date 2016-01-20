@@ -1,0 +1,10 @@
+framework module LTMorphingLabel {
+  umbrella header "LTMorphingLabel.h"
+
+  export *
+  module * { export * }
+}
+
+module LTMorphingLabel.Swift {
+    header "LTMorphingLabel-Swift.h"
+}

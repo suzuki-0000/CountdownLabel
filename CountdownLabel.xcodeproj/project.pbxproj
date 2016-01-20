@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		891A80A71C46311F007706BF /* LTMorphingLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 891A80A61C46311F007706BF /* LTMorphingLabel.framework */; };
 		892106D41C3CF4140007CDEC /* CountdownLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 892106D31C3CF4140007CDEC /* CountdownLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		892107001C3CF4490007CDEC /* CountdownLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892106FF1C3CF4490007CDEC /* CountdownLabel.swift */; };
 		8999B51E1C4F2F7200C46F10 /* CountdownLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8999B51D1C4F2F7200C46F10 /* CountdownLabelTests.swift */; };
 		8999B5201C4F2F7200C46F10 /* CountdownLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892106D01C3CF4140007CDEC /* CountdownLabel.framework */; };
 		8999B5271C4F2F8700C46F10 /* StoryboardTests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8999B5261C4F2F8700C46F10 /* StoryboardTests.storyboard */; };
+		8999B5801C4F619D00C46F10 /* LTMorphingLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8999B57F1C4F619D00C46F10 /* LTMorphingLabel.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,7 +26,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		891A80A61C46311F007706BF /* LTMorphingLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LTMorphingLabel.framework; path = Carthage/Build/iOS/LTMorphingLabel.framework; sourceTree = "<group>"; };
 		892106D01C3CF4140007CDEC /* CountdownLabel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CountdownLabel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		892106D31C3CF4140007CDEC /* CountdownLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountdownLabel.h; sourceTree = "<group>"; };
 		892106D51C3CF4140007CDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -35,6 +34,7 @@
 		8999B51D1C4F2F7200C46F10 /* CountdownLabelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownLabelTests.swift; sourceTree = "<group>"; };
 		8999B51F1C4F2F7200C46F10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8999B5261C4F2F8700C46F10 /* StoryboardTests.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StoryboardTests.storyboard; sourceTree = "<group>"; };
+		8999B57F1C4F619D00C46F10 /* LTMorphingLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LTMorphingLabel.framework; path = Frameworks/LTMorphingLabel.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				891A80A71C46311F007706BF /* LTMorphingLabel.framework in Frameworks */,
+				8999B5801C4F619D00C46F10 /* LTMorphingLabel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,7 +60,7 @@
 		892106C61C3CF4140007CDEC = {
 			isa = PBXGroup;
 			children = (
-				891A80A61C46311F007706BF /* LTMorphingLabel.framework */,
+				8999B57F1C4F619D00C46F10 /* LTMorphingLabel.framework */,
 				892106D21C3CF4140007CDEC /* CountdownLabel */,
 				8999B51C1C4F2F7200C46F10 /* CountdownLabelTests */,
 				892106D11C3CF4140007CDEC /* Products */,
@@ -360,6 +360,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = CountdownLabel/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -383,6 +384,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = CountdownLabel/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -442,6 +444,7 @@
 				8999B5251C4F2F7200C46F10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
