@@ -80,7 +80,6 @@ public class CountdownLabel: LTMorphingLabel {
     
     private var completion: CountdownCompletion?
     private var fromDate: NSDate = NSDate()
-    private var targetDate: NSDate = NSDate()
     private var currentDate: NSDate = NSDate()
     private var currentTime: NSTimeInterval = 0
     private var diffDate: NSDate!
@@ -129,6 +128,10 @@ public class CountdownLabel: LTMorphingLabel {
         setCountDownDate(fromDate, targetDate: targetDate)
     }
     
+    deinit {
+        dispose()
+    }
+    
     // MARK: - Setter Methods
     public func setCountDownTime(minutes: NSTimeInterval) {
         setCountDownTime(NSDate(), minutes: minutes)
@@ -139,7 +142,6 @@ public class CountdownLabel: LTMorphingLabel {
         
         targetTime = minutes
         currentTime = minutes
-        targetDate = fromDate.dateByAddingTimeInterval(minutes)
         diffDate = date1970.dateByAddingTimeInterval(minutes)
         
         updateLabel()
@@ -151,7 +153,6 @@ public class CountdownLabel: LTMorphingLabel {
     
     public func setCountDownDate(fromDate: NSDate, targetDate: NSDate) {
         self.fromDate = fromDate
-        self.targetDate = targetDate
         
         targetTime = targetDate.timeIntervalSinceDate(fromDate)
         currentTime = targetDate.timeIntervalSinceDate(fromDate) 
@@ -276,7 +277,6 @@ private extension CountdownLabel {
     }
     
     func updateTimer() {
-        // dispose
         disposeTimer()
         
         // create
@@ -311,25 +311,25 @@ private extension CountdownLabel {
 }
 
 public enum CountdownEffect {
-    case Scale
+    case Anvil
+    case Burn
     case Evaporate
     case Fall
-    case Pixelate
-    case Sparkle
-    case Burn
-    case Anvil
     case None
+    case Pixelate
+    case Scale
+    case Sparkle
     
     func toLTMorphing() -> LTMorphingEffect? {
         switch self {
-        case .Scale     : return .Scale
+        case .Anvil     : return .Anvil
+        case .Burn      : return .Burn
         case .Evaporate : return .Evaporate
         case .Fall      : return .Fall
-        case .Pixelate  : return .Pixelate
-        case .Sparkle   : return .Sparkle
-        case .Burn      : return .Burn
-        case .Anvil     : return .Anvil
         case .None      : return nil
+        case .Pixelate  : return .Pixelate
+        case .Scale     : return .Scale
+        case .Sparkle   : return .Sparkle
         }
     }
 }

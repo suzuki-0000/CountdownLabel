@@ -80,7 +80,7 @@ class CountdownLabelExampleTests: XCTestCase {
         label.pause()
         
         let expectation = expectationWithDescription("expect")
-        delay(1.0) {
+        delay(2.0) {
             label.pause()
             
             XCTAssertEqual(label.isCounting, false)
@@ -92,7 +92,7 @@ class CountdownLabelExampleTests: XCTestCase {
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(2.0, handler: nil)
+        waitForExpectationsWithTimeout(3.0, handler: nil)
     }
     
     func testPauseStatus() {
@@ -277,7 +277,7 @@ class CountdownLabelExampleTests: XCTestCase {
     func testAttributedText() {
         let label = CountdownLabel()
         label.setCountDownTime(10)
-        label.timerInText = CountdownAttributedText(text: "HELLO TIME IS HERE NOW",
+        label.countdownAttributedText = CountdownAttributedText(text: "HELLO TIME IS HERE NOW",
             replacement: "HERE",
             attributes: [NSForegroundColorAttributeName: UIColor.redColor()])
         label.start()
@@ -289,7 +289,7 @@ class CountdownLabelExampleTests: XCTestCase {
         let fromDate   = NSDate().dateByAddingTimeInterval(10)
         let targetDate = fromDate.dateByAddingTimeInterval(30)
         let label = CountdownLabel(frame: CGRectZero, fromDate: fromDate, targetDate: targetDate)
-        label.timerInText = CountdownAttributedText(text: "HELLO TIME IS HERE NOW",
+        label.countdownAttributedText = CountdownAttributedText(text: "HELLO TIME IS HERE NOW",
             replacement: "HERE",
             attributes: [NSForegroundColorAttributeName: UIColor.redColor()])
         label.start()
@@ -332,6 +332,30 @@ class CountdownLabelExampleTests: XCTestCase {
         XCTAssertEqual(label.isCounting, false)
         XCTAssertEqual(label.isPaused, false)
         XCTAssertEqual(label.isFinished, true)
+    }
+    
+    func testMorphingStatus() {
+        let label = CountdownLabel(frame: CGRectZero, minutes: 30)
+        
+        XCTAssertEqual(label.morphingEnabled, false)
+        
+        // see example
+        label.animationType = .Anvil
+        label.animationType = .Burn
+        label.animationType = .Evaporate
+        label.animationType = .Fall
+        label.animationType = .Pixelate
+        label.animationType = .Scale
+        label.animationType = .Sparkle
+        label.start()
+        
+        XCTAssertEqual(label.morphingEnabled, true)
+        
+        label.pause()
+        label.animationType = .None
+        label.start()
+        
+        XCTAssertEqual(label.morphingEnabled, false)
     }
     
     func delay(delay: Double, closure: ()->()) {
