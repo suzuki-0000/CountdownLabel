@@ -144,7 +144,7 @@ you can set as attributedText too. note:but morphing animation will be disabled.
 ```swift
 countdownLabel.setCountDownTime(30)
 countdownLabel.timeFormat = "ss"
-countdownLabel.timerInText = SKTimerInText(text: "timer HERE in text", replacement: "HERE")
+countdownLabel.countdownAttributedText = CountdownAttributedText(text: "timer HERE in text", replacement: "HERE")
 countdownLabel.start() 
 ```
 

@@ -72,9 +72,9 @@ public class CountdownLabel: LTMorphingLabel {
     }
     public var timeFormat = "HH:mm:ss"
     public var thens = [NSTimeInterval: CountdownExecution]()
-    public var timerInText: CountdownAttributedText! {
+    public var countdownAttributedText: CountdownAttributedText! {
         didSet {
-            range = (timerInText.text as NSString).rangeOfString(timerInText.replacement)
+            range = (countdownAttributedText.text as NSString).rangeOfString(countdownAttributedText.replacement)
         }
     }
     
@@ -240,26 +240,23 @@ public extension CountdownLabel {
 private extension CountdownLabel {
     func setup() {
         morphingEnabled = false
-        
     }
     
     func updateText() {
         // if time is before start
-        if timeCounted < 0 {
-            text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
-            return
-        }
+        let formattedText = timeCounted < 0
+            ? dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
+            : dateFormatter.stringFromDate(diffDate.dateByAddingTimeInterval(round(timeCounted * -1)))
         
-        if let timerInText = timerInText {
-            let attrTextInRange = NSAttributedString(string: dateFormatter.stringFromDate(diffDate.dateByAddingTimeInterval(timeCounted * -1)), attributes: timerInText.attributes)
-            let attributedString = NSMutableAttributedString(string: timerInText.text)
+        if let countdownAttributedText = countdownAttributedText {
+            let attrTextInRange = NSAttributedString(string: formattedText, attributes: countdownAttributedText.attributes)
+            let attributedString = NSMutableAttributedString(string: countdownAttributedText.text)
             attributedString.replaceCharactersInRange(range, withAttributedString: attrTextInRange)
             
             attributedText = attributedString
             text = attributedString.string
         } else {
-            
-            text = dateFormatter.stringFromDate(diffDate.dateByAddingTimeInterval(round(timeCounted * -1)))
+            text = formattedText
         }
         setNeedsDisplay()
     }
