@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import CountdownLabel
+//@testable import CountdownLabel
 
 class CountdownLabelExampleTests: XCTestCase {
     
