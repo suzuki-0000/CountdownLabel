@@ -12,6 +12,7 @@
 		8999B51E1C4F2F7200C46F10 /* CountdownLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8999B51D1C4F2F7200C46F10 /* CountdownLabelTests.swift */; };
 		8999B5201C4F2F7200C46F10 /* CountdownLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892106D01C3CF4140007CDEC /* CountdownLabel.framework */; };
 		8999B5271C4F2F8700C46F10 /* StoryboardTests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8999B5261C4F2F8700C46F10 /* StoryboardTests.storyboard */; };
+		89B3C64D1C5077FC00A02978 /* LTMorphingLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89B3C64C1C5077FC00A02978 /* LTMorphingLabel.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +34,7 @@
 		8999B51D1C4F2F7200C46F10 /* CountdownLabelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownLabelTests.swift; sourceTree = "<group>"; };
 		8999B51F1C4F2F7200C46F10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8999B5261C4F2F8700C46F10 /* StoryboardTests.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StoryboardTests.storyboard; sourceTree = "<group>"; };
-		8999B57F1C4F619D00C46F10 /* LTMorphingLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LTMorphingLabel.framework; path = Frameworks/LTMorphingLabel.framework; sourceTree = "<group>"; };
+		89B3C64C1C5077FC00A02978 /* LTMorphingLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LTMorphingLabel.framework; path = Carthage/Build/iOS/LTMorphingLabel.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89B3C64D1C5077FC00A02978 /* LTMorphingLabel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +60,7 @@
 		892106C61C3CF4140007CDEC = {
 			isa = PBXGroup;
 			children = (
-				8999B57F1C4F619D00C46F10 /* LTMorphingLabel.framework */,
+				89B3C64C1C5077FC00A02978 /* LTMorphingLabel.framework */,
 				892106D21C3CF4140007CDEC /* CountdownLabel */,
 				8999B51C1C4F2F7200C46F10 /* CountdownLabelTests */,
 				892106D11C3CF4140007CDEC /* Products */,
@@ -117,6 +119,7 @@
 				892106CD1C3CF4140007CDEC /* Headers */,
 				892106CE1C3CF4140007CDEC /* Resources */,
 				8993AA3F1C4E028900C4A6D2 /* ShellScript */,
+				89B3C64E1C50780100A02978 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -212,6 +215,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\necho \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+		89B3C64E1C50780100A02978 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/LTMorphingLabel.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -343,6 +360,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = CountdownLabel/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -366,6 +384,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = CountdownLabel/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
