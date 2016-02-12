@@ -4,7 +4,7 @@ CountdownLabel
 [![Build Status](https://travis-ci.org/suzuki-0000/CountdownLabel.svg?branch=master)](https://travis-ci.org/suzuki-0000/CountdownLabel)
 [![codecov.io](https://codecov.io/github/suzuki-0000/CountdownLabel/coverage.svg?branch=master)](https://codecov.io/github/suzuki-0000/CountdownLabel?branch=master)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Cocoapods Compatible](https://img.shields.io/cocoapods/v/CountdownLabel.svg?style=flat)](http://cocoadocs.org/docsets/CountdownLabel)
+[![CocoaPods Compatible](https://img.shields.io/cocoapods/v/CountdownLabel.svg?style=flat)](http://cocoadocs.org/docsets/CountdownLabel)
 [![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 
 Simple countdown UILabel with morphing animation, and some useful function.
