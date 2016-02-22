@@ -24,18 +24,18 @@ script:
   - set -o pipefail
   - xcodebuild -version
   - xcodebuild -showsdks
-  - xcodebuild
-    -project "$FRAMEWORK_NAME.xcodeproj"
-    -scheme "$SCHEME"
-    -sdk "$SDK"
-    -destination "$DESTINATION"
-    -configuration Debug
-    ONLY_ACTIVE_ARCH=NO
-    GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
-    GCC_GENERATE_TEST_COVERAGE_FILES=YES
-    "$ACTION"
-    | xcpretty -c
+#  - xcodebuild
+#    -project "$FRAMEWORK_NAME.xcodeproj"
+#    -scheme "$SCHEME"
+#    -sdk "$SDK"
+#    -destination "$DESTINATION"
+#    -configuration Debug
+#    ONLY_ACTIVE_ARCH=NO
+#    GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
+#    GCC_GENERATE_TEST_COVERAGE_FILES=YES
+#    "$ACTION"
+#    | xcpretty -c
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+#  - bash <(curl -s https://codecov.io/bash)
 
