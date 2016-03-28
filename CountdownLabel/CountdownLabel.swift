@@ -283,10 +283,10 @@ private extension CountdownLabel {
         
         // create
         timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireInterval,
-            target: self,
-            selector: "updateLabel",
-            userInfo: nil,
-            repeats: true)
+                                                       target: self,
+                                                       selector: #selector(updateLabel),
+                                                       userInfo: nil,
+                                                       repeats: true)
         
         // register to NSrunloop
         NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
