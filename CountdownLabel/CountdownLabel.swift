@@ -10,7 +10,10 @@ import UIKit
 import LTMorphingLabel
 
 @objc public protocol CountdownLabelDelegate {
+    optional func countdownStarted()
+    optional func countdownPaused()
     optional func countdownFinished()
+    optional func countdownCancelled()
     optional func countingAt(timeCounted timeCounted: NSTimeInterval, timeRemaining: NSTimeInterval)
 }
 
@@ -190,9 +193,6 @@ public class CountdownLabel: LTMorphingLabel {
 // MARK: - Public
 public extension CountdownLabel {
     func start(completion: ( () -> () )? = nil) {
-        // set completion if needed
-        completion?()
-        
         // pause status check
         updatePauseStatusIfNeeded()
         
@@ -201,9 +201,15 @@ public extension CountdownLabel {
         
         // fire!
         timer.fire()
+        
+        // set completion if needed
+        completion?()
+        
+        // set delegate
+        countdownDelegate?.countdownStarted?()
     }
     
-    func pause() {
+    func pause(completion: (() -> ())? = nil) {
         if paused {
             return
         }
@@ -217,8 +223,25 @@ public extension CountdownLabel {
         
         // reset
         pausedDate = NSDate()
+        
+        // set completion if needed
+        completion?()
+        
+        // set delegate
+        countdownDelegate?.countdownPaused?()
     }
-   
+    
+    func cancel(completion: (() -> ())? = nil) {
+        text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
+        dispose()
+        
+        // set completion if needed
+        completion?()
+        
+        // set delegate
+        countdownDelegate?.countdownCancelled?()
+    }
+    
     func addTime(time: NSTimeInterval) {
         currentTime = time + currentTime
         diffDate = date1970.dateByAddingTimeInterval(currentTime)
