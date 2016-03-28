@@ -244,6 +244,8 @@ private extension CountdownLabel {
     }
     
     func updateText() {
+        guard diffDate != nil else { return }
+
         // if time is before start
         let formattedText = timeCounted < 0
             ? dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
