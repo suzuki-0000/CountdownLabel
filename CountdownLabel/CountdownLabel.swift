@@ -193,6 +193,11 @@ public class CountdownLabel: LTMorphingLabel {
 // MARK: - Public
 public extension CountdownLabel {
     func start(completion: ( () -> () )? = nil) {
+        if !isPaused {
+            // current date should be setted at the time of the counter's starting, or the time will be wrong (just a few seconds) after the first time of pausing.
+            currentDate = NSDate()
+        }
+        
         // pause status check
         updatePauseStatusIfNeeded()
         
