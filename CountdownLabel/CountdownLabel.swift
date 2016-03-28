@@ -191,7 +191,7 @@ public class CountdownLabel: LTMorphingLabel {
 public extension CountdownLabel {
     func start(completion: ( () -> () )? = nil) {
         // set completion if needed
-        self.completion = completion
+        completion?()
         
         // pause status check
         updatePauseStatusIfNeeded()
