@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "CountdownLabel"
-  s.version      = '1.1.0'
+  s.version      = '1.1.1'
   s.summary      = 'Simple countdown UILabel with morphing animation, and some useful function.'
   s.homepage     = "https://github.com/suzuki-0000/CountdownLabel"
   s.license      = { :type => "MIT", :file => "LICENSE" }
