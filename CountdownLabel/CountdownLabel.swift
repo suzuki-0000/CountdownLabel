@@ -24,6 +24,7 @@ public extension NSTimeInterval {
 }
 
 public class CountdownLabel: LTMorphingLabel {
+    
     public typealias CountdownCompletion = () -> ()?
     public typealias CountdownExecution = () -> ()
     private let defaultFireInterval = 1.0
