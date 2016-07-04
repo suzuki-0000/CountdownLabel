@@ -10,7 +10,6 @@ import UIKit
 import CountdownLabel
 
 class ViewController: UIViewController {
-
     @IBOutlet weak var countdownLabel1: CountdownLabel!
     @IBOutlet weak var countdownLabelAnvil: CountdownLabel!
     @IBOutlet weak var countdownLabelBurn: CountdownLabel!
@@ -29,90 +28,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 1. normal
-        countdownLabel1.setCountDownTime(60*60)
-        countdownLabel1.start()
-
-        // option animation ( using LTMorphing inside )
-        countdownLabelAnvil.setCountDownTime(60*60)
-        countdownLabelAnvil.start()
-
-        countdownLabelBurn.setCountDownTime(60*60)
-        countdownLabelBurn.animationType = .Burn
-        countdownLabelBurn.start()
-        
-        countdownLabelEvaporate.setCountDownTime(60*60)
-        countdownLabelEvaporate.animationType = .Evaporate
-        countdownLabelEvaporate.start()
-        
-        countdownLabelFall.setCountDownTime(60*60)
-        countdownLabelFall.animationType = .Fall
-        countdownLabelFall.start()
-        
-        countdownLabelPixelate.setCountDownTime(60*60)
-        countdownLabelPixelate.animationType = .Pixelate
-        countdownLabelPixelate.start()
-        
-        countdownLabelScale.setCountDownTime(60*60)
-        countdownLabelScale.animationType = .Scale
-        countdownLabelScale.start()
-        
-        countdownLabelSparkle.setCountDownTime(60*60)
-        countdownLabelSparkle.animationType = .Sparkle
-        countdownLabelSparkle.start()
-        
-        // 2. style
-        countdownLabel2.setCountDownTime(60*60)
-        countdownLabel2.animationType = .Evaporate
-        countdownLabel2.textColor = .orangeColor()
-        countdownLabel2.font = UIFont(name:"Courier", size:UIFont.labelFontSize())
-        countdownLabel2.start()
-        
-        // 3. get status
-        countdownLabel3.setCountDownTime(30)
-        countdownLabel3.animationType = .Sparkle
-        countdownLabel3.start()
-        
-        // 4. control countdown
-        countdownLabel4.setCountDownTime(30)
-        countdownLabel4.animationType = .Pixelate
-        countdownLabel4.start()
-        
-        // 5. control countdown
-        countdownLabel5.setCountDownTime(10)
-        countdownLabel5.animationType = .Pixelate
-        countdownLabel5.countdownDelegate = self
-        countdownLabel5.start() { [unowned self] in
-            self.countdownLabel5.text = "timer finished."
-        }
-        
-        // 6. control countdown
-        countdownLabel6.setCountDownTime(30)
-        countdownLabel5.animationType = .Scale
-        countdownLabel6.then(10) { [unowned self] in
-            self.countdownLabel6.animationType = .Pixelate
-            self.countdownLabel6.textColor = .greenColor()
-        }
-        countdownLabel6.then(5) { [unowned self] in
-            self.countdownLabel6.animationType = .Sparkle
-            self.countdownLabel6.textColor = .yellowColor()
-        }
-        countdownLabel6.start() {
-            self.countdownLabel6.textColor = .whiteColor()
-        }
-       
-        // 7. attributed text
-        countdownLabel7.setCountDownTime(30)
-        countdownLabel7.animationType = .Anvil
-        countdownLabel7.timeFormat = "ss"
-        countdownLabel7.countdownAttributedText = CountdownAttributedText(text: "HELLO TIME IS HERE NOW",
-            replacement: "HERE",
-            attributes: [NSForegroundColorAttributeName: UIColor.redColor()])
-        countdownLabel7.start() {
-            self.countdownLabel7.text = "timer finished."
-        }
+        createEx1()
+        createEx2()
+        createEx3()
+        createEx4()
+        createEx5()
+        createEx6()
+        createEx7()
     }
-    
+}
+
+// MARK: - IBAction
+extension ViewController {
     // MARK: - countdownLabel3's IBAction
     @IBAction func getTimerCounted(sender: UIButton) {
         alert("\(countdownLabel3.timeCounted)")
@@ -142,6 +69,102 @@ class ViewController: UIViewController {
     }
 }
 
+extension ViewController {
+    func createEx1() {
+        // 1. normal
+        countdownLabel1.setCountDownTime(60*60)
+        countdownLabel1.start()
+        
+        // option animation ( using LTMorphing inside )
+        countdownLabelAnvil.setCountDownTime(60*60)
+        countdownLabelAnvil.start()
+        
+        countdownLabelBurn.setCountDownTime(60*60)
+        countdownLabelBurn.animationType = .Burn
+        countdownLabelBurn.start()
+        
+        countdownLabelEvaporate.setCountDownTime(60*60)
+        countdownLabelEvaporate.animationType = .Evaporate
+        countdownLabelEvaporate.start()
+        
+        countdownLabelFall.setCountDownTime(60*60)
+        countdownLabelFall.animationType = .Fall
+        countdownLabelFall.start()
+        
+        countdownLabelPixelate.setCountDownTime(60*60)
+        countdownLabelPixelate.animationType = .Pixelate
+        countdownLabelPixelate.start()
+        
+        countdownLabelScale.setCountDownTime(60*60)
+        countdownLabelScale.animationType = .Scale
+        countdownLabelScale.start()
+        
+        countdownLabelSparkle.setCountDownTime(60*60)
+        countdownLabelSparkle.animationType = .Sparkle
+        countdownLabelSparkle.start()
+    }
+    
+    func createEx2() {
+        // 2. style
+        countdownLabel2.setCountDownTime(60*60)
+        countdownLabel2.animationType = .Evaporate
+        countdownLabel2.textColor = .orangeColor()
+        countdownLabel2.font = UIFont(name:"Courier", size:UIFont.labelFontSize())
+        countdownLabel2.start()
+    }
+    
+    func createEx3() {
+        // 3. get status
+        countdownLabel3.setCountDownTime(30)
+        countdownLabel3.animationType = .Sparkle
+        countdownLabel3.start()
+    }
+    
+    func createEx4() {
+        // 4. control countdown
+        countdownLabel4.setCountDownTime(30)
+        countdownLabel4.animationType = .Pixelate
+        countdownLabel4.start()
+    }
+    
+    func createEx5() {
+        // 5. control countdown
+        countdownLabel5.setCountDownTime(10)
+        countdownLabel5.animationType = .Pixelate
+        countdownLabel5.countdownDelegate = self
+        countdownLabel5.start() { [unowned self] in
+            self.countdownLabel5.text = "timer finished."
+        }
+    }
+    func createEx6() {
+        // 6. control countdown
+        countdownLabel6.setCountDownTime(30)
+        countdownLabel5.animationType = .Scale
+        countdownLabel6.then(10) { [unowned self] in
+            self.countdownLabel6.animationType = .Pixelate
+            self.countdownLabel6.textColor = .greenColor()
+        }
+        countdownLabel6.then(5) { [unowned self] in
+            self.countdownLabel6.animationType = .Sparkle
+            self.countdownLabel6.textColor = .yellowColor()
+        }
+        countdownLabel6.start() {
+            self.countdownLabel6.textColor = .whiteColor()
+        }
+    }
+    
+    func createEx7() {
+        // 7. attributed text
+        countdownLabel7.setCountDownTime(30)
+        countdownLabel7.animationType = .Anvil
+        countdownLabel7.timeFormat = "ss"
+        countdownLabel7.countdownAttributedText = CountdownAttributedText(text: "HELLO TIME IS HERE NOW", replacement: "HERE", attributes: [NSForegroundColorAttributeName: UIColor.redColor()])
+        countdownLabel7.start() {
+            self.countdownLabel7.text = "timer finished."
+        }
+    }
+    
+}
 extension ViewController: CountdownLabelDelegate {
     func countdownFinished() {
         debugPrint("countdownFinished at delegate.")
