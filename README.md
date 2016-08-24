@@ -153,10 +153,13 @@ countdownLabel.start()
 
 
 #### Format
+Don't specified over 24 hours or you'll get wrong format.
 CountdownLabel uses `00:00:00 (HH:mm:ss)` as default format.
 if you prefer using another format, Your can set your time format like below.
 
+
 `countdownLabel.timeFormat = @"mm:ss"`
+
 
 #### Scheduled
 you can set scheduled timer
