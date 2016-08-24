@@ -180,7 +180,7 @@ countdownLabel.morphingEnabled // check morphing is enabled
 ```
 
 ## Requirements
-- iOS 8.4+
+- iOS 9.0+
 - Swift 2.0+
 - ARC
 
