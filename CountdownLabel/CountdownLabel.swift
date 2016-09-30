@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import LTMorphingLabel
 
 @objc public protocol CountdownLabelDelegate {
     optional func countdownStarted()
