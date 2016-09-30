@@ -69,7 +69,6 @@
 		8999B51D1C4F2F7200C46F10 /* CountdownLabelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownLabelTests.swift; sourceTree = "<group>"; };
 		8999B51F1C4F2F7200C46F10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8999B5261C4F2F8700C46F10 /* StoryboardTests.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StoryboardTests.storyboard; sourceTree = "<group>"; };
-		89B3C64C1C5077FC00A02978 /* LTMorphingLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LTMorphingLabel.framework; path = Carthage/Build/iOS/LTMorphingLabel.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +126,6 @@
 		892106C61C3CF4140007CDEC = {
 			isa = PBXGroup;
 			children = (
-				89B3C64C1C5077FC00A02978 /* LTMorphingLabel.framework */,
 				892106D21C3CF4140007CDEC /* CountdownLabel */,
 				8999B51C1C4F2F7200C46F10 /* CountdownLabelTests */,
 				892106D11C3CF4140007CDEC /* Products */,
