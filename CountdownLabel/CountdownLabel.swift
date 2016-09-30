@@ -111,7 +111,7 @@ public class CountdownLabel: LTMorphingLabel {
         setup()
     }
     
-    override init(frame: CGRect) {
+    public override required init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
