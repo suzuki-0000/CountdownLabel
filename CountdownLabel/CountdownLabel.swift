@@ -9,41 +9,41 @@
 import UIKit
 
 @objc public protocol CountdownLabelDelegate {
-    optional func countdownStarted()
-    optional func countdownPaused()
-    optional func countdownFinished()
-    optional func countdownCancelled()
-    optional func countingAt(timeCounted timeCounted: NSTimeInterval, timeRemaining: NSTimeInterval)
-}
+    @objc optional func countdownStarted()
+    @objc optional func countdownPaused()
+    @objc optional func countdownFinished()
+    @objc optional func countdownCancelled()
+    @objc optional func countingAt(timeCounted timeCounted: TimeInterval, timeRemaining: TimeInterval)
 
-public extension NSTimeInterval {
+}
+extension TimeInterval {
     var int: Int {
         return Int(self)
     }
 }
 
-public class CountdownLabel: LTMorphingLabel {
+class CountdownLabel: LTMorphingLabel {
     
     public typealias CountdownCompletion = () -> ()?
     public typealias CountdownExecution = () -> ()
-    private let defaultFireInterval = 1.0
-    private let date1970 = NSDate(timeIntervalSince1970: 0)
+    internal let defaultFireInterval = 1.0
+    internal let date1970 = NSDate(timeIntervalSince1970: 0)
     
     // conputed property
-    public var dateFormatter: NSDateFormatter {
-        let df = NSDateFormatter()
-        df.locale = NSLocale.currentLocale()
-        df.timeZone = NSTimeZone(name: "GMT")
+    public var dateFormatter: DateFormatter {
+        let df = DateFormatter()
+        df.locale = NSLocale.current
+        df.timeZone = NSTimeZone(name: "GMT") as TimeZone!
         df.dateFormat = timeFormat
         return df
     }
     
-    public var timeCounted: NSTimeInterval {
-        let timeCounted = NSDate().timeIntervalSinceDate(fromDate)
+    public var timeCounted: TimeInterval {
+        let timeCounted = NSDate().timeIntervalSince(fromDate as Date)
         return round(timeCounted < 0 ? 0 : timeCounted)
     }
     
-    public var timeRemaining: NSTimeInterval {
+    public var timeRemaining: TimeInterval {
         return round(currentTime) - timeCounted
     }
     
@@ -73,28 +73,28 @@ public class CountdownLabel: LTMorphingLabel {
         }
     }
     public var timeFormat = "HH:mm:ss"
-    public var thens = [NSTimeInterval: CountdownExecution]()
+    public var thens = [TimeInterval: CountdownExecution]()
     public var countdownAttributedText: CountdownAttributedText! {
         didSet {
-            range = (countdownAttributedText.text as NSString).rangeOfString(countdownAttributedText.replacement)
+            range = (countdownAttributedText.text as NSString).range(of: countdownAttributedText.replacement)
         }
     }
     
-    private var completion: CountdownCompletion?
-    private var fromDate: NSDate = NSDate()
-    private var currentDate: NSDate = NSDate()
-    private var currentTime: NSTimeInterval = 0
-    private var diffDate: NSDate!
-    private var targetTime: NSTimeInterval = 0
-    private var pausedDate: NSDate!
-    private var range: NSRange!
-    private var timer: NSTimer!
+    internal var completion: CountdownCompletion?
+    internal var fromDate: NSDate = NSDate()
+    internal var currentDate: NSDate = NSDate()
+    internal var currentTime: TimeInterval = 0
+    internal var diffDate: NSDate!
+    internal var targetTime: TimeInterval = 0
+    internal var pausedDate: NSDate!
+    internal var range: NSRange!
+    internal var timer: Timer!
     
-    private var counting: Bool = false
-    private var endOfTimer: Bool {
+    internal var counting: Bool = false
+    internal var endOfTimer: Bool {
         return timeCounted >= currentTime
     }
-    private var finished: Bool = false {
+    internal var finished: Bool = false {
         didSet {
             if finished {
                 paused = false
@@ -102,7 +102,7 @@ public class CountdownLabel: LTMorphingLabel {
             }
         }
     }
-    private var paused: Bool = false
+    internal var paused: Bool = false
     
     // MARK: - Initialize
     public required init?(coder aDecoder: NSCoder) {
@@ -115,19 +115,19 @@ public class CountdownLabel: LTMorphingLabel {
         setup()
     }
     
-    public convenience init(frame: CGRect, minutes: NSTimeInterval) {
+    public convenience init(frame: CGRect, minutes: TimeInterval) {
         self.init(frame: frame)
-        setCountDownTime(minutes)
+        setCountDownTime(minutes: minutes)
     }
     
     public convenience init(frame: CGRect, date: NSDate) {
         self.init(frame: frame)
-        setCountDownDate(date)
+        setCountDownDate(targetDate: date)
     }
     
     public convenience init(frame: CGRect, fromDate: NSDate, targetDate: NSDate) {
         self.init(frame: frame)
-        setCountDownDate(fromDate, targetDate: targetDate)
+        setCountDownDate(fromDate: fromDate, targetDate: targetDate)
     }
     
     deinit {
@@ -135,30 +135,30 @@ public class CountdownLabel: LTMorphingLabel {
     }
     
     // MARK: - Setter Methods
-    public func setCountDownTime(minutes: NSTimeInterval) {
-        setCountDownTime(NSDate(), minutes: minutes)
+    public func setCountDownTime(minutes: TimeInterval) {
+        setCountDownTime(fromDate: NSDate(), minutes: minutes)
     }
     
-    public func setCountDownTime(fromDate: NSDate, minutes: NSTimeInterval) {
+    public func setCountDownTime(fromDate: NSDate, minutes: TimeInterval) {
         self.fromDate = fromDate
         
         targetTime = minutes
         currentTime = minutes
-        diffDate = date1970.dateByAddingTimeInterval(minutes)
+        diffDate = date1970.addingTimeInterval(minutes)
         
         updateLabel()
     }
     
     public func setCountDownDate(targetDate: NSDate) {
-        setCountDownDate(NSDate(), targetDate: targetDate)
+        setCountDownDate(fromDate: NSDate(), targetDate: targetDate)
     }
     
     public func setCountDownDate(fromDate: NSDate, targetDate: NSDate) {
         self.fromDate = fromDate
         
-        targetTime = targetDate.timeIntervalSinceDate(fromDate)
-        currentTime = targetDate.timeIntervalSinceDate(fromDate) 
-        diffDate = date1970.dateByAddingTimeInterval(targetTime)
+        targetTime = targetDate.timeIntervalSince(fromDate as Date)
+        currentTime = targetDate.timeIntervalSince(fromDate as Date) 
+        diffDate = date1970.addingTimeInterval(targetTime)
         
         updateLabel()
     }
@@ -181,7 +181,7 @@ public class CountdownLabel: LTMorphingLabel {
         
         // if end of timer
         if endOfTimer {
-            text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
+            text = dateFormatter.string(from: date1970.addingTimeInterval(0) as Date)
             countdownDelegate?.countdownFinished?()
             dispose()
             completion?()
@@ -190,7 +190,7 @@ public class CountdownLabel: LTMorphingLabel {
 }
 
 // MARK: - Public
-public extension CountdownLabel {
+extension CountdownLabel {
     func start(completion: ( () -> () )? = nil) {
         if !isPaused {
             // current date should be setted at the time of the counter's starting, or the time will be wrong (just a few seconds) after the first time of pausing.
@@ -236,7 +236,7 @@ public extension CountdownLabel {
     }
     
     func cancel(completion: (() -> ())? = nil) {
-        text = dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
+        text = dateFormatter.string(from: date1970.addingTimeInterval(0) as Date)
         dispose()
         
         // set completion if needed
@@ -246,14 +246,14 @@ public extension CountdownLabel {
         countdownDelegate?.countdownCancelled?()
     }
     
-    func addTime(time: NSTimeInterval) {
+    func addTime(time: TimeInterval) {
         currentTime = time + currentTime
-        diffDate = date1970.dateByAddingTimeInterval(currentTime)
+        diffDate = date1970.addingTimeInterval(currentTime)
         
         updateLabel()
     }
     
-    func then(targetTime: NSTimeInterval, completion: () -> ()) -> Self {
+    func then(targetTime: TimeInterval, completion: @escaping () -> ()) -> Self {
         let t = targetTime - (targetTime - targetTime)
         guard t > 0 else {
             return self
@@ -265,7 +265,7 @@ public extension CountdownLabel {
 }
 
 // MARK: - private
-private extension CountdownLabel {
+extension CountdownLabel {
     func setup() {
         morphingEnabled = false
     }
@@ -275,13 +275,13 @@ private extension CountdownLabel {
 
         // if time is before start
         let formattedText = timeCounted < 0
-            ? dateFormatter.stringFromDate(date1970.dateByAddingTimeInterval(0))
-            : dateFormatter.stringFromDate(diffDate.dateByAddingTimeInterval(round(timeCounted * -1)))
+            ? dateFormatter.string(from: date1970.addingTimeInterval(0) as Date)
+            : dateFormatter.string(from: diffDate.addingTimeInterval(round(timeCounted * -1)) as Date)
         
         if let countdownAttributedText = countdownAttributedText {
             let attrTextInRange = NSAttributedString(string: formattedText, attributes: countdownAttributedText.attributes)
             let attributedString = NSMutableAttributedString(string: countdownAttributedText.text)
-            attributedString.replaceCharactersInRange(range, withAttributedString: attrTextInRange)
+            attributedString.replaceCharacters(in: range, with: attrTextInRange)
             
             attributedText = attributedString
             text = attributedString.string
@@ -296,8 +296,8 @@ private extension CountdownLabel {
             return
         }
         // change date
-        let pastedTime = pausedDate.timeIntervalSinceDate(currentDate)
-        currentDate = NSDate().dateByAddingTimeInterval(-pastedTime)
+        let pastedTime = pausedDate.timeIntervalSince(currentDate as Date)
+        currentDate = NSDate().addingTimeInterval(-pastedTime)
         fromDate = currentDate
         
         // reset pause
@@ -309,14 +309,14 @@ private extension CountdownLabel {
         disposeTimer()
         
         // create
-        timer = NSTimer.scheduledTimerWithTimeInterval(defaultFireInterval,
+        timer = Timer.scheduledTimer(timeInterval: defaultFireInterval,
                                                        target: self,
                                                        selector: #selector(updateLabel),
                                                        userInfo: nil,
                                                        repeats: true)
         
         // register to NSrunloop
-        NSRunLoop.currentRunLoop().addTimer(timer, forMode: NSRunLoopCommonModes)
+        RunLoop.current.add(timer, forMode: RunLoopMode.commonModes)
         counting = true
     }
     
@@ -339,7 +339,7 @@ private extension CountdownLabel {
     }
 }
 
-public enum CountdownEffect {
+enum CountdownEffect {
     case Anvil
     case Burn
     case Evaporate
@@ -363,10 +363,10 @@ public enum CountdownEffect {
     }
 }
 
-public class CountdownAttributedText: NSObject {
-    private let text: String
-    private let replacement: String
-    private let attributes: [String: AnyObject]?
+class CountdownAttributedText: NSObject {
+    internal let text: String
+    internal let replacement: String
+    internal let attributes: [String: AnyObject]?
    
     public init(text: String, replacement: String, attributes: [String: AnyObject]? = nil) {
         self.text = text
