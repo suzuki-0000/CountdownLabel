@@ -1,7 +1,7 @@
 CountdownLabel
 ========================
 
-![Language](https://img.shields.io/badge/language-Swift%202.3-orange.svg)
+![Swift](http://img.shields.io/badge/swift-3.0-brightgreen.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/CountdownLabel.svg?style=flat)](http://cocoadocs.org/docsets/CountdownLabel)
 
@@ -16,6 +16,15 @@ Simple countdown UILabel with morphing animation, and some useful function.
 - Style change as usual as UILabel do
 - Morphing animation from [LTMorphingLabel](https://github.com/lexrus/LTMorphingLabel).
 - XCTest assertion
+
+### Version vs Swift version.
+
+Below is a table that shows which version of what you should use for your Swift version.
+
+| Swift version | version    |
+| ------------- | --------------- |
+| 3.X           | >= 2.0 |
+| 2.3           | 1.3  |
 
 ## Usage
 You need only 2 lines. 
