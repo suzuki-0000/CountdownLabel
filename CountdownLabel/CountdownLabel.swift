@@ -22,7 +22,7 @@ extension TimeInterval {
     }
 }
 
-class CountdownLabel: LTMorphingLabel {
+public class CountdownLabel: LTMorphingLabel {
     
     public typealias CountdownCompletion = () -> ()?
     public typealias CountdownExecution = () -> ()
@@ -191,7 +191,7 @@ class CountdownLabel: LTMorphingLabel {
 
 // MARK: - Public
 extension CountdownLabel {
-    func start(completion: ( () -> () )? = nil) {
+    public func start(completion: ( () -> () )? = nil) {
         if !isPaused {
             // current date should be setted at the time of the counter's starting, or the time will be wrong (just a few seconds) after the first time of pausing.
             currentDate = NSDate()
@@ -213,7 +213,7 @@ extension CountdownLabel {
         countdownDelegate?.countdownStarted?()
     }
     
-    func pause(completion: (() -> ())? = nil) {
+    public func pause(completion: (() -> ())? = nil) {
         if paused {
             return
         }
@@ -235,7 +235,7 @@ extension CountdownLabel {
         countdownDelegate?.countdownPaused?()
     }
     
-    func cancel(completion: (() -> ())? = nil) {
+    public func cancel(completion: (() -> ())? = nil) {
         text = dateFormatter.string(from: date1970.addingTimeInterval(0) as Date)
         dispose()
         
@@ -246,14 +246,14 @@ extension CountdownLabel {
         countdownDelegate?.countdownCancelled?()
     }
     
-    func addTime(time: TimeInterval) {
+    public func addTime(time: TimeInterval) {
         currentTime = time + currentTime
         diffDate = date1970.addingTimeInterval(currentTime)
         
         updateLabel()
     }
     
-    func then(targetTime: TimeInterval, completion: @escaping () -> ()) -> Self {
+    public func then(targetTime: TimeInterval, completion: @escaping () -> ()) -> Self {
         let t = targetTime - (targetTime - targetTime)
         guard t > 0 else {
             return self
@@ -339,7 +339,7 @@ extension CountdownLabel {
     }
 }
 
-enum CountdownEffect {
+public enum CountdownEffect {
     case Anvil
     case Burn
     case Evaporate
@@ -363,7 +363,7 @@ enum CountdownEffect {
     }
 }
 
-class CountdownAttributedText: NSObject {
+public class CountdownAttributedText: NSObject {
     internal let text: String
     internal let replacement: String
     internal let attributes: [String: AnyObject]?
