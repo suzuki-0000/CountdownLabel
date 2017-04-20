@@ -13,7 +13,7 @@ import UIKit
     @objc optional func countdownPaused()
     @objc optional func countdownFinished()
     @objc optional func countdownCancelled()
-    @objc optional func countingAt(timeCounted timeCounted: TimeInterval, timeRemaining: TimeInterval)
+    @objc optional func countingAt(timeCounted: TimeInterval, timeRemaining: TimeInterval)
 
 }
 extension TimeInterval {
