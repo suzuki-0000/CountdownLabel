@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C482D341F8803BC002AA83C /* CountdownLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C482D331F8803BC002AA83C /* CountdownLabelTests.swift */; };
 		6C482D361F8803BC002AA83C /* CountdownLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892106D01C3CF4140007CDEC /* CountdownLabel.framework */; };
+		6C4EB6E11F8811AF004FB011 /* CountdownLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8999B51D1C4F2F7200C46F10 /* CountdownLabelTests.swift */; };
+		6C4EB6E21F881229004FB011 /* StoryboardTests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8999B5261C4F2F8700C46F10 /* StoryboardTests.storyboard */; };
+		6C4EB6E31F8813AC004FB011 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CD800601F87FDDA00135D79 /* Info.plist */; };
 		890F89791D9E39B300CF7720 /* LTCharacterDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F89651D9E39B300CF7720 /* LTCharacterDiffResult.swift */; };
 		890F897A1D9E39B300CF7720 /* LTCharacterLimbo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F89661D9E39B300CF7720 /* LTCharacterLimbo.swift */; };
 		890F897B1D9E39B300CF7720 /* LTEasing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F89671D9E39B300CF7720 /* LTEasing.swift */; };
@@ -43,8 +45,6 @@
 
 /* Begin PBXFileReference section */
 		6C482D311F8803BC002AA83C /* CountdownLabelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountdownLabelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6C482D331F8803BC002AA83C /* CountdownLabelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownLabelTests.swift; sourceTree = "<group>"; };
-		6C482D351F8803BC002AA83C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6CD800601F87FDDA00135D79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		890F89651D9E39B300CF7720 /* LTCharacterDiffResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterDiffResult.swift; sourceTree = "<group>"; };
 		890F89661D9E39B300CF7720 /* LTCharacterLimbo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LTCharacterLimbo.swift; sourceTree = "<group>"; };
@@ -91,15 +91,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6C482D321F8803BC002AA83C /* CountdownLabelTests */ = {
-			isa = PBXGroup;
-			children = (
-				6C482D331F8803BC002AA83C /* CountdownLabelTests.swift */,
-				6C482D351F8803BC002AA83C /* Info.plist */,
-			);
-			path = CountdownLabelTests;
-			sourceTree = "<group>";
-		};
 		890F89631D9E39B300CF7720 /* LTMorphingLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,7 +129,6 @@
 			children = (
 				892106D21C3CF4140007CDEC /* CountdownLabel */,
 				8999B51C1C4F2F7200C46F10 /* CountdownLabelTests */,
-				6C482D321F8803BC002AA83C /* CountdownLabelTests */,
 				892106D11C3CF4140007CDEC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -237,7 +227,6 @@
 				TargetAttributes = {
 					6C482D301F8803BC002AA83C = {
 						CreatedOnToolsVersion = 9.1;
-						DevelopmentTeam = CYC8C8R4K9;
 						ProvisioningStyle = Automatic;
 					};
 					892106CF1C3CF4140007CDEC = {
@@ -269,6 +258,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C4EB6E31F8813AC004FB011 /* Info.plist in Resources */,
+				6C4EB6E21F881229004FB011 /* StoryboardTests.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,7 +297,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6C482D341F8803BC002AA83C /* CountdownLabelTests.swift in Sources */,
+				6C4EB6E11F8811AF004FB011 /* CountdownLabelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +349,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CYC8C8R4K9;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CountdownLabelTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -387,7 +378,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CYC8C8R4K9;
+				DEVELOPMENT_TEAM = "";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CountdownLabelTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
