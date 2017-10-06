@@ -3,7 +3,7 @@
 //  https://github.com/lexrus/LTMorphingLabel
 //
 //  The MIT License (MIT)
-//  Copyright (c) 2016 Lex Tang, http://lexrus.com
+//  Copyright (c) 2017 Lex Tang, http://lexrus.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a
 //  copy of this software and associated documentation files
@@ -27,12 +27,12 @@
 
 import UIKit
 
-
 extension LTMorphingLabel {
-    
+
+    @objc
     func FallLoad() {
         
-        progressClosures["Fall\(LTMorphingPhases.Progress)"] = {
+        progressClosures["Fall\(LTMorphingPhases.progress)"] = {
             (index: Int, progress: Float, isNewChar: Bool) in
             
             if isNewChar {
@@ -53,7 +53,7 @@ extension LTMorphingLabel {
             
         }
         
-        effectClosures["Fall\(LTMorphingPhases.Disappear)"] = {
+        effectClosures["Fall\(LTMorphingPhases.disappear)"] = {
             char, index, progress in
             
             return LTCharacterLimbo(
@@ -64,11 +64,11 @@ extension LTMorphingLabel {
                 drawingProgress: CGFloat(progress))
         }
         
-        effectClosures["Fall\(LTMorphingPhases.Appear)"] = {
+        effectClosures["Fall\(LTMorphingPhases.appear)"] = {
             char, index, progress in
             
             let currentFontSize = CGFloat(
-                LTEasing.easeOutQuint(t: progress, 0.0, Float(self.font.pointSize))
+                LTEasing.easeOutQuint(progress, 0.0, Float(self.font.pointSize))
             )
             let yOffset = CGFloat(self.font.pointSize - currentFontSize)
             
@@ -81,8 +81,7 @@ extension LTMorphingLabel {
             )
         }
         
-        
-        drawingClosures["Fall\(LTMorphingPhases.Draw)"] = {
+        drawingClosures["Fall\(LTMorphingPhases.draw)"] = {
             limbo in
             
             if limbo.drawingProgress > 0.0 {
@@ -91,19 +90,19 @@ extension LTMorphingLabel {
                 context!.saveGState()
                 let charCenterX = charRect.origin.x + (charRect.size.width / 2.0)
                 var charBottomY = charRect.origin.y + charRect.size.height - self.font.pointSize / 6
-                var charColor = self.textColor
+                var charColor: UIColor = self.textColor
                 
                 // Fall down if drawingProgress is more than 50%
                 if limbo.drawingProgress > 0.5 {
                     let ease = CGFloat(
-                        LTEasing.easeInQuint(t:
+                        LTEasing.easeInQuint(
                             Float(limbo.drawingProgress - 0.4),
                             0.0,
-                            0.5,
-                            1.0
+                            1.0,
+                            0.5
                         )
                     )
-                    charBottomY = charBottomY + ease * 10.0
+                    charBottomY += ease * 10.0
                     let fadeOutAlpha = min(
                         1.0,
                         max(
@@ -123,7 +122,7 @@ extension LTMorphingLabel {
                 
                 let angle = Float(sin(Double(limbo.rect.origin.x)) > 0.5 ? 168 : -168)
                 let rotation = CGFloat(
-                    LTEasing.easeOutBack(t:
+                    LTEasing.easeOutBack(
                         min(
                             1.0,
                             Float(limbo.drawingProgress)
@@ -134,10 +133,11 @@ extension LTMorphingLabel {
                 )
                 context!.rotate(by: rotation * CGFloat(Double.pi) / 180.0)
                 let s = String(limbo.char)
-                s.draw(in: charRect, withAttributes: [
-                    NSFontAttributeName: self.font.withSize(limbo.size),
-                    NSForegroundColorAttributeName: charColor ?? UIColor.black
-                    ])
+                let attributes: [NSAttributedStringKey: Any] = [
+                    .font: self.font.withSize(limbo.size),
+                    .foregroundColor: charColor
+                ]
+                s.draw(in: charRect, withAttributes: attributes)
                 context!.restoreGState()
                 
                 return true

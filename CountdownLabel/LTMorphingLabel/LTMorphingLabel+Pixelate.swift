@@ -3,7 +3,7 @@
 //  https://github.com/lexrus/LTMorphingLabel
 //
 //  The MIT License (MIT)
-//  Copyright (c) 2016 Lex Tang, http://lexrus.com
+//  Copyright (c) 2017 Lex Tang, http://lexrus.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a
 //  copy of this software and associated documentation files
@@ -27,12 +27,12 @@
 
 import UIKit
 
-
 extension LTMorphingLabel {
-    
+
+    @objc
     func PixelateLoad() {
         
-        effectClosures["Pixelate\(LTMorphingPhases.Disappear)"] = {
+        effectClosures["Pixelate\(LTMorphingPhases.disappear)"] = {
             char, index, progress in
             
             return LTCharacterLimbo(
@@ -43,7 +43,7 @@ extension LTMorphingLabel {
                 drawingProgress: CGFloat(progress))
         }
         
-        effectClosures["Pixelate\(LTMorphingPhases.Appear)"] = {
+        effectClosures["Pixelate\(LTMorphingPhases.appear)"] = {
             char, index, progress in
             
             return LTCharacterLimbo(
@@ -55,13 +55,13 @@ extension LTMorphingLabel {
             )
         }
         
-        drawingClosures["Pixelate\(LTMorphingPhases.Draw)"] = {
+        drawingClosures["Pixelate\(LTMorphingPhases.draw)"] = {
             limbo in
             
             if limbo.drawingProgress > 0.0 {
                 
                 let charImage = self.pixelateImageForCharLimbo(
-                    charLimbo: limbo,
+                    limbo,
                     withBlurRadius: limbo.drawingProgress * 6.0
                 )
                 
@@ -74,8 +74,8 @@ extension LTMorphingLabel {
         }
     }
     
-    private func pixelateImageForCharLimbo(
-        charLimbo: LTCharacterLimbo,
+    fileprivate func pixelateImageForCharLimbo(
+        _ charLimbo: LTCharacterLimbo,
         withBlurRadius blurRadius: CGFloat
         ) -> UIImage {
             let scale = min(UIScreen.main.scale, 1.0 / blurRadius)
@@ -88,11 +88,9 @@ extension LTMorphingLabel {
                 height: charLimbo.rect.size.height
             )
             String(charLimbo.char).draw(in: rect, withAttributes: [
-                NSFontAttributeName:
-                    self.font,
-                NSForegroundColorAttributeName:
-                    self.textColor.withAlphaComponent(fadeOutAlpha)
-                ])
+                .font: self.font,
+                .foregroundColor: self.textColor.withAlphaComponent(fadeOutAlpha)
+            ])
             let newImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
             return newImage!

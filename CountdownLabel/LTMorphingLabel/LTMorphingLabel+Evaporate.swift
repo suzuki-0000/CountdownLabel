@@ -3,7 +3,7 @@
 //  https://github.com/lexrus/LTMorphingLabel
 //
 //  The MIT License (MIT)
-//  Copyright (c) 2016 Lex Tang, http://lexrus.com
+//  Copyright (c) 2017 Lex Tang, http://lexrus.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a
 //  copy of this software and associated documentation files
@@ -27,23 +27,22 @@
 
 import UIKit
 
-
 extension LTMorphingLabel {
-    
+
+    @objc
     func EvaporateLoad() {
         
-        progressClosures["Evaporate\(LTMorphingPhases.Progress)"] = {
+        progressClosures["Evaporate\(LTMorphingPhases.progress)"] = {
             (index: Int, progress: Float, isNewChar: Bool) in
             let j: Int = Int(round(cos(Double(index)) * 1.2))
             let delay = isNewChar ? self.morphingCharacterDelay * -1.0 : self.morphingCharacterDelay
             return min(1.0, max(0.0, self.morphingProgress + delay * Float(j)))
         }
         
-        effectClosures["Evaporate\(LTMorphingPhases.Disappear)"] = {
+        effectClosures["Evaporate\(LTMorphingPhases.disappear)"] = {
             char, index, progress in
             
-            
-            let newProgress = LTEasing.easeOutQuint(t: progress, 0.0, 1.0, 1.0)
+            let newProgress = LTEasing.easeOutQuint(progress, 0.0, 1.0, 1.0)
             let yOffset: CGFloat = -0.8 * CGFloat(self.font.pointSize) * CGFloat(newProgress)
             let currentRect = self.previousRects[index].offsetBy(dx: 0, dy: yOffset)
             let currentAlpha = CGFloat(1.0 - newProgress)
@@ -56,10 +55,10 @@ extension LTMorphingLabel {
                 drawingProgress: 0.0)
         }
         
-        effectClosures["Evaporate\(LTMorphingPhases.Appear)"] = {
+        effectClosures["Evaporate\(LTMorphingPhases.appear)"] = {
             char, index, progress in
             
-            let newProgress = 1.0 - LTEasing.easeOutQuint(t: progress, 0.0, 1.0)
+            let newProgress = 1.0 - LTEasing.easeOutQuint(progress, 0.0, 1.0)
             let yOffset = CGFloat(self.font.pointSize) * CGFloat(newProgress) * 1.2
             
             return LTCharacterLimbo(

@@ -107,7 +107,7 @@ class ViewController: UIViewController {
         countdownLabel7.timeFormat = "ss"
         countdownLabel7.countdownAttributedText = CountdownAttributedText(text: "HELLO TIME IS HERE NOW",
             replacement: "HERE",
-            attributes: [NSForegroundColorAttributeName: UIColor.red])
+            attributes: [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue) : UIColor.red])
         countdownLabel7.start() {
             self.countdownLabel7.text = "timer finished."
         }

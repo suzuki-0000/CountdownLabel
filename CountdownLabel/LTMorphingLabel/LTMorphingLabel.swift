@@ -3,7 +3,7 @@
 //  https://github.com/lexrus/LTMorphingLabel
 //
 //  The MIT License (MIT)
-//  Copyright (c) 2016 Lex Tang, http://lexrus.com
+//  Copyright (c) 2017 Lex Tang, http://lexrus.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a
 //  copy of this software and associated documentation files
@@ -29,14 +29,32 @@ import Foundation
 import UIKit
 import QuartzCore
 
-
-enum LTMorphingPhases: Int {
-    case Start, Appear, Disappear, Draw, Progress, SkipFrames
+private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
 }
 
+private func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
+enum LTMorphingPhases: Int {
+    case start, appear, disappear, draw, progress, skipFrames
+}
 
 typealias LTMorphingStartClosure =
-    (Void) -> Void
+    () -> Void
 
 typealias LTMorphingEffectClosure =
     (Character, _ index: Int, _ progress: Float) -> LTCharacterLimbo
@@ -48,26 +66,24 @@ typealias LTMorphingManipulateProgressClosure =
     (_ index: Int, _ progress: Float, _ isNewChar: Bool) -> Float
 
 typealias LTMorphingSkipFramesClosure =
-    (Void) -> Int
-
+    () -> Int
 
 @objc public protocol LTMorphingLabelDelegate {
-    @objc optional func morphingDidStart(label: LTMorphingLabel)
-    @objc optional func morphingDidComplete(label: LTMorphingLabel)
-    @objc optional func morphingOnProgress(label: LTMorphingLabel, progress: Float)
+    @objc optional func morphingDidStart(_ label: LTMorphingLabel)
+    @objc optional func morphingDidComplete(_ label: LTMorphingLabel)
+    @objc optional func morphingOnProgress(_ label: LTMorphingLabel, progress: Float)
 }
 
-
 // MARK: - LTMorphingLabel
-@IBDesignable public class LTMorphingLabel: UILabel {
+@IBDesignable open class LTMorphingLabel: UILabel {
     
-    @IBInspectable public var morphingProgress: Float = 0.0
-    @IBInspectable public var morphingDuration: Float = 0.6
-    @IBInspectable public var morphingCharacterDelay: Float = 0.026
-    @IBInspectable public var morphingEnabled: Bool = true
+    @IBInspectable open var morphingProgress: Float = 0.0
+    @IBInspectable open var morphingDuration: Float = 0.6
+    @IBInspectable open var morphingCharacterDelay: Float = 0.026
+    @IBInspectable open var morphingEnabled: Bool = true
 
-    @IBOutlet public weak var delegate: LTMorphingLabelDelegate?
-    public var morphingEffect: LTMorphingEffect = .Scale
+    @IBOutlet open weak var delegate: LTMorphingLabelDelegate?
+    open var morphingEffect: LTMorphingEffect = .scale
     
     var startClosures = [String: LTMorphingStartClosure]()
     var effectClosures = [String: LTMorphingEffectClosure]()
@@ -93,9 +109,9 @@ typealias LTMorphingSkipFramesClosure =
     let presentingInIB = false
     #endif
     
-    override public var font: UIFont! {
+    override open var font: UIFont! {
         get {
-            return super.font
+            return super.font ?? UIFont.systemFont(ofSize: 15)
         }
         set {
             super.font = newValue
@@ -103,15 +119,15 @@ typealias LTMorphingSkipFramesClosure =
         }
     }
     
-    override public var text: String! {
+    override open var text: String! {
         get {
-            return super.text
+            return super.text ?? ""
         }
         set {
             guard text != newValue else { return }
 
             previousText = text ?? ""
-            diffResults = previousText.diffWith(anotherString: newValue)
+            diffResults = previousText.diffWith(newValue)
             super.text = newValue ?? ""
             
             morphingProgress = 0.0
@@ -129,23 +145,23 @@ typealias LTMorphingSkipFramesClosure =
                 morphingProgress = 0.5
             } else if previousText != text {
                 displayLink.isPaused = false
-                let closureKey = "\(morphingEffect.description)\(LTMorphingPhases.Start)"
+                let closureKey = "\(morphingEffect.description)\(LTMorphingPhases.start)"
                 if let closure = startClosures[closureKey] {
                     return closure()
                 }
                 
-                delegate?.morphingDidStart?(label: self)
+                delegate?.morphingDidStart?(self)
             }
         }
     }
     
-    public override func setNeedsLayout() {
+    open override func setNeedsLayout() {
         super.setNeedsLayout()
-        previousRects = rectsOfEachCharacter(textToDraw: previousText, withFont: font)
-        newRects = rectsOfEachCharacter(textToDraw: text ?? "", withFont: font)
+        previousRects = rectsOfEachCharacter(previousText, withFont: font)
+        newRects = rectsOfEachCharacter(text ?? "", withFont: font)
     }
     
-    override public var bounds: CGRect {
+    override open var bounds: CGRect {
         get {
             return super.bounds
         }
@@ -155,7 +171,7 @@ typealias LTMorphingSkipFramesClosure =
         }
     }
     
-    override public var frame: CGRect {
+    override open var frame: CGRect {
         get {
             return super.frame
         }
@@ -165,15 +181,19 @@ typealias LTMorphingSkipFramesClosure =
         }
     }
     
-    internal lazy var displayLink: CADisplayLink = {
+    fileprivate lazy var displayLink: CADisplayLink = {
         let displayLink = CADisplayLink(
             target: self,
-            selector: #selector(LTMorphingLabel.displayFrameTick))
-        displayLink.add(
-            to: RunLoop.current,
-            forMode: RunLoopMode.commonModes)
+            selector: #selector(LTMorphingLabel.displayFrameTick)
+        )
+        displayLink.add(to: .current, forMode: .commonModes)
         return displayLink
         }()
+
+    deinit {
+        displayLink.remove(from: .current, forMode: .commonModes)
+        displayLink.invalidate()
+    }
     
     lazy var emitterView: LTEmitterView = {
         let emitterView = LTEmitterView(frame: self.bounds)
@@ -185,9 +205,22 @@ typealias LTMorphingSkipFramesClosure =
 // MARK: - Animation extension
 extension LTMorphingLabel {
 
-    func displayFrameTick() {
+    @objc func displayFrameTick() {
         if displayLink.duration > 0.0 && totalFrames == 0 {
-            let frameRate = Float(displayLink.duration) / Float(displayLink.frameInterval)
+            var frameRate = Float(0)
+            if #available(iOS 10.0, tvOS 10.0, *) {
+                var frameInterval = 1
+                if displayLink.preferredFramesPerSecond == 60 {
+                    frameInterval = 1
+                } else if displayLink.preferredFramesPerSecond == 30 {
+                    frameInterval = 2
+                } else {
+                    frameInterval = 1
+                }
+                frameRate = Float(displayLink.duration) / Float(frameInterval)
+            } else {
+                frameRate = Float(displayLink.duration) / Float(displayLink.frameInterval)
+            }
             totalFrames = Int(ceil(morphingDuration / frameRate))
 
             let totalDelay = Float((text!).characters.count) * morphingCharacterDelay
@@ -199,7 +232,7 @@ extension LTMorphingLabel {
         if previousText != text && currentFrame < totalFrames + totalDelayFrames + 5 {
             morphingProgress += 1.0 / Float(totalFrames)
 
-            let closureKey = "\(morphingEffect.description)\(LTMorphingPhases.SkipFrames)"
+            let closureKey = "\(morphingEffect.description)\(LTMorphingPhases.skipFrames)"
             if let closure = skipFramesClosures[closureKey] {
                 skipFramesCount += 1
                 if skipFramesCount > closure() {
@@ -216,22 +249,22 @@ extension LTMorphingLabel {
         } else {
             displayLink.isPaused = true
 
-            delegate?.morphingDidComplete?(label: self)
+            delegate?.morphingDidComplete?(self)
         }
     }
     
     // Could be enhanced by kerning text:
     // http://stackoverflow.com/questions/21443625/core-text-calculate-letter-frame-in-ios
-    func rectsOfEachCharacter(textToDraw: String, withFont font: UIFont) -> [CGRect] {
+    func rectsOfEachCharacter(_ textToDraw: String, withFont font: UIFont) -> [CGRect] {
         var charRects = [CGRect]()
         var leftOffset: CGFloat = 0.0
         
-        charHeight = "Leg".size(attributes: [NSFontAttributeName: font]).height
+        charHeight = "Leg".size(withAttributes: [.font: font]).height
         
         let topOffset = (bounds.size.height - charHeight) / 2.0
-        
-        for (_, char) in textToDraw.characters.enumerated() {
-            let charSize = String(char).size(attributes: [NSFontAttributeName: font])
+
+        for char in textToDraw.characters {
+            let charSize = String(char).size(withAttributes: [.font: font])
             charRects.append(
                 CGRect(
                     origin: CGPoint(
@@ -267,7 +300,7 @@ extension LTMorphingLabel {
     }
     
     func limboOfOriginalCharacter(
-        char: Character,
+        _ char: Character,
         index: Int,
         progress: Float) -> LTCharacterLimbo {
             
@@ -280,33 +313,33 @@ extension LTMorphingLabel {
             
             switch diffResult {
                 // Move the character that exists in the new text to current position
-            case .Same:
+            case .same:
                 newX = Float(newRects[index].origin.x)
                 currentRect.origin.x = CGFloat(
-                    LTEasing.easeOutQuint(t: progress, oriX, newX - oriX)
+                    LTEasing.easeOutQuint(progress, oriX, newX - oriX)
                 )
-            case .Move(let offset):
+            case .move(let offset):
                 newX = Float(newRects[index + offset].origin.x)
                 currentRect.origin.x = CGFloat(
-                    LTEasing.easeOutQuint(t: progress, oriX, newX - oriX)
+                    LTEasing.easeOutQuint(progress, oriX, newX - oriX)
                 )
-            case .MoveAndAdd(let offset):
+            case .moveAndAdd(let offset):
                 newX = Float(newRects[index + offset].origin.x)
                 currentRect.origin.x = CGFloat(
-                    LTEasing.easeOutQuint(t: progress, oriX, newX - oriX)
+                    LTEasing.easeOutQuint(progress, oriX, newX - oriX)
                 )
             default:
                 // Otherwise, remove it
                 
                 // Override morphing effect with closure in extenstions
                 if let closure = effectClosures[
-                    "\(morphingEffect.description)\(LTMorphingPhases.Disappear)"
+                    "\(morphingEffect.description)\(LTMorphingPhases.disappear)"
                     ] {
                         return closure(char, index, progress)
                 } else {
                     // And scale it by default
                     let fontEase = CGFloat(
-                        LTEasing.easeOutQuint(t:
+                        LTEasing.easeOutQuint(
                             progress, 0, Float(font.pointSize)
                         )
                     )
@@ -330,22 +363,22 @@ extension LTMorphingLabel {
     }
     
     func limboOfNewCharacter(
-        char: Character,
+        _ char: Character,
         index: Int,
         progress: Float) -> LTCharacterLimbo {
             
             let currentRect = newRects[index]
             var currentFontSize = CGFloat(
-                LTEasing.easeOutQuint(t: progress, 0, Float(font.pointSize))
+                LTEasing.easeOutQuint(progress, 0, Float(font.pointSize))
             )
             
             if let closure = effectClosures[
-                "\(morphingEffect.description)\(LTMorphingPhases.Appear)"
+                "\(morphingEffect.description)\(LTMorphingPhases.appear)"
                 ] {
                     return closure(char, index, progress)
             } else {
                 currentFontSize = CGFloat(
-                    LTEasing.easeOutQuint(t: progress, 0.0, Float(font.pointSize))
+                    LTEasing.easeOutQuint(progress, 0.0, Float(font.pointSize))
                 )
                 // For emojis
                 currentFontSize = max(0.0001, currentFontSize)
@@ -370,27 +403,27 @@ extension LTMorphingLabel {
             var progress: Float = 0.0
             
             if let closure = progressClosures[
-                "\(morphingEffect.description)\(LTMorphingPhases.Progress)"
+                "\(morphingEffect.description)\(LTMorphingPhases.progress)"
                 ] {
                     progress = closure(i, morphingProgress, false)
             } else {
                 progress = min(1.0, max(0.0, morphingProgress + morphingCharacterDelay * Float(i)))
             }
             
-            let limboOfCharacter = limboOfOriginalCharacter(char: character, index: i, progress: progress)
+            let limboOfCharacter = limboOfOriginalCharacter(character, index: i, progress: progress)
             limbo.append(limboOfCharacter)
         }
         
         // Add new characters
         for (i, character) in (text!).characters.enumerated() {
-            if i >= (diffResults?.0.count)! {
+            if i >= diffResults?.0.count {
                 break
             }
             
             var progress: Float = 0.0
             
             if let closure = progressClosures[
-                "\(morphingEffect.description)\(LTMorphingPhases.Progress)"
+                "\(morphingEffect.description)\(LTMorphingPhases.progress)"
                 ] {
                     progress = closure(i, morphingProgress, true)
             } else {
@@ -404,9 +437,9 @@ extension LTMorphingLabel {
             
             if let diffResult = diffResults?.0[i] {
                 switch diffResult {
-                case .MoveAndAdd, .Replace, .Add, .Delete:
+                case .moveAndAdd, .replace, .add, .delete:
                     let limboOfCharacter = limboOfNewCharacter(
-                        char: character,
+                        character,
                         index: i,
                         progress: progress
                     )
@@ -422,24 +455,24 @@ extension LTMorphingLabel {
 
 }
 
-
 // MARK: - Drawing extension
 extension LTMorphingLabel {
     
-    override public func didMoveToSuperview() {
+    override open func didMoveToSuperview() {
         if let s = text {
             text = s
         }
+        
         // Load all morphing effects
         for effectName: String in LTMorphingEffect.allValues {
             let effectFunc = Selector("\(effectName)Load")
-            if LTMorphingLabel.responds(to: effectFunc) {
-                LTMorphingLabel.performSelector(onMainThread: effectFunc, with: nil, waitUntilDone: true)
+            if responds(to: effectFunc) {
+                perform(effectFunc)
             }
         }
     }
     
-    override public func drawText(in rect: CGRect) {
+    override open func drawText(in rect: CGRect) {
         if !morphingEnabled || limboOfCharacters().count == 0 {
             super.drawText(in: rect)
             return
@@ -450,21 +483,23 @@ extension LTMorphingLabel {
             
             let willAvoidDefaultDrawing: Bool = {
                 if let closure = drawingClosures[
-                    "\(morphingEffect.description)\(LTMorphingPhases.Draw)"
+                    "\(morphingEffect.description)\(LTMorphingPhases.draw)"
                     ] {
                         return closure($0)
                 }
                 return false
                 }(charLimbo)
-            
+
             if !willAvoidDefaultDrawing {
+                var attrs: [NSAttributedStringKey: Any] = [
+                    .foregroundColor: textColor.withAlphaComponent(charLimbo.alpha)
+                ]
+
+                if let font = UIFont(name: font.fontName, size: charLimbo.size) {
+                    attrs[.font] = font
+                }
                 let s = String(charLimbo.char)
-                s.draw(in: charRect, withAttributes: [
-                    NSFontAttributeName:
-                        UIFont.init(name: font.fontName, size: charLimbo.size)!,
-                    NSForegroundColorAttributeName:
-                        textColor.withAlphaComponent(charLimbo.alpha)
-                    ])
+                s.draw(in: charRect, withAttributes: attrs)
             }
         }
     }

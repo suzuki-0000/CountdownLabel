@@ -3,7 +3,7 @@
 //  https://github.com/lexrus/LTMorphingLabel
 //
 //  The MIT License (MIT)
-//  Copyright (c) 2016 Lex Tang, http://lexrus.com
+//  Copyright (c) 2017 Lex Tang, http://lexrus.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a
 //  copy of this software and associated documentation files
@@ -27,6 +27,25 @@
 
 import UIKit
 
+private func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+private func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
 
 public struct LTEmitter {
     
@@ -79,22 +98,15 @@ public struct LTEmitter {
     }
     
     public func play() {
-        if (layer.emitterCells?.count)! > 0 {
+        if layer.emitterCells?.count > 0 {
             return
         }
         
         layer.emitterCells = [cell]
-        DispatchQueue.main.asyncAfter(deadline: .now() + Double(duration)) {
+        let d = DispatchTime.now() + Double(Int64(duration * Float(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: d) {
             self.layer.birthRate = 0.0
         }
-//        let d = dispatch_time(
-//            dispatch_time_t(DispatchTime.now()),
-//            Int64(duration * Float(NSEC_PER_SEC))
-//        )
-//
-//        dispatch_after(d, DispatchQueue.main) {
-//            self.layer.birthRate = 0.0
-//        }
     }
     
     public func stop() {
@@ -103,33 +115,31 @@ public struct LTEmitter {
         }
     }
     
-    func update(configureClosure: LTEmitterConfigureClosure? = .none) -> LTEmitter {
+    func update(_ configureClosure: LTEmitterConfigureClosure? = .none) -> LTEmitter {
         configureClosure?(layer, cell)
         return self
     }
     
 }
 
-
 public typealias LTEmitterConfigureClosure = (CAEmitterLayer, CAEmitterCell) -> Void
 
-
-public class LTEmitterView: UIView {
+open class LTEmitterView: UIView {
     
-    public lazy var emitters: Dictionary<String, LTEmitter> = {
-        var _emitters = Dictionary<String, LTEmitter>()
+    open lazy var emitters: [String: LTEmitter] = {
+        var _emitters = [String: LTEmitter]()
         return _emitters
         }()
     
-    public func createEmitter(
-        name: String,
+    open func createEmitter(
+        _ name: String,
         particleName: String,
         duration: Float,
         configureClosure: LTEmitterConfigureClosure?
         ) -> LTEmitter {
 
             var emitter: LTEmitter
-            if let e = emitterByName(name: name) {
+            if let e = emitterByName(name) {
                 emitter = e
             } else {
                 emitter = LTEmitter(
@@ -146,14 +156,14 @@ public class LTEmitterView: UIView {
             return emitter
     }
     
-    public func emitterByName(name: String) -> LTEmitter? {
+    open func emitterByName(_ name: String) -> LTEmitter? {
         if let e = emitters[name] {
             return e
         }
         return Optional.none
     }
     
-    public func removeAllEmitters() {
+    open func removeAllEmitters() {
         for (_, emitter) in emitters {
             emitter.layer.removeFromSuperlayer()
         }

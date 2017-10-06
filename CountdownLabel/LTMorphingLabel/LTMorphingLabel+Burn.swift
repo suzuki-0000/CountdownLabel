@@ -3,7 +3,7 @@
 //  https://github.com/lexrus/LTMorphingLabel
 //
 //  The MIT License (MIT)
-//  Copyright (c) 2016 Lex Tang, http://lexrus.com
+//  Copyright (c) 2017 Lex Tang, http://lexrus.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a
 //  copy of this software and associated documentation files
@@ -27,11 +27,10 @@
 
 import UIKit
 
-
 extension LTMorphingLabel {
     
-    private func burningImageForCharLimbo(
-        charLimbo: LTCharacterLimbo,
+    fileprivate func burningImageForCharLimbo(
+        _ charLimbo: LTCharacterLimbo,
         withProgress progress: CGFloat
         ) -> (UIImage, CGRect) {
             let maskedHeight = charLimbo.rect.size.height * max(0.01, progress)
@@ -51,8 +50,8 @@ extension LTMorphingLabel {
                 height: maskedHeight
             )
             String(charLimbo.char).draw(in: rect, withAttributes: [
-                NSFontAttributeName: self.font,
-                NSForegroundColorAttributeName: self.textColor
+                .font: self.font,
+                .foregroundColor: self.textColor
                 ])
             let newImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
@@ -64,14 +63,15 @@ extension LTMorphingLabel {
             )
         return (newImage!, newRect)
     }
-    
+
+    @objc
     func BurnLoad() {
         
-        startClosures["Burn\(LTMorphingPhases.Start)"] = {
+        startClosures["Burn\(LTMorphingPhases.start)"] = {
             self.emitterView.removeAllEmitters()
         }
         
-        progressClosures["Burn\(LTMorphingPhases.Progress)"] = {
+        progressClosures["Burn\(LTMorphingPhases.progress)"] = {
             index, progress, isNewChar in
             
             if !isNewChar {
@@ -83,7 +83,7 @@ extension LTMorphingLabel {
             
         }
         
-        effectClosures["Burn\(LTMorphingPhases.Disappear)"] = {
+        effectClosures["Burn\(LTMorphingPhases.disappear)"] = {
             char, index, progress in
             
             return LTCharacterLimbo(
@@ -95,7 +95,7 @@ extension LTMorphingLabel {
             )
         }
         
-        effectClosures["Burn\(LTMorphingPhases.Appear)"] = {
+        effectClosures["Burn\(LTMorphingPhases.appear)"] = {
             char, index, progress in
             
             if char != " " {
@@ -106,7 +106,7 @@ extension LTMorphingLabel {
                 )
                 
                 self.emitterView.createEmitter(
-                    name: "c\(index)",
+                    "c\(index)",
                     particleName: "Fire",
                     duration: self.morphingDuration
                     ) { (layer, cell) in
@@ -116,7 +116,7 @@ extension LTMorphingLabel {
                         )
                         layer.renderMode = kCAEmitterLayerAdditive
                         layer.emitterMode = kCAEmitterLayerOutline
-                        cell.emissionLongitude = CGFloat(Double.pi / 2.0)
+                        cell.emissionLongitude = CGFloat(Double.pi / 2)
                         cell.scale = self.font.pointSize / 160.0
                         cell.scaleSpeed = self.font.pointSize / 100.0
                         cell.birthRate = Float(self.font.pointSize)
@@ -129,13 +129,12 @@ extension LTMorphingLabel {
                         cell.spin = 0
                         cell.spinRange = 0
                         cell.lifetime = self.morphingDuration / 3.0
-                    }.update {
-                        (layer, cell) in
+                    }.update { (layer, _) in
                         layer.emitterPosition = emitterPosition
                     }.play()
                 
                 self.emitterView.createEmitter(
-                    name: "s\(index)",
+                    "s\(index)",
                     particleName: "Smoke",
                     duration: self.morphingDuration
                     ) { (layer, cell) in
@@ -145,7 +144,7 @@ extension LTMorphingLabel {
                         )
                         layer.renderMode = kCAEmitterLayerAdditive
                         layer.emitterMode = kCAEmitterLayerVolume
-                        cell.emissionLongitude = CGFloat(Double.pi / 2.0)
+                        cell.emissionLongitude = CGFloat(Double.pi / 2)
                         cell.scale = self.font.pointSize / 40.0
                         cell.scaleSpeed = self.font.pointSize / 100.0
                         cell.birthRate =
@@ -160,8 +159,7 @@ extension LTMorphingLabel {
                         cell.spin = CGFloat(Float(arc4random_uniform(30)) / 10.0)
                         cell.spinRange = 3
                         cell.lifetime = self.morphingDuration
-                    }.update {
-                        (layer, cell) in
+                    }.update { (layer, _) in
                         layer.emitterPosition = emitterPosition
                     }.play()
             }
@@ -175,13 +173,13 @@ extension LTMorphingLabel {
             )
         }
         
-        drawingClosures["Burn\(LTMorphingPhases.Draw)"] = {
+        drawingClosures["Burn\(LTMorphingPhases.draw)"] = {
             (charLimbo: LTCharacterLimbo) in
             
             if charLimbo.drawingProgress > 0.0 {
                 
                 let (charImage, rect) = self.burningImageForCharLimbo(
-                    charLimbo: charLimbo,
+                    charLimbo,
                     withProgress: charLimbo.drawingProgress
                 )
                 charImage.draw(in: rect)
@@ -192,7 +190,7 @@ extension LTMorphingLabel {
             return false
         }
         
-        skipFramesClosures["Burn\(LTMorphingPhases.SkipFrames)"] = {
+        skipFramesClosures["Burn\(LTMorphingPhases.skipFrames)"] = {
             return 1
         }
     }

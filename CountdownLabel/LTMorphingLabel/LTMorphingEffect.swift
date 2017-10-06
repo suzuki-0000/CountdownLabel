@@ -3,7 +3,7 @@
 //  https://github.com/lexrus/LTMorphingLabel
 //
 //  The MIT License (MIT)
-//  Copyright (c) 2016 Lex Tang, http://lexrus.com
+//  Copyright (c) 2017 Lex Tang, http://lexrus.com
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a
 //  copy of this software and associated documentation files
@@ -27,16 +27,15 @@
 
 import UIKit
 
-
 @objc public enum LTMorphingEffect: Int, CustomStringConvertible {
 
-    case Scale = 0
-    case Evaporate
-    case Fall
-    case Pixelate
-    case Sparkle
-    case Burn
-    case Anvil
+    case scale = 0
+    case evaporate
+    case fall
+    case pixelate
+    case sparkle
+    case burn
+    case anvil
     
     public static let allValues = [
         "Scale", "Evaporate", "Fall", "Pixelate", "Sparkle", "Burn", "Anvil"
@@ -44,17 +43,17 @@ import UIKit
     
     public var description: String {
         switch self {
-        case .Evaporate:
+        case .evaporate:
             return "Evaporate"
-        case .Fall:
+        case .fall:
             return "Fall"
-        case .Pixelate:
+        case .pixelate:
             return "Pixelate"
-        case .Sparkle:
+        case .sparkle:
             return "Sparkle"
-        case .Burn:
+        case .burn:
             return "Burn"
-        case .Anvil:
+        case .anvil:
             return "Anvil"
         default:
             return "Scale"
