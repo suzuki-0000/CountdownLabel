@@ -16,13 +16,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		89993DA71C3FAD920099AC14 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 89993D8A1C3FAD910099AC14 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 89993D911C3FAD910099AC14;
-			remoteInfo = CountdownLabelExample;
-		};
 		8999B52B1C4F300300C46F10 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 89993DB71C3FAE1C0099AC14 /* CountdownLabel.xcodeproj */;
@@ -47,7 +40,6 @@
 		89993D9C1C3FAD910099AC14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		89993D9F1C3FAD910099AC14 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89993DA11C3FAD910099AC14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		89993DA61C3FAD920099AC14 /* CountdownLabelExample.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountdownLabelExample.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		89993DB71C3FAE1C0099AC14 /* CountdownLabel.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CountdownLabel.xcodeproj; path = ../CountdownLabel.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,13 +49,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				89CA98A21C4E412200C74EF9 /* CountdownLabel.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		89993DA31C3FAD920099AC14 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +68,6 @@
 			isa = PBXGroup;
 			children = (
 				89993D921C3FAD910099AC14 /* CountdownLabelExample.app */,
-				89993DA61C3FAD920099AC14 /* CountdownLabelExample.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,24 +114,6 @@
 			productReference = 89993D921C3FAD910099AC14 /* CountdownLabelExample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		89993DA51C3FAD920099AC14 /* CountdownLabelExampleTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 89993DB21C3FAD920099AC14 /* Build configuration list for PBXNativeTarget "CountdownLabelExampleTests" */;
-			buildPhases = (
-				89993DA21C3FAD920099AC14 /* Sources */,
-				89993DA31C3FAD920099AC14 /* Frameworks */,
-				89993DA41C3FAD920099AC14 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				89993DA81C3FAD920099AC14 /* PBXTargetDependency */,
-			);
-			name = CountdownLabelExampleTests;
-			productName = CountdownLabelExampleTests;
-			productReference = 89993DA61C3FAD920099AC14 /* CountdownLabelExample.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -155,16 +121,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = suzuki_keishi;
 				TargetAttributes = {
 					89993D911C3FAD910099AC14 = {
 						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0830;
-					};
-					89993DA51C3FAD920099AC14 = {
-						CreatedOnToolsVersion = 7.2;
-						TestTargetID = 89993D911C3FAD910099AC14;
+						LastSwiftMigration = 0900;
 					};
 				};
 			};
@@ -188,7 +150,6 @@
 			projectRoot = "";
 			targets = (
 				89993D911C3FAD910099AC14 /* CountdownLabelExample */,
-				89993DA51C3FAD920099AC14 /* CountdownLabelExampleTests */,
 			);
 		};
 /* End PBXProject section */
@@ -221,13 +182,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		89993DA41C3FAD920099AC14 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -240,22 +194,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		89993DA21C3FAD920099AC14 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		89993DA81C3FAD920099AC14 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 89993D911C3FAD910099AC14 /* CountdownLabelExample */;
-			targetProxy = 89993DA71C3FAD920099AC14 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		89993D991C3FAD910099AC14 /* Main.storyboard */ = {
@@ -285,14 +224,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -332,14 +277,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -374,7 +325,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.CountdownLabelExample;
 				PRODUCT_NAME = CountdownLabelExample;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -387,31 +339,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.CountdownLabelExample;
 				PRODUCT_NAME = CountdownLabelExample;
-				SWIFT_VERSION = 3.0;
-			};
-			name = Release;
-		};
-		89993DB31C3FAD920099AC14 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = CountdownLabelExampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.CountdownLabelExampleTests;
-				PRODUCT_NAME = CountdownLabelExample;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CountdownLabelExample.app/CountdownLabelExample";
-			};
-			name = Debug;
-		};
-		89993DB41C3FAD920099AC14 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = CountdownLabelExampleTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.CountdownLabelExampleTests;
-				PRODUCT_NAME = CountdownLabelExample;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CountdownLabelExample.app/CountdownLabelExample";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -432,15 +361,6 @@
 			buildConfigurations = (
 				89993DB01C3FAD920099AC14 /* Debug */,
 				89993DB11C3FAD920099AC14 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		89993DB21C3FAD920099AC14 /* Build configuration list for PBXNativeTarget "CountdownLabelExampleTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				89993DB31C3FAD920099AC14 /* Debug */,
-				89993DB41C3FAD920099AC14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

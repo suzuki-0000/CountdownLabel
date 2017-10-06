@@ -135,8 +135,8 @@ extension LTMorphingLabel {
                 context!.rotate(by: rotation * CGFloat(Double.pi) / 180.0)
                 let s = String(limbo.char)
                 s.draw(in: charRect, withAttributes: [
-                    NSFontAttributeName: self.font.withSize(limbo.size),
-                    NSForegroundColorAttributeName: charColor ?? UIColor.black
+                    NSAttributedStringKey.font: self.font.withSize(limbo.size),
+                    NSAttributedStringKey.foregroundColor: charColor ?? UIColor.black
                     ])
                 context!.restoreGState()
                 
