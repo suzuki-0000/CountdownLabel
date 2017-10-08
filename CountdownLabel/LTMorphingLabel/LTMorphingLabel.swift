@@ -36,7 +36,7 @@ enum LTMorphingPhases: Int {
 
 
 typealias LTMorphingStartClosure =
-    (Void) -> Void
+    () -> Void
 
 typealias LTMorphingEffectClosure =
     (Character, _ index: Int, _ progress: Float) -> LTCharacterLimbo
@@ -48,7 +48,7 @@ typealias LTMorphingManipulateProgressClosure =
     (_ index: Int, _ progress: Float, _ isNewChar: Bool) -> Float
 
 typealias LTMorphingSkipFramesClosure =
-    (Void) -> Int
+    () -> Int
 
 
 @objc public protocol LTMorphingLabelDelegate {
@@ -185,7 +185,7 @@ typealias LTMorphingSkipFramesClosure =
 // MARK: - Animation extension
 extension LTMorphingLabel {
 
-    func displayFrameTick() {
+    @objc func displayFrameTick() {
         if displayLink.duration > 0.0 && totalFrames == 0 {
             let frameRate = Float(displayLink.duration) / Float(displayLink.frameInterval)
             totalFrames = Int(ceil(morphingDuration / frameRate))
@@ -226,12 +226,12 @@ extension LTMorphingLabel {
         var charRects = [CGRect]()
         var leftOffset: CGFloat = 0.0
         
-        charHeight = "Leg".size(attributes: [NSFontAttributeName: font]).height
+        charHeight = "Leg".size(withAttributes: [NSAttributedStringKey.font: font]).height
         
         let topOffset = (bounds.size.height - charHeight) / 2.0
         
         for (_, char) in textToDraw.characters.enumerated() {
-            let charSize = String(char).size(attributes: [NSFontAttributeName: font])
+            let charSize = String(char).size(withAttributes: [NSAttributedStringKey.font: font])
             charRects.append(
                 CGRect(
                     origin: CGPoint(
@@ -460,9 +460,9 @@ extension LTMorphingLabel {
             if !willAvoidDefaultDrawing {
                 let s = String(charLimbo.char)
                 s.draw(in: charRect, withAttributes: [
-                    NSFontAttributeName:
+                    NSAttributedStringKey.font:
                         UIFont.init(name: font.fontName, size: charLimbo.size)!,
-                    NSForegroundColorAttributeName:
+                    NSAttributedStringKey.foregroundColor:
                         textColor.withAlphaComponent(charLimbo.alpha)
                     ])
             }

@@ -205,7 +205,7 @@ extension LTMorphingLabel {
                     name: "fragments",
                     particleName: "Fragment",
                     duration: 0.6
-                    ) {_ in}.update {
+                    ) {_,_ in}.update {
                         (layer, cell) in
                         if progress > end {
                             layer.birthRate = 0
@@ -215,7 +215,7 @@ extension LTMorphingLabel {
                     name: "leftFragments",
                     particleName: "Fragment",
                     duration: 0.6
-                    ) {_ in}.update {
+                    ) {_,_ in}.update {
                         (layer, cell) in
                         if progress > end {
                             layer.birthRate = 0
@@ -225,7 +225,7 @@ extension LTMorphingLabel {
                     name: "rightFragments",
                     particleName: "Fragment",
                     duration: 0.6
-                    ) {_ in}.update {
+                    ) {_,_ in}.update {
                         (layer, cell) in
                         if progress > end {
                             layer.birthRate = 0
@@ -239,7 +239,7 @@ extension LTMorphingLabel {
                     name: "leftSmoke",
                     particleName: "Smoke",
                     duration: 0.6
-                    ) {_ in}.update {
+                    ) {_,_ in}.update {
                         (layer, cell) in
                         if progress > end {
                             layer.birthRate = 0
@@ -249,7 +249,7 @@ extension LTMorphingLabel {
                     name: "rightSmoke",
                     particleName: "Smoke",
                     duration: 0.6
-                    ) {_ in}.update {
+                    ) {_,_ in}.update {
                         (layer, cell) in
                         if progress > end {
                             layer.birthRate = 0
