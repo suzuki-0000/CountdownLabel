@@ -1,7 +1,7 @@
 CountdownLabel
 ========================
 
-![Swift](http://img.shields.io/badge/swift-3.0-brightgreen.svg)
+![Swift](http://img.shields.io/badge/swift-4.0-brightgreen.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods Compatible](https://img.shields.io/cocoapods/v/CountdownLabel.svg?style=flat)](http://cocoadocs.org/docsets/CountdownLabel)
 
@@ -23,6 +23,7 @@ Below is a table that shows which version of what you should use for your Swift 
 
 | Swift version | version    |
 | ------------- | --------------- |
+| 4.X           | >= 3.0 |
 | 3.X           | >= 2.0 |
 | 2.3           | 1.3  |
 
