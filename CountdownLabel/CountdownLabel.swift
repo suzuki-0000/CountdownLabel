@@ -272,11 +272,12 @@ extension CountdownLabel {
     
     func updateText() {
         guard diffDate != nil else { return }
-
+        
+        let date = diffDate.addingTimeInterval(round(timeCounted * -1)) as Date
         // if time is before start
         let formattedText = timeCounted < 0
             ? dateFormatter.string(from: date1970.addingTimeInterval(0) as Date)
-            : dateFormatter.string(from: diffDate.addingTimeInterval(round(timeCounted * -1)) as Date)
+            : self.surplusTime(date)
         
         if let countdownAttributedText = countdownAttributedText {
             let attrTextInRange = NSAttributedString(string: formattedText, attributes: countdownAttributedText.attributes)
