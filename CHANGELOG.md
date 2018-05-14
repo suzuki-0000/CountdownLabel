@@ -1,13 +1,5 @@
 # Change Log
 
-## [Unreleased](https://github.com/suzuki-0000/CountdownLabel/tree/HEAD)
-
-[Full Changelog](https://github.com/suzuki-0000/CountdownLabel/compare/3.0.0...HEAD)
-
-**Fixed bugs:**
-
-- doesn't work for when in tableview reuse cells! [\#30](https://github.com/suzuki-0000/CountdownLabel/issues/30)
-
 ## [3.0.0](https://github.com/suzuki-0000/CountdownLabel/tree/3.0.0) (2017-10-11)
 [Full Changelog](https://github.com/suzuki-0000/CountdownLabel/compare/2.0.1...3.0.0)
 
