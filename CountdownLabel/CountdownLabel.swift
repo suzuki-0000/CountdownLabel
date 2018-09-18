@@ -253,6 +253,7 @@ extension CountdownLabel {
         updateLabel()
     }
     
+    @discardableResult
     public func then(targetTime: TimeInterval, completion: @escaping () -> ()) -> Self {
         let t = targetTime - (targetTime - targetTime)
         guard t > 0 else {
