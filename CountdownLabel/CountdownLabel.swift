@@ -273,11 +273,12 @@ extension CountdownLabel {
     
     func updateText() {
         guard diffDate != nil else { return }
-
+        
+        let date = diffDate.addingTimeInterval(round(timeCounted * -1)) as Date
         // if time is before start
         let formattedText = timeCounted < 0
             ? dateFormatter.string(from: date1970.addingTimeInterval(0) as Date)
-            : dateFormatter.string(from: diffDate.addingTimeInterval(round(timeCounted * -1)) as Date)
+            : self.surplusTime(date)
         
         if let countdownAttributedText = countdownAttributedText {
             let attrTextInRange = NSAttributedString(string: formattedText, attributes: countdownAttributedText.attributes)
@@ -290,6 +291,30 @@ extension CountdownLabel {
             text = formattedText
         }
         setNeedsDisplay()
+    }
+    
+    //fix one day bug
+    func surplusTime(_ to1970Date: Date) -> String {
+        let calendar = Calendar.init(identifier: .gregorian);
+        var labelText = timeFormat;
+        let comp = calendar.dateComponents([.day, .hour, .minute, .second], from: date1970 as Date, to: to1970Date)
+        
+        if let day = comp.day ,let _ = timeFormat.range(of: "dd"){
+            labelText = labelText.replacingOccurrences(of: "dd", with: String.init(format: "%02ld", day))
+        }
+        if let hour = comp.hour ,let _ = timeFormat.range(of: "hh"){
+            labelText = labelText.replacingOccurrences(of: "hh", with: String.init(format: "%02ld", hour))
+        }
+        if let hour = comp.hour ,let _ = timeFormat.range(of: "HH"){
+            labelText = labelText.replacingOccurrences(of: "HH", with: String.init(format: "%02ld", hour))
+        }
+        if let minute = comp.minute ,let _ = timeFormat.range(of: "mm"){
+            labelText = labelText.replacingOccurrences(of: "mm", with: String.init(format: "%02ld", minute))
+        }
+        if let second = comp.second ,let _ = timeFormat.range(of: "ss"){
+            labelText = labelText.replacingOccurrences(of: "ss", with: String.init(format: "%02ld", second))
+        }
+        return labelText
     }
     
     func updatePauseStatusIfNeeded() {
