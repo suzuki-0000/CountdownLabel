@@ -23,7 +23,8 @@ Below is a table that shows which version of what you should use for your Swift 
 
 | Swift version | version    |
 | ------------- | --------------- |
-| 4.X           | >= 3.0 |
+| 4.2           | >= 4.0 |
+| 4.0, 4.1      | >= 3.0 |
 | 3.X           | >= 2.0 |
 | 2.3           | 1.3  |
 
