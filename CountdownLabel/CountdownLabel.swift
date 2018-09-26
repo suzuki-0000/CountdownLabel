@@ -342,7 +342,7 @@ extension CountdownLabel {
                                                        repeats: true)
         
         // register to NSrunloop
-        RunLoop.current.add(timer, forMode: RunLoopMode.commonModes)
+        RunLoop.current.add(timer, forMode: RunLoop.Mode.common)
         counting = true
     }
     
@@ -392,9 +392,9 @@ public enum CountdownEffect {
 public class CountdownAttributedText: NSObject {
     internal let text: String
     internal let replacement: String
-    internal let attributes: [NSAttributedStringKey: Any]?
+    internal let attributes: [NSAttributedString.Key: Any]?
    
-    public init(text: String, replacement: String, attributes: [NSAttributedStringKey: Any]? = nil) {
+    public init(text: String, replacement: String, attributes: [NSAttributedString.Key: Any]? = nil) {
         self.text = text
         self.replacement = replacement
         self.attributes = attributes

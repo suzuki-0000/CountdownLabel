@@ -186,12 +186,12 @@ typealias LTMorphingSkipFramesClosure =
             target: self,
             selector: #selector(LTMorphingLabel.displayFrameTick)
         )
-        displayLink.add(to: .current, forMode: .commonModes)
+        displayLink.add(to: .current, forMode: RunLoop.Mode.common)
         return displayLink
         }()
 
     deinit {
-        displayLink.remove(from: .current, forMode: .commonModes)
+        displayLink.remove(from: .current, forMode: RunLoop.Mode.common)
         displayLink.invalidate()
     }
     
@@ -491,7 +491,7 @@ extension LTMorphingLabel {
                 }(charLimbo)
 
             if !willAvoidDefaultDrawing {
-                var attrs: [NSAttributedStringKey: Any] = [
+                var attrs: [NSAttributedString.Key: Any] = [
                     .foregroundColor: textColor.withAlphaComponent(charLimbo.alpha)
                 ]
 

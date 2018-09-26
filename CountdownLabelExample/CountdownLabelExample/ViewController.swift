@@ -35,6 +35,7 @@ class ViewController: UIViewController {
 
         // option animation ( using LTMorphing inside )
         countdownLabelAnvil.setCountDownTime(minutes: 60*60)
+        countdownLabelAnvil.animationType = .Anvil
         countdownLabelAnvil.start()
 
         countdownLabelBurn.setCountDownTime(minutes: 60*60)
@@ -107,7 +108,7 @@ class ViewController: UIViewController {
         countdownLabel7.timeFormat = "ss"
         countdownLabel7.countdownAttributedText = CountdownAttributedText(text: "HELLO TIME IS HERE NOW",
             replacement: "HERE",
-            attributes: [NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue) : UIColor.red])
+            attributes: [NSAttributedString.Key(rawValue: NSAttributedString.Key.foregroundColor.rawValue) : UIColor.red])
         countdownLabel7.start() {
             self.countdownLabel7.text = "timer finished."
         }
@@ -126,10 +127,10 @@ class ViewController: UIViewController {
     @IBAction func controlStartStop(_ sender: UIButton) {
         if countdownLabel4.isPaused {
             countdownLabel4.start()
-            sender.setTitle("pause", for: UIControlState())
+            sender.setTitle("pause", for: UIControl.State())
         } else {
             countdownLabel4.pause()
-            sender.setTitle("start", for: UIControlState())
+            sender.setTitle("start", for: UIControl.State())
         }
     }
     

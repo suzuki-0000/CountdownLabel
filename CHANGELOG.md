@@ -5,7 +5,7 @@
 
 ### Changed
 
-- remove Swift4.0 warning and fix one day bug. [\#29](https://github.com/suzuki-0000/CountdownLabel/pull/29)
+- Remove Swift4.0 warning and fix one day bug. [\#29](https://github.com/suzuki-0000/CountdownLabel/pull/29)
 - Fixed 24H/12H time format due to unforced locale [\#28](https://github.com/suzuki-0000/CountdownLabel/pull/28)
 
 ## [3.0.0](https://github.com/suzuki-0000/CountdownLabel/tree/3.0.0) (2017-10-11)
