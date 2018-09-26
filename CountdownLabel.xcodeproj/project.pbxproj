@@ -22,20 +22,7 @@
 		764D994C1F87830200204ED2 /* LTCharacterDiffResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764D992A1F877FF500204ED2 /* LTCharacterDiffResult.swift */; };
 		892106D41C3CF4140007CDEC /* CountdownLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 892106D31C3CF4140007CDEC /* CountdownLabel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		892107001C3CF4490007CDEC /* CountdownLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892106FF1C3CF4490007CDEC /* CountdownLabel.swift */; };
-		8999B51E1C4F2F7200C46F10 /* CountdownLabelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8999B51D1C4F2F7200C46F10 /* CountdownLabelTests.swift */; };
-		8999B5201C4F2F7200C46F10 /* CountdownLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892106D01C3CF4140007CDEC /* CountdownLabel.framework */; };
-		8999B5271C4F2F8700C46F10 /* StoryboardTests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8999B5261C4F2F8700C46F10 /* StoryboardTests.storyboard */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		8999B5211C4F2F7200C46F10 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 892106C71C3CF4140007CDEC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 892106CF1C3CF4140007CDEC;
-			remoteInfo = CountdownLabel;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		764D992A1F877FF500204ED2 /* LTCharacterDiffResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LTCharacterDiffResult.swift; sourceTree = "<group>"; };
@@ -60,7 +47,6 @@
 		892106D31C3CF4140007CDEC /* CountdownLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountdownLabel.h; sourceTree = "<group>"; };
 		892106D51C3CF4140007CDEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		892106FF1C3CF4490007CDEC /* CountdownLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownLabel.swift; sourceTree = "<group>"; };
-		8999B51B1C4F2F7200C46F10 /* CountdownLabelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CountdownLabelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8999B51D1C4F2F7200C46F10 /* CountdownLabelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountdownLabelTests.swift; sourceTree = "<group>"; };
 		8999B51F1C4F2F7200C46F10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8999B5261C4F2F8700C46F10 /* StoryboardTests.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = StoryboardTests.storyboard; sourceTree = "<group>"; };
@@ -71,14 +57,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8999B5181C4F2F7200C46F10 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8999B5201C4F2F7200C46F10 /* CountdownLabel.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,7 +109,6 @@
 			isa = PBXGroup;
 			children = (
 				892106D01C3CF4140007CDEC /* CountdownLabel.framework */,
-				8999B51B1C4F2F7200C46F10 /* CountdownLabelTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -190,24 +167,6 @@
 			productReference = 892106D01C3CF4140007CDEC /* CountdownLabel.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		8999B51A1C4F2F7200C46F10 /* CountdownLabelTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8999B5231C4F2F7200C46F10 /* Build configuration list for PBXNativeTarget "CountdownLabelTests" */;
-			buildPhases = (
-				8999B5171C4F2F7200C46F10 /* Sources */,
-				8999B5181C4F2F7200C46F10 /* Frameworks */,
-				8999B5191C4F2F7200C46F10 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8999B5221C4F2F7200C46F10 /* PBXTargetDependency */,
-			);
-			name = CountdownLabelTests;
-			productName = CountdownLabelTests;
-			productReference = 8999B51B1C4F2F7200C46F10 /* CountdownLabelTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -222,10 +181,6 @@
 						CreatedOnToolsVersion = 7.2;
 						LastSwiftMigration = 0800;
 					};
-					8999B51A1C4F2F7200C46F10 = {
-						CreatedOnToolsVersion = 7.2;
-						LastSwiftMigration = 0830;
-					};
 				};
 			};
 			buildConfigurationList = 892106CA1C3CF4140007CDEC /* Build configuration list for PBXProject "CountdownLabel" */;
@@ -233,6 +188,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 892106C61C3CF4140007CDEC;
@@ -241,7 +197,6 @@
 			projectRoot = "";
 			targets = (
 				892106CF1C3CF4140007CDEC /* CountdownLabel */,
-				8999B51A1C4F2F7200C46F10 /* CountdownLabelTests */,
 			);
 		};
 /* End PBXProject section */
@@ -251,14 +206,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8999B5191C4F2F7200C46F10 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8999B5271C4F2F8700C46F10 /* StoryboardTests.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,23 +249,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8999B5171C4F2F7200C46F10 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8999B51E1C4F2F7200C46F10 /* CountdownLabelTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		8999B5221C4F2F7200C46F10 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 892106CF1C3CF4140007CDEC /* CountdownLabel */;
-			targetProxy = 8999B5211C4F2F7200C46F10 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		892106D61C3CF4140007CDEC /* Debug */ = {
@@ -443,13 +374,15 @@
 				);
 				INFOPLIST_FILE = CountdownLabel/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.CountdownLabel;
 				PRODUCT_NAME = CountdownLabel;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -469,34 +402,14 @@
 				);
 				INFOPLIST_FILE = CountdownLabel/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.CountdownLabel;
 				PRODUCT_NAME = CountdownLabel;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
-		8999B5241C4F2F7200C46F10 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = CountdownLabelTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.CountdownLabelTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-			};
-			name = Debug;
-		};
-		8999B5251C4F2F7200C46F10 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = CountdownLabelTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.CountdownLabelTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -517,15 +430,6 @@
 			buildConfigurations = (
 				892106D91C3CF4140007CDEC /* Debug */,
 				892106DA1C3CF4140007CDEC /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8999B5231C4F2F7200C46F10 /* Build configuration list for PBXNativeTarget "CountdownLabelTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8999B5241C4F2F7200C46F10 /* Debug */,
-				8999B5251C4F2F7200C46F10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
