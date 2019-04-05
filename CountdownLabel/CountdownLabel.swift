@@ -302,11 +302,11 @@ extension CountdownLabel {
         if let day = comp.day ,let _ = timeFormat.range(of: "dd"){
             labelText = labelText.replacingOccurrences(of: "dd", with: String.init(format: "%02ld", day))
         }
-        if let hour = comp.hour ,let _ = timeFormat.range(of: "hh"){
-            labelText = labelText.replacingOccurrences(of: "hh", with: String.init(format: "%02ld", hour))
+        if let hour = comp.hour ,let _ = timeFormat.range(of: "hh"),let day = comp.day {
+            labelText = labelText.replacingOccurrences(of: "hh", with: String.init(format: "%02ld", (hour + (day * 24))))
         }
-        if let hour = comp.hour ,let _ = timeFormat.range(of: "HH"){
-            labelText = labelText.replacingOccurrences(of: "HH", with: String.init(format: "%02ld", hour))
+        if let hour = comp.hour ,let _ = timeFormat.range(of: "HH"),let day = comp.day {
+            labelText = labelText.replacingOccurrences(of: "HH", with: String.init(format: "%02ld", (hour + (day * 24))))
         }
         if let minute = comp.minute ,let _ = timeFormat.range(of: "mm"){
             labelText = labelText.replacingOccurrences(of: "mm", with: String.init(format: "%02ld", minute))
