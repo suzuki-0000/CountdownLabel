@@ -33,7 +33,7 @@ public class CountdownLabel: LTMorphingLabel {
     public var dateFormatter: DateFormatter {
         let df = DateFormatter()
         df.locale = Locale(identifier: "en_US_POSIX")
-        df.timeZone = NSTimeZone(name: "GMT") as TimeZone!
+        df.timeZone = TimeZone(identifier: "GMT")
         df.dateFormat = timeFormat
         return df
     }
@@ -393,7 +393,7 @@ public class CountdownAttributedText: NSObject {
     internal let text: String
     internal let replacement: String
     internal let attributes: [NSAttributedString.Key: Any]?
-   
+
     public init(text: String, replacement: String, attributes: [NSAttributedString.Key: Any]? = nil) {
         self.text = text
         self.replacement = replacement
