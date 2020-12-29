@@ -233,6 +233,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 892106C61C3CF4140007CDEC;
@@ -449,7 +450,7 @@
 				PRODUCT_NAME = CountdownLabel;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -474,7 +475,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.CountdownLabel;
 				PRODUCT_NAME = CountdownLabel;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
