@@ -121,7 +121,8 @@
 				892106FF1C3CF4490007CDEC /* CountdownLabel.swift */,
 				892106D51C3CF4140007CDEC /* Info.plist */,
 			);
-			path = CountdownLabel;
+			name = CountdownLabel;
+			path = Sources/CountdownLabel;
 			sourceTree = "<group>";
 		};
 		8999B51C1C4F2F7200C46F10 /* CountdownLabelTests */ = {
