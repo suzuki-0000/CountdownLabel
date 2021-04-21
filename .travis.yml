@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode7.2
+osx_image: xcode12.4
 branches:
   only:
     - master
@@ -9,7 +9,7 @@ env:
     - LANG=en_US.UTF-8
     - FRAMEWORK_NAME="CountdownLabel"
   matrix:
-    - DESTINATION="OS=9.2,name=iPhone 6"  SCHEME="CountdownLabelTests" SDK="iphonesimulator9.2"  $ACTION="test"
+    - DESTINATION="OS=11.0,name=iPhone 11"  SCHEME="CountdownLabelTests" SDK="iphonesimulator11.0"  $ACTION="test"
 
 before_install:
   - brew update
