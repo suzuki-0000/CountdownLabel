@@ -33,8 +33,8 @@ public class CountdownLabel: LTMorphingLabel {
     public var dateFormatter: DateFormatter {
         let df = DateFormatter()
         df.locale = Locale(identifier: "en_US_POSIX")
-        df.timeZone = NSTimeZone(name: "GMT") as TimeZone!
         df.dateFormat = timeFormat
+        df.timeZone = TimeZone(secondsFromGMT: 0)
         return df
     }
     
@@ -295,8 +295,8 @@ extension CountdownLabel {
     
     //fix one day bug
     func surplusTime(_ to1970Date: Date) -> String {
-        let calendar = Calendar.init(identifier: .gregorian);
-        var labelText = timeFormat;
+        let calendar = Calendar.init(identifier: .gregorian)
+        var labelText = dateFormatter.string(from: to1970Date)
         let comp = calendar.dateComponents([.day, .hour, .minute, .second], from: date1970 as Date, to: to1970Date)
         
         if let day = comp.day ,let _ = timeFormat.range(of: "dd"){
