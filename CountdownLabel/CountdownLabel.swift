@@ -414,7 +414,7 @@ public class CountdownAttributedText: NSObject {
     internal let text: String
     internal let replacement: String
     internal let attributes: [NSAttributedString.Key: Any]?
-   
+
     public init(text: String, replacement: String, attributes: [NSAttributedString.Key: Any]? = nil) {
         self.text = text
         self.replacement = replacement
