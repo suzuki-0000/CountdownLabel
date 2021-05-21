@@ -24,7 +24,7 @@ public struct LTEasing {
     
     public static func easeInQuint(_ t: Float, _ b: Float, _ c: Float, _ d: Float = 1.0) -> Float {
         return {
-            return pow($0, 5) + b
+            return c * pow($0, 5) + b
             }(t / d)
     }
     
