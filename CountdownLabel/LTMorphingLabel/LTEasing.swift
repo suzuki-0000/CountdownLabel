@@ -18,15 +18,13 @@ public struct LTEasing {
     
     public static func easeOutQuint(_ t: Float, _ b: Float, _ c: Float, _ d: Float = 1.0) -> Float {
         return {
-            let m = $0 * $0 * $0 * $0 * $0
-            return c * (m + 1.0) + b
+            return c * (pow($0, 5) + 1.0) + b
             }(t / d - 1.0)
     }
     
     public static func easeInQuint(_ t: Float, _ b: Float, _ c: Float, _ d: Float = 1.0) -> Float {
         return {
-            let x = c * $0
-            return x * $0 * $0 * $0 * $0 + b
+            return pow($0, 5) + b
             }(t / d)
     }
     
